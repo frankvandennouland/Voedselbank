@@ -17,8 +17,53 @@ public class Identiteitsbewijs {
     private Date datumUitgifte = new Date();
     private String Soort;
     private int client_ID;
-    
-    public Identiteitsbewijs() {
-        
+
+    public Identiteitsbewijs(int identiteitsnummer, String plaatsUitgifte, String Soort, int client_ID) {
+        this.identiteitsnummer = identiteitsnummer;
+        this.plaatsUitgifte = plaatsUitgifte;
+        this.Soort = Soort;
+        this.client_ID = client_ID;
     }
+    
+    public int getIdentiteitsnummer() {
+        return identiteitsnummer;
+    }
+
+    public void setIdentiteitsnummer(int identiteitsnummer) {
+        this.identiteitsnummer = identiteitsnummer;
+    }
+
+    public String getPlaatsUitgifte() {
+        return plaatsUitgifte;
+    }
+
+    public void setPlaatsUitgifte(String plaatsUitgifte) {
+        this.plaatsUitgifte = plaatsUitgifte;
+    }
+
+    public Date getDatumUitgifte() {
+        return datumUitgifte;
+    }
+
+    public void setDatumUitgifte(Date datumUitgifte) {
+        this.datumUitgifte = datumUitgifte;
+    }
+
+    public String getSoort() {
+        return Soort;
+    }
+
+    public void setSoort(String Soort) {
+        this.Soort = Soort;
+    }
+
+    public int getClient_ID() {
+        return client_ID;
+    }
+
+    public void setClient_ID(int client_ID) {
+        this.client_ID = client_ID;
+    }
+    
+
 }

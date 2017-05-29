@@ -15,7 +15,13 @@ public class Voedselbank {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        //main program stuff;
         
+        
+        //DATABASE LOGIN
+        //13114751
+        //ihah7Aeroh
+        //meru.hhs.nl
     }
     
 }

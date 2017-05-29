@@ -19,9 +19,67 @@ public class Intake {
     private Date datumHerintake = new Date();
     private Date datumStopzetting = new Date();
     private String RedenStopzetting;
-    
-    
-    public Intake() {
-        
+
+    public Intake(int client_ID, int hulpverlerner_ID, String RedenStopzetting) {
+        this.client_ID = client_ID;
+        this.hulpverlerner_ID = hulpverlerner_ID;
+        this.RedenStopzetting = RedenStopzetting;
     }
+    
+    public int getClient_ID() {
+        return client_ID;
+    }
+
+    public void setClient_ID(int client_ID) {
+        this.client_ID = client_ID;
+    }
+
+    public int getHulpverlerner_ID() {
+        return hulpverlerner_ID;
+    }
+
+    public void setHulpverlerner_ID(int hulpverlerner_ID) {
+        this.hulpverlerner_ID = hulpverlerner_ID;
+    }
+
+    public Date getDatum() {
+        return datum;
+    }
+
+    public void setDatum(Date datum) {
+        this.datum = datum;
+    }
+
+    public Date getDatumUitgifte() {
+        return datumUitgifte;
+    }
+
+    public void setDatumUitgifte(Date datumUitgifte) {
+        this.datumUitgifte = datumUitgifte;
+    }
+
+    public Date getDatumHerintake() {
+        return datumHerintake;
+    }
+
+    public void setDatumHerintake(Date datumHerintake) {
+        this.datumHerintake = datumHerintake;
+    }
+
+    public Date getDatumStopzetting() {
+        return datumStopzetting;
+    }
+
+    public void setDatumStopzetting(Date datumStopzetting) {
+        this.datumStopzetting = datumStopzetting;
+    }
+
+    public String getRedenStopzetting() {
+        return RedenStopzetting;
+    }
+
+    public void setRedenStopzetting(String RedenStopzetting) {
+        this.RedenStopzetting = RedenStopzetting;
+    }
+
 }
