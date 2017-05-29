@@ -11,10 +11,10 @@ import javax.swing.JFrame;
  *
  * @author Niek van der Starre
  */
-public class Scherm extends JFrame {
+public class MainFrame extends JFrame {
 
     
-    public Scherm() {
+    public MainFrame() {
         initComponents();
     }
 
@@ -37,7 +37,7 @@ public class Scherm extends JFrame {
     }
 
     public static void main(String[] args) {
-        Scherm scherm = new Scherm();
+        MainFrame scherm = new MainFrame();
         scherm.setVisible(true);
         KlantAanmaken a = new KlantAanmaken();
         a.setVisible(true);
