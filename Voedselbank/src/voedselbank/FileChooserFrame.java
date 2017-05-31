@@ -14,12 +14,12 @@ import javax.swing.filechooser.FileFilter;
  *
  * @author Dave
  */
-public class NewJFrame extends javax.swing.JFrame {
+public class FileChooserFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form NewJFrame
      */
-    public NewJFrame() {
+    public FileChooserFrame() {
         initComponents();
     }
 
@@ -103,10 +103,6 @@ public class NewJFrame extends javax.swing.JFrame {
                   
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    public static void main(String[] args) {
-        NewJFrame testFrame = new NewJFrame();
-        testFrame.setVisible(true);
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;

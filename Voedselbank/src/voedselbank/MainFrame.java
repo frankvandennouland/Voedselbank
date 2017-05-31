@@ -41,7 +41,7 @@ public class MainFrame extends JFrame {
         scherm.setVisible(true);
         ClientAanmaken a = new ClientAanmaken();
         a.setVisible(true);
-        NewJFrame f = new NewJFrame();
+        FileChooserFrame f = new FileChooserFrame();
         f.setVisible(true);
         OverzichtScherm s = new OverzichtScherm();
         s.setVisible(true);
