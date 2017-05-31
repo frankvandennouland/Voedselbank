@@ -100,7 +100,7 @@ public class NewJFrame extends javax.swing.JFrame {
         JFileChooser fileChooser = new JFileChooser();
             fileChooser.addChoosableFileFilter(new ExcelFilter());
             fileChooser.showOpenDialog(this);
-        
+                  
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
    
@@ -124,7 +124,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
         @Override
         public String getDescription() {
-            return "JE MOEDER";
+            return "xlsx";
         }
     
 }
