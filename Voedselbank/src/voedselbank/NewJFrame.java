@@ -127,7 +127,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
         @Override
         public String getDescription() {
-            return "All Excel filer (.xlsx)";
+            return "All Excel files (.xlsx)";
         }
     
 }
