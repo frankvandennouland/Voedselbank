@@ -39,8 +39,12 @@ public class MainFrame extends JFrame {
     public static void main(String[] args) {
         MainFrame scherm = new MainFrame();
         scherm.setVisible(true);
-        KlantAanmaken a = new KlantAanmaken();
+        ClientAanmaken a = new ClientAanmaken();
         a.setVisible(true);
+        NewJFrame f = new NewJFrame();
+        f.setVisible(true);
+        OverzichtScherm s = new OverzichtScherm();
+        s.setVisible(true);
 
     }
 
