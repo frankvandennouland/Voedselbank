@@ -169,7 +169,8 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_importeerKnopActionPerformed
 
     private void clientwijzigenKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientwijzigenKnopActionPerformed
-        // TODO add your handling code here:
+        ClientWijzigen w = new ClientWijzigen();
+        w.setVisible(true);
     }//GEN-LAST:event_clientwijzigenKnopActionPerformed
 
     private void clienttoevoegenKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clienttoevoegenKnopActionPerformed

@@ -35,6 +35,7 @@ public class OverzichtScherm extends javax.swing.JFrame {
         clientperhulpverlenerKnop = new javax.swing.JButton();
         overzichtintakeKnop = new javax.swing.JButton();
         mutatieperuitgiftepuntKnop = new javax.swing.JButton();
+        exporteerKnop = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -73,6 +74,8 @@ public class OverzichtScherm extends javax.swing.JFrame {
             }
         });
 
+        exporteerKnop.setText("Exporteer naar pdf");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -85,7 +88,8 @@ public class OverzichtScherm extends javax.swing.JFrame {
                     .addComponent(mutatieperperiodeKnop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(clientperhulpverlenerKnop, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                     .addComponent(overzichtintakeKnop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(mutatieperuitgiftepuntKnop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(mutatieperuitgiftepuntKnop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(exporteerKnop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 750, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -107,7 +111,8 @@ public class OverzichtScherm extends javax.swing.JFrame {
                         .addComponent(overzichtintakeKnop)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(mutatieperuitgiftepuntKnop)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(exporteerKnop))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -127,6 +132,7 @@ public class OverzichtScherm extends javax.swing.JFrame {
     private javax.swing.JButton bevoorradingslijstKnop;
     private javax.swing.JButton clientenoverzichtKnop;
     private javax.swing.JButton clientperhulpverlenerKnop;
+    private javax.swing.JButton exporteerKnop;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton mutatieperperiodeKnop;
     private javax.swing.JButton mutatieperuitgiftepuntKnop;
