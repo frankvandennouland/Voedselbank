@@ -5,11 +5,17 @@
  */
 package voedselbank;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 /**
  *
  * @author Niek van der Starre
  */
 public class ClientAanmaken extends javax.swing.JFrame {
+
+    private static Connection connection;
 
     /**
      * Creates new form KlantAanpassen
@@ -129,6 +135,11 @@ public class ClientAanmaken extends javax.swing.JFrame {
         uitgiftepuntVeld.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lijst van uitgiftepunten" }));
 
         toevoegKnop.setText("Cliënt toevoegen");
+        toevoegKnop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                toevoegKnopActionPerformed(evt);
+            }
+        });
 
         jLabel14.setText("Kaartnummer");
 
@@ -276,6 +287,31 @@ public class ClientAanmaken extends javax.swing.JFrame {
     private void telefoonnummerVeldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telefoonnummerVeldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_telefoonnummerVeldActionPerformed
+
+    private void toevoegKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toevoegKnopActionPerformed
+        try {
+            connection = SimpleDataSourceV2.getConnection();
+            PreparedStatement prestatement = connection.prepareStatement("INSERT INTO Cliënt(naam, telefoonnummer, mobielnummer, adres, postcode, plaats, email, kaartnummer, aantalpersonen, naam_partner, status_cliënt)"
+                                                                         + "VALUES(?,?,?,?,?,?,?,?,?,?,?)");
+
+            prestatement.setString(1, naamVeld.getText());
+            prestatement.setString(2, telefoonnummerVeld.getText());
+            prestatement.setString(3, mobielnummerVeld.getText());
+            prestatement.setString(4, adresVeld.getText());
+            prestatement.setString(5, postcodeVeld.getText());
+            prestatement.setString(6, plaatsVeld.getText());
+            prestatement.setString(7, emailVeld.getText());
+            prestatement.setString(8, kaartnummerVeld.getText());
+            prestatement.setString(9, aantalpersonenVeld.getSelectedItem().toString());
+            prestatement.setString(10, naampartnerVeld.getText());
+            prestatement.setString(11, "Actief");
+
+            prestatement.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_toevoegKnopActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> aantalpersonenVeld;
