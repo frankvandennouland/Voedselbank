@@ -23,11 +23,13 @@ public class Client {
     private String Status;
     private String naamPartner;
     private int uitgiftepunt_ID;
-    private int partner_ID;
     private int verwijzer_ID;
     private int verwijzing_ID;
 
-    public Client(int ID, int kaartnummer, String naam, String telefoonnummer, String adres, String postcode, String plaats, String email, String mobielnummer, int aantalPersonen, String Status, String naamPartner, int uitgiftepunt_ID, int partner_ID, int verwijzer_ID, int verwijzing_ID) {
+    public Client() {
+    }
+     
+    public Client(int ID, int kaartnummer, String naam, String telefoonnummer, String adres, String postcode, String plaats, String email, String mobielnummer, int aantalPersonen, String Status, String naamPartner, int uitgiftepunt_ID, int verwijzer_ID, int verwijzing_ID) {
         this.ID = ID;
         this.kaartnummer = kaartnummer;
         this.naam = naam;
@@ -41,11 +43,10 @@ public class Client {
         this.Status = Status;
         this.naamPartner = naamPartner;
         this.uitgiftepunt_ID = uitgiftepunt_ID;
-        this.partner_ID = partner_ID;
         this.verwijzer_ID = verwijzer_ID;
         this.verwijzing_ID = verwijzing_ID;
     }
-
+    
     public int getID() {
         return ID;
     }
@@ -150,14 +151,6 @@ public class Client {
         this.uitgiftepunt_ID = uitgiftepunt_ID;
     }
 
-    public int getPartner_ID() {
-        return partner_ID;
-    }
-
-    public void setPartner_ID(int partner_ID) {
-        this.partner_ID = partner_ID;
-    }
-
     public int getVerwijzer_ID() {
         return verwijzer_ID;
     }
@@ -172,6 +165,11 @@ public class Client {
 
     public void setVerwijzing_ID(int verwijzing_ID) {
         this.verwijzing_ID = verwijzing_ID;
+    }
+    
+    @Override
+    public String toString(){
+        return kaartnummer + " - " + naam + " - " + telefoonnummer;
     }
     
 }

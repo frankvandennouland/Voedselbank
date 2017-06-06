@@ -5,6 +5,7 @@
  */
 package voedselbank;
 
+import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -15,7 +16,7 @@ import java.sql.SQLException;
  */
 public class ClientAanmaken extends javax.swing.JFrame {
 
-    private static Connection connection;
+    private Connection connection;
 
     /**
      * Creates new form KlantAanpassen
@@ -265,7 +266,7 @@ public class ClientAanmaken extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void naamVeldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naamVeldActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_naamVeldActionPerformed
 
     private void mobielnummerVeldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mobielnummerVeldActionPerformed

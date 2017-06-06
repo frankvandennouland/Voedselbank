@@ -5,11 +5,19 @@
  */
 package voedselbank;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.DefaultListModel;
+
 /**
  *
  * @author Niek van der Starre
  */
 public class ClientZoeken extends javax.swing.JFrame {
+
+    private Connection connection;
 
     /**
      * Creates new form ClientZoeken
@@ -33,9 +41,10 @@ public class ClientZoeken extends javax.swing.JFrame {
         naamVeld = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         telefoonnummerVeld = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        zoekKnop = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         clientenLijst = new javax.swing.JList<>();
+        wijzigKnop = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -45,14 +54,21 @@ public class ClientZoeken extends javax.swing.JFrame {
 
         jLabel3.setText("Telefoonnummer");
 
-        jButton1.setText("Zoeken");
-
-        clientenLijst.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Lijst van gevonden klanten" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+        zoekKnop.setText("Zoeken");
+        zoekKnop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                zoekKnopActionPerformed(evt);
+            }
         });
+
         jScrollPane1.setViewportView(clientenLijst);
+
+        wijzigKnop.setText("Wijzig");
+        wijzigKnop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                wijzigKnopActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -60,14 +76,16 @@ public class ClientZoeken extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1)
-                    .addComponent(kaartnummerVeld)
-                    .addComponent(jLabel2)
-                    .addComponent(naamVeld)
-                    .addComponent(jLabel3)
-                    .addComponent(telefoonnummerVeld)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(wijzigKnop, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel1)
+                        .addComponent(kaartnummerVeld)
+                        .addComponent(jLabel2)
+                        .addComponent(naamVeld)
+                        .addComponent(jLabel3)
+                        .addComponent(telefoonnummerVeld)
+                        .addComponent(zoekKnop, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
                 .addContainerGap())
@@ -77,7 +95,7 @@ public class ClientZoeken extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -91,17 +109,68 @@ public class ClientZoeken extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(telefoonnummerVeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1)))
+                        .addComponent(zoekKnop)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(wijzigKnop)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void zoekKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zoekKnopActionPerformed
+
+        DefaultListModel model = new DefaultListModel();
+
+        try {
+            connection = SimpleDataSourceV2.getConnection();
+            PreparedStatement prestatement = connection.prepareStatement("SELECT * FROM Cliënt WHERE kaartnummer = ? or naam like ? or telefoonnummer = ?");
+
+            prestatement.setString(1, kaartnummerVeld.getText());
+            prestatement.setString(2, naamVeld.getText());
+            prestatement.setString(3, telefoonnummerVeld.getText());
+
+            ResultSet rs = prestatement.executeQuery();
+
+            while (rs.next()) {
+                int ID = rs.getInt("ID_cliënt");
+                int kaartnummer = rs.getInt("kaartnummer");
+                String naam = rs.getString("naam");
+                String telefoonnummer = rs.getString("telefoonnummer");
+                String adres = rs.getString("adres");
+                String postcode = rs.getString("postcode");
+                String plaats = rs.getString("plaats");
+                String email = rs.getString("email");
+                String mobielnummer = rs.getString("mobielnummer");
+                int aantalPersonen = rs.getInt("aantalPersonen");
+                String Status = rs.getString("status_cliënt");
+                String naamPartner = rs.getString("naam_partner");
+                int uitgiftepunt_ID = rs.getInt("ID_uitgiftepunt");
+                int verwijzer_ID = rs.getInt("ID_verwijzer");
+                int verwijzing_ID = rs.getInt("ID_verwijzing");
+
+                Client client = new Client(ID, kaartnummer, naam, telefoonnummer, adres, postcode, plaats, email, mobielnummer, aantalPersonen,
+                        Status, naamPartner, uitgiftepunt_ID, verwijzer_ID, verwijzing_ID);
+
+                model.addElement(client);
+
+            }
+            
+            clientenLijst.setModel(model);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_zoekKnopActionPerformed
+
+    private void wijzigKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_wijzigKnopActionPerformed
+        ClientWijzigen w = new ClientWijzigen();
+        w.setVisible(true);
+    }//GEN-LAST:event_wijzigKnopActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList<String> clientenLijst;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -109,5 +178,7 @@ public class ClientZoeken extends javax.swing.JFrame {
     private javax.swing.JTextField kaartnummerVeld;
     private javax.swing.JTextField naamVeld;
     private javax.swing.JTextField telefoonnummerVeld;
+    private javax.swing.JButton wijzigKnop;
+    private javax.swing.JButton zoekKnop;
     // End of variables declaration//GEN-END:variables
 }

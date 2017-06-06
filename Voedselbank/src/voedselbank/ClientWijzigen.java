@@ -53,7 +53,6 @@ public class ClientWijzigen extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         naampartnerVeld = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        clientzoekKnop = new javax.swing.JButton();
         wijzigKnop = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
         kaartnummerVeld = new javax.swing.JTextField();
@@ -131,13 +130,6 @@ public class ClientWijzigen extends javax.swing.JFrame {
 
         jLabel9.setText("Naam partner");
 
-        clientzoekKnop.setText("Cliënt zoeken");
-        clientzoekKnop.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clientzoekKnopActionPerformed(evt);
-            }
-        });
-
         wijzigKnop.setText("Gegevens wijzigen");
 
         jLabel14.setText("Kaartnummer");
@@ -181,7 +173,6 @@ public class ClientWijzigen extends javax.swing.JFrame {
                     .addComponent(jLabel13)
                     .addComponent(uitgiftepuntVeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(verwijderKnop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(clientzoekKnop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(wijzigKnop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(91, 91, 91))
         );
@@ -251,8 +242,6 @@ public class ClientWijzigen extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(kaartnummerVeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(clientzoekKnop)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(verwijderKnop)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(wijzigKnop)))
@@ -288,16 +277,10 @@ public class ClientWijzigen extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_aantalpersonenVeldActionPerformed
 
-    private void clientzoekKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientzoekKnopActionPerformed
-        ClientZoeken z = new ClientZoeken();
-        z.setVisible(true);
-    }//GEN-LAST:event_clientzoekKnopActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> aantalpersonenVeld;
     private javax.swing.JTextField adresVeld;
-    private javax.swing.JButton clientzoekKnop;
     private javax.swing.JTextField emailVeld;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

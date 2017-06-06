@@ -148,8 +148,8 @@ public class MainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void clientwijzigenKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientwijzigenKnopActionPerformed
-        ClientWijzigen w = new ClientWijzigen();
-        w.setVisible(true);
+        ClientZoeken z = new ClientZoeken();
+        z.setVisible(true);
     }//GEN-LAST:event_clientwijzigenKnopActionPerformed
 
     private void clienttoevoegenKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clienttoevoegenKnopActionPerformed
