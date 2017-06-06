@@ -76,8 +76,18 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         uitgiftepunttoevoegenKnop.setText("Uitgiftepunt toevoegen");
+        uitgiftepunttoevoegenKnop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uitgiftepunttoevoegenKnopActionPerformed(evt);
+            }
+        });
 
         uitgiftepuntwijzigenKnop.setText("Uitgiftepunt wijzigen/verwijderen");
+        uitgiftepuntwijzigenKnop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uitgiftepuntwijzigenKnopActionPerformed(evt);
+            }
+        });
 
         overzichtenKnop.setText("Overzichten");
         overzichtenKnop.addActionListener(new java.awt.event.ActionListener() {
@@ -151,6 +161,16 @@ public class MainFrame extends javax.swing.JFrame {
         OverzichtScherm s = new OverzichtScherm();
         s.setVisible(true);
     }//GEN-LAST:event_overzichtenKnopActionPerformed
+
+    private void uitgiftepunttoevoegenKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uitgiftepunttoevoegenKnopActionPerformed
+        UitgiftepuntAanmaken u = new UitgiftepuntAanmaken();
+        u.setVisible(true);
+    }//GEN-LAST:event_uitgiftepunttoevoegenKnopActionPerformed
+
+    private void uitgiftepuntwijzigenKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uitgiftepuntwijzigenKnopActionPerformed
+        UitgiftepuntWijzigen u = new UitgiftepuntWijzigen();
+        u.setVisible(true);
+    }//GEN-LAST:event_uitgiftepuntwijzigenKnopActionPerformed
 
     public static void main(String[] args) {
         MainFrame f = new MainFrame();
