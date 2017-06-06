@@ -5,18 +5,24 @@
  */
 package voedselbank;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 /**
  *
  * @author Niek van der Starre
  */
 public class UitgiftepuntAanmaken extends javax.swing.JFrame {
 
+    private static Connection connection;
+
     /**
      * Creates new form KlantAanpassen
      */
     public UitgiftepuntAanmaken() {
         initComponents();
-        setTitle("Cliënt toevoegen");
+        setTitle("Uitgiftepunt toevoegen");
     }
 
     /**
@@ -29,15 +35,15 @@ public class UitgiftepuntAanmaken extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        naamVeld = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        adresVeld = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        postcodeVeld = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        plaatsnaamVeld = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        capaciteitVeld = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
 
@@ -45,33 +51,33 @@ public class UitgiftepuntAanmaken extends javax.swing.JFrame {
 
         jLabel1.setText("Naam*");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        naamVeld.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                naamVeldActionPerformed(evt);
             }
         });
 
         jLabel2.setText("Adres*");
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        adresVeld.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                adresVeldActionPerformed(evt);
             }
         });
 
         jLabel3.setText("Postcode*");
 
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        postcodeVeld.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                postcodeVeldActionPerformed(evt);
             }
         });
 
         jLabel4.setText("Plaatsnaam*");
 
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        plaatsnaamVeld.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                plaatsnaamVeldActionPerformed(evt);
             }
         });
 
@@ -99,13 +105,13 @@ public class UitgiftepuntAanmaken extends javax.swing.JFrame {
                                 .addComponent(jLabel1)
                                 .addComponent(jLabel2)
                                 .addComponent(jLabel3)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
-                                .addComponent(jTextField2)
+                                .addComponent(postcodeVeld, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
+                                .addComponent(adresVeld)
                                 .addComponent(jLabel4)
-                                .addComponent(jTextField4)
+                                .addComponent(plaatsnaamVeld)
                                 .addComponent(jLabel5)
-                                .addComponent(jTextField5)
-                                .addComponent(jTextField1))
+                                .addComponent(capaciteitVeld)
+                                .addComponent(naamVeld))
                             .addComponent(jLabel11))
                         .addGap(95, 320, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -119,23 +125,23 @@ public class UitgiftepuntAanmaken extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(naamVeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(adresVeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(postcodeVeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(plaatsnaamVeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(capaciteitVeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
                 .addComponent(jButton4)
                 .addGap(2, 2, 2)
@@ -146,27 +152,44 @@ public class UitgiftepuntAanmaken extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void naamVeldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naamVeldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_naamVeldActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void postcodeVeldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_postcodeVeldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_postcodeVeldActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void plaatsnaamVeldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_plaatsnaamVeldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_plaatsnaamVeldActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void adresVeldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adresVeldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_adresVeldActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        try {
+            connection = SimpleDataSourceV2.getConnection();
+            PreparedStatement prestatement = connection.prepareStatement("INSERT INTO Uitgiftepunt(naam, adres, postcode, plaatsnaam, capaciteit)"
+                    + "VALUES(?,?,?,?,?)");
+
+            prestatement.setString(1, naamVeld.getText());
+            prestatement.setString(2, adresVeld.getText());
+            prestatement.setString(3, postcodeVeld.getText());
+            prestatement.setString(4, plaatsnaamVeld.getText());
+            prestatement.setString(5, capaciteitVeld.getText());
+
+            prestatement.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField adresVeld;
+    private javax.swing.JTextField capaciteitVeld;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
@@ -174,10 +197,8 @@ public class UitgiftepuntAanmaken extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField naamVeld;
+    private javax.swing.JTextField plaatsnaamVeld;
+    private javax.swing.JTextField postcodeVeld;
     // End of variables declaration//GEN-END:variables
 }

@@ -16,7 +16,7 @@ public class UitgiftepuntWijzigen extends javax.swing.JFrame {
      */
     public UitgiftepuntWijzigen() {
         initComponents();
-        setTitle("Cliënt toevoegen");
+        setTitle("Uitgiftepunt wijzigen");
     }
 
     /**
