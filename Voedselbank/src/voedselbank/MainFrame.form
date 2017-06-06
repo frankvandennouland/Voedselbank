@@ -7,33 +7,6 @@
     <Component class="javax.swing.JSeparator" name="jSeparator1">
     </Component>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
-      <SubComponents>
-        <Menu class="javax.swing.JMenu" name="menuBestandKnop">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Bestand"/>
-          </Properties>
-          <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="importeerKnop">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Importeer uit Excel"/>
-                <Property name="toolTipText" type="java.lang.String" value="Importeer overzichten uit een excel bestand naar de database"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="importeerKnopActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Exporteer naar PDF"/>
-                <Property name="toolTipText" type="java.lang.String" value="Exporteer de geselecteerde overzichten naar een PDF bestand"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem1ActionPerformed"/>
-              </Events>
-            </MenuItem>
-          </SubComponents>
-        </Menu>
-      </SubComponents>
     </Menu>
   </NonVisualComponents>
   <Properties>
@@ -82,8 +55,9 @@
                       <Component id="uitgiftepunttoevoegenKnop" max="32767" attributes="0"/>
                       <Component id="uitgiftepuntwijzigenKnop" max="32767" attributes="0"/>
                       <Component id="overzichtenKnop" max="32767" attributes="0"/>
+                      <Component id="jButton1" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="337" max="32767" attributes="0"/>
+                  <EmptySpace pref="258" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -100,7 +74,9 @@
                   <Component id="uitgiftepuntwijzigenKnop" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="overzichtenKnop" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="287" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="270" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -116,7 +92,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="clientwijzigenKnop">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Cli&#xeb;nt wijzigen"/>
+            <Property name="text" type="java.lang.String" value="Cli&#xeb;ntgegevens wijzigen/verwijderen"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="clientwijzigenKnopActionPerformed"/>
@@ -129,7 +105,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="uitgiftepuntwijzigenKnop">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Uitgiftepunt wijzigen"/>
+            <Property name="text" type="java.lang.String" value="Uitgiftepunt wijzigen/verwijderen"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="overzichtenKnop">
@@ -139,6 +115,11 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="overzichtenKnopActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButton1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Importeer uit Excel"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

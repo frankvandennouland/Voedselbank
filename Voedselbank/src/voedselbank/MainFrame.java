@@ -56,10 +56,8 @@ public class MainFrame extends javax.swing.JFrame {
         uitgiftepunttoevoegenKnop = new javax.swing.JButton();
         uitgiftepuntwijzigenKnop = new javax.swing.JButton();
         overzichtenKnop = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        menuBestandKnop = new javax.swing.JMenu();
-        importeerKnop = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -70,7 +68,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        clientwijzigenKnop.setText("Cliënt wijzigen");
+        clientwijzigenKnop.setText("Cliëntgegevens wijzigen/verwijderen");
         clientwijzigenKnop.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 clientwijzigenKnopActionPerformed(evt);
@@ -79,7 +77,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         uitgiftepunttoevoegenKnop.setText("Uitgiftepunt toevoegen");
 
-        uitgiftepuntwijzigenKnop.setText("Uitgiftepunt wijzigen");
+        uitgiftepuntwijzigenKnop.setText("Uitgiftepunt wijzigen/verwijderen");
 
         overzichtenKnop.setText("Overzichten");
         overzichtenKnop.addActionListener(new java.awt.event.ActionListener() {
@@ -87,6 +85,8 @@ public class MainFrame extends javax.swing.JFrame {
                 overzichtenKnopActionPerformed(evt);
             }
         });
+
+        jButton1.setText("Importeer uit Excel");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -99,8 +99,9 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(clientwijzigenKnop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(uitgiftepunttoevoegenKnop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(uitgiftepuntwijzigenKnop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(overzichtenKnop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(337, Short.MAX_VALUE))
+                    .addComponent(overzichtenKnop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(258, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -115,30 +116,10 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(uitgiftepuntwijzigenKnop)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(overzichtenKnop)
-                .addContainerGap(287, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addContainerGap(270, Short.MAX_VALUE))
         );
-
-        menuBestandKnop.setText("Bestand");
-
-        importeerKnop.setText("Importeer uit Excel");
-        importeerKnop.setToolTipText("Importeer overzichten uit een excel bestand naar de database");
-        importeerKnop.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                importeerKnopActionPerformed(evt);
-            }
-        });
-        menuBestandKnop.add(importeerKnop);
-
-        jMenuItem1.setText("Exporteer naar PDF");
-        jMenuItem1.setToolTipText("Exporteer de geselecteerde overzichten naar een PDF bestand");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        menuBestandKnop.add(jMenuItem1);
-
-        jMenuBar1.add(menuBestandKnop);
 
         setJMenuBar(jMenuBar1);
 
@@ -155,18 +136,6 @@ public class MainFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        JFileChooser fileChooser = new JFileChooser();
-        fileChooser.showSaveDialog(this);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void importeerKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importeerKnopActionPerformed
-        JFileChooser fileChooser = new JFileChooser();
-        fileChooser.addChoosableFileFilter(new ExcelFilter());
-        fileChooser.showOpenDialog(this);
-
-    }//GEN-LAST:event_importeerKnopActionPerformed
 
     private void clientwijzigenKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientwijzigenKnopActionPerformed
         ClientWijzigen w = new ClientWijzigen();
@@ -192,29 +161,14 @@ public class MainFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton clienttoevoegenKnop;
     private javax.swing.JButton clientwijzigenKnop;
-    private javax.swing.JMenuItem importeerKnop;
+    private javax.swing.JButton jButton1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JOptionPane jOptionPane1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JMenu menuBestandKnop;
     private javax.swing.JButton overzichtenKnop;
     private javax.swing.JButton uitgiftepunttoevoegenKnop;
     private javax.swing.JButton uitgiftepuntwijzigenKnop;
     // End of variables declaration//GEN-END:variables
 
-    class ExcelFilter extends FileFilter {
-
-        @Override
-        public boolean accept(File f) {
-            return false;
-        }
-
-        @Override
-        public String getDescription() {
-            return "All Excel files (.xlsx)";
-        }
-
-    }
 }
