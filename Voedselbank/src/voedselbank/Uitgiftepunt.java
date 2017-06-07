@@ -74,5 +74,9 @@ public class Uitgiftepunt {
         this.capaciteit = capaciteit;
     }
     
+    @Override
+    public String toString(){
+        return naam;
+    }
     
 }

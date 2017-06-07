@@ -5,17 +5,93 @@
  */
 package voedselbank;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JFrame;
+
 /**
  *
  * @author Niek van der Starre
  */
 public class ClientWijzigen extends javax.swing.JFrame {
 
+    private Client client;
+    private JFrame opener;
+    private Connection connection;
+
     /**
      * Creates new form ClientWijzigen
      */
     public ClientWijzigen() {
         initComponents();
+        this.setTitle("Clientgegevens wijzigen/verwijderen");
+    }
+
+    public ClientWijzigen(Client client) {
+        this.client = client;
+        initComponents();
+        this.setTitle("Clientgegevens wijzigen/verwijderen");
+        vulVelden();
+        maakUitgiftepuntLijst();
+    }
+
+    public void setOpener(JFrame jf) {
+        opener = jf;
+        opener.setVisible(false);
+    }
+
+    /**
+     * Vult de velden met informatie van de cliënt.
+     */
+    private void vulVelden() {
+        naamVeld.setText(client.getNaam());
+        telefoonnummerVeld.setText(client.getTelefoonnummer());
+        mobielnummerVeld.setText(client.getMobielnummer());
+        adresVeld.setText(client.getAdres());
+        postcodeVeld.setText(client.getPostcode());
+        plaatsVeld.setText(client.getPlaats());
+        emailVeld.setText(client.getEmail());
+        kaartnummerVeld.setText(client.getKaartnummer() + "");
+        naampartnerVeld.setText(client.getNaamPartner());
+        aantalpersonenVeld.setSelectedItem(client.getAantalPersonen());
+        statusVeld.setSelectedItem(client.getStatus());
+
+    }
+
+    /**
+     * Maakt de combobox van uitgiftepunten aan
+     */
+    private void maakUitgiftepuntLijst() {
+
+        DefaultComboBoxModel<Uitgiftepunt> model = new DefaultComboBoxModel();
+
+        try {
+            connection = SimpleDataSourceV2.getConnection();
+            PreparedStatement prestatement = connection.prepareStatement("SELECT * FROM Uitgiftepunt");
+
+            ResultSet rs = prestatement.executeQuery();
+
+            while (rs.next()) {
+                int uitgiftepunt_ID = rs.getInt("ID_uitgiftepunt");
+                String naam = rs.getString("naam");
+                String adres = rs.getString("adres");
+                String postcode = rs.getString("postcode");
+                String plaatsnaam = rs.getString("plaatsnaam");
+                int capaciteit = rs.getInt("capaciteit");
+
+                Uitgiftepunt u = new Uitgiftepunt(uitgiftepunt_ID, naam, adres, postcode, plaatsnaam, capaciteit);
+
+                model.addElement(u);
+            }
+
+            uitgiftepuntVeld.setModel(model);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
     /**
@@ -56,6 +132,8 @@ public class ClientWijzigen extends javax.swing.JFrame {
         wijzigKnop = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
         kaartnummerVeld = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        statusVeld = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -106,14 +184,17 @@ public class ClientWijzigen extends javax.swing.JFrame {
         jLabel1.setText("Naam*");
 
         verwijderKnop.setText("Cliënt verwijderen");
+        verwijderKnop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                verwijderKnopActionPerformed(evt);
+            }
+        });
 
         verwijzerVeld.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lijst van hulporganisaties" }));
 
         jLabel10.setText("Verwijzer");
 
         soortvoedselpakketVeld.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Enkelvoudig", "Dubbel", "Drievoudig" }));
-
-        uitgiftepuntVeld.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lijst van uitgiftepunten" }));
 
         jLabel12.setText("Soort voedselpakket");
 
@@ -131,8 +212,17 @@ public class ClientWijzigen extends javax.swing.JFrame {
         jLabel9.setText("Naam partner");
 
         wijzigKnop.setText("Gegevens wijzigen");
+        wijzigKnop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                wijzigKnopActionPerformed(evt);
+            }
+        });
 
         jLabel14.setText("Kaartnummer");
+
+        jLabel15.setText("Status");
+
+        statusVeld.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Actief", "Afgewezen", "Gestopt", "Pending" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -173,7 +263,9 @@ public class ClientWijzigen extends javax.swing.JFrame {
                     .addComponent(jLabel13)
                     .addComponent(uitgiftepuntVeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(verwijderKnop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(wijzigKnop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(wijzigKnop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel15)
+                    .addComponent(statusVeld, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(91, 91, 91))
         );
         layout.setVerticalGroup(
@@ -228,9 +320,11 @@ public class ClientWijzigen extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(verwijzerVeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel15))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(plaatsVeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(14, 14, 14)
@@ -242,6 +336,8 @@ public class ClientWijzigen extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(kaartnummerVeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(statusVeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(verwijderKnop)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(wijzigKnop)))
@@ -277,6 +373,46 @@ public class ClientWijzigen extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_aantalpersonenVeldActionPerformed
 
+    private void wijzigKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_wijzigKnopActionPerformed
+        try {
+            connection = SimpleDataSourceV2.getConnection();
+            PreparedStatement ps = connection.prepareStatement("UPDATE Cliënt SET naam = ?, telefoonnummer = ?, mobielnummer = ?, adres = ?, postcode = ?, plaats = ?, email = ?, kaartnummer = ?, aantalpersonen = ?, naam_partner = ?, status_cliënt = ? WHERE ID_cliënt = ?");
+
+            ps.setString(1, naamVeld.getText());
+            ps.setString(2, telefoonnummerVeld.getText());
+            ps.setString(3, mobielnummerVeld.getText());
+            ps.setString(4, adresVeld.getText());
+            ps.setString(5, postcodeVeld.getText());
+            ps.setString(6, plaatsVeld.getText());
+            ps.setString(7, emailVeld.getText());
+            ps.setString(8, kaartnummerVeld.getText());
+            ps.setString(9, aantalpersonenVeld.getSelectedItem().toString());
+            ps.setString(10, naampartnerVeld.getText());
+            ps.setString(11, statusVeld.getSelectedItem().toString());
+            ps.setInt(12, client.getID());
+
+            ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+    }//GEN-LAST:event_wijzigKnopActionPerformed
+
+    private void verwijderKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verwijderKnopActionPerformed
+        try {
+            connection = SimpleDataSourceV2.getConnection();
+            PreparedStatement ps = connection.prepareStatement("DELETE FROM Cliënt WHERE ID_cliënt = ?");
+
+            ps.setInt(1, client.getID());
+
+            ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_verwijderKnopActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> aantalpersonenVeld;
@@ -288,6 +424,7 @@ public class ClientWijzigen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -303,8 +440,9 @@ public class ClientWijzigen extends javax.swing.JFrame {
     private javax.swing.JTextField plaatsVeld;
     private javax.swing.JTextField postcodeVeld;
     private javax.swing.JComboBox<String> soortvoedselpakketVeld;
+    private javax.swing.JComboBox<String> statusVeld;
     private javax.swing.JTextField telefoonnummerVeld;
-    private javax.swing.JComboBox<String> uitgiftepuntVeld;
+    private javax.swing.JComboBox<Uitgiftepunt> uitgiftepuntVeld;
     private javax.swing.JButton verwijderKnop;
     private javax.swing.JComboBox<String> verwijzerVeld;
     private javax.swing.JButton wijzigKnop;

@@ -24,6 +24,7 @@ public class ClientZoeken extends javax.swing.JFrame {
      */
     public ClientZoeken() {
         initComponents();
+        setTitle("Cliënt zoeken");
     }
 
     /**
@@ -78,14 +79,13 @@ public class ClientZoeken extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(wijzigKnop, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel1)
-                        .addComponent(kaartnummerVeld)
-                        .addComponent(jLabel2)
-                        .addComponent(naamVeld)
-                        .addComponent(jLabel3)
-                        .addComponent(telefoonnummerVeld)
-                        .addComponent(zoekKnop, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(kaartnummerVeld, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(naamVeld, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(telefoonnummerVeld, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(zoekKnop, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
                 .addContainerGap())
@@ -120,8 +120,8 @@ public class ClientZoeken extends javax.swing.JFrame {
 
     private void zoekKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zoekKnopActionPerformed
 
-        DefaultListModel model = new DefaultListModel();
-
+        DefaultListModel<Client> model = new DefaultListModel();
+        
         try {
             connection = SimpleDataSourceV2.getConnection();
             PreparedStatement prestatement = connection.prepareStatement("SELECT * FROM Cliënt WHERE kaartnummer = ? or naam like ? or telefoonnummer = ?");
@@ -157,20 +157,21 @@ public class ClientZoeken extends javax.swing.JFrame {
             }
             
             clientenLijst.setModel(model);
-
+            
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }//GEN-LAST:event_zoekKnopActionPerformed
 
     private void wijzigKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_wijzigKnopActionPerformed
-        ClientWijzigen w = new ClientWijzigen();
+        ClientWijzigen w = new ClientWijzigen(clientenLijst.getSelectedValue());
+        w.setOpener(this);  
         w.setVisible(true);
     }//GEN-LAST:event_wijzigKnopActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JList<String> clientenLijst;
+    private javax.swing.JList<Client> clientenLijst;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
