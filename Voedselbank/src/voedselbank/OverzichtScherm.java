@@ -5,11 +5,17 @@
  */
 package voedselbank;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 /**
  *
  * @author Niek van der Starre
  */
 public class OverzichtScherm extends javax.swing.JFrame {
+
+    private Connection connection;
 
     /**
      * Creates new form OverzichtScherm
@@ -60,6 +66,11 @@ public class OverzichtScherm extends javax.swing.JFrame {
         });
 
         clientenoverzichtKnop.setText("Cliënten overzicht");
+        clientenoverzichtKnop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clientenoverzichtKnopActionPerformed(evt);
+            }
+        });
 
         mutatieperperiodeKnop.setText("Mutatie per periode");
 
@@ -127,6 +138,19 @@ public class OverzichtScherm extends javax.swing.JFrame {
     private void bevoorradingslijstKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bevoorradingslijstKnopActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_bevoorradingslijstKnopActionPerformed
+
+    private void clientenoverzichtKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientenoverzichtKnopActionPerformed
+        try {
+            connection = SimpleDataSourceV2.getConnection();
+            PreparedStatement prestatement = connection.prepareStatement("SELECT * FROM Cliënt");
+            prestatement.executeQuery();
+                              
+            prestatement.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_clientenoverzichtKnopActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bevoorradingslijstKnop;
