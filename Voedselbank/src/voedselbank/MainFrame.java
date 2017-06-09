@@ -6,8 +6,13 @@
 package voedselbank;
 
 import java.io.File;
+import java.io.FileInputStream;
 import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileFilter;
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.DataFormatter;
 
 /**
  *
@@ -97,6 +102,11 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         jButton1.setText("Importeer uit Excel");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -172,6 +182,36 @@ public class MainFrame extends javax.swing.JFrame {
         u.setVisible(true);
     }//GEN-LAST:event_uitgiftepuntwijzigenKnopActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        JFileChooser fc = new JFileChooser();
+        fc.showOpenDialog(this);
+
+        DataFormatter formatter = new DataFormatter();
+        
+        
+        File file = fc.getSelectedFile();
+        System.out.println("here");
+        try {
+	FileInputStream fileInputStream = new FileInputStream(file);
+	HSSFWorkbook workbook = new HSSFWorkbook(fileInputStream);
+	HSSFSheet worksheet = workbook.getSheet("Intakestatus");
+	HSSFRow row6 = worksheet.getRow(5);
+	HSSFCell cellA6 = row6.getCell((short) 0);
+	String a6Val = formatter.formatCellValue(worksheet.getRow(5).getCell(0));
+	HSSFCell cellB6 = row6.getCell((short) 1);
+	String b6Val = formatter.formatCellValue(worksheet.getRow(5).getCell(1));
+	HSSFCell cellC6 = row6.getCell((short) 2);
+	String c6Val = formatter.formatCellValue(worksheet.getRow(5).getCell(2));
+                
+        System.out.println("A1: " + a6Val);
+	System.out.println("B1: " + b6Val);
+	System.out.println("C1: " + c6Val);
+
+        } catch(Exception ioe) {
+            ioe.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+                                       
     public static void main(String[] args) {
         MainFrame f = new MainFrame();
         f.setVisible(true);
