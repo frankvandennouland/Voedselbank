@@ -190,7 +190,7 @@ public class MainFrame extends javax.swing.JFrame {
         
         
         File file = fc.getSelectedFile();
-        System.out.println("here");
+
         try {
 	FileInputStream fileInputStream = new FileInputStream(file);
 	HSSFWorkbook workbook = new HSSFWorkbook(fileInputStream);
