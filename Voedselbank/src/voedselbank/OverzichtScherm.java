@@ -144,7 +144,7 @@ public class OverzichtScherm extends javax.swing.JFrame {
     private void clientenoverzichtKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientenoverzichtKnopActionPerformed
         try {
             connection = SimpleDataSourceV2.getConnection();
-            PreparedStatement prestatement = connection.prepareStatement("SELECT * FROM Cliënt");
+            PreparedStatement prestatement = connection.prepareStatement("SELECT naam, telefoonnummer, mobielnummer, adres, postcode, plaats, email, kaartnummer, aantalpersonen, naam_partner, status_cliënt FROM Cliënt");
             ResultSet rs = prestatement.executeQuery();
        
             overzichtTabel.setModel(DbUtils.resultSetToTableModel(rs));
