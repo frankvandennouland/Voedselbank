@@ -7,7 +7,9 @@ package voedselbank;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import net.proteanit.sql.DbUtils;
 
 /**
  *
@@ -143,8 +145,9 @@ public class OverzichtScherm extends javax.swing.JFrame {
         try {
             connection = SimpleDataSourceV2.getConnection();
             PreparedStatement prestatement = connection.prepareStatement("SELECT * FROM Cliënt");
-            prestatement.executeQuery();
-                              
+            ResultSet rs = prestatement.executeQuery();
+            // Hier wordt deze library gebruikt: 
+            overzichtTabel.setModel(DbUtils.resultSetToTableModel(rs));
             prestatement.executeUpdate();
 
         } catch (SQLException ex) {
