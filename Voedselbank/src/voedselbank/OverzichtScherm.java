@@ -146,8 +146,9 @@ public class OverzichtScherm extends javax.swing.JFrame {
             connection = SimpleDataSourceV2.getConnection();
             PreparedStatement prestatement = connection.prepareStatement("SELECT naam, telefoonnummer, mobielnummer, adres, postcode, plaats, email, kaartnummer, aantalpersonen, naam_partner, status_cliënt FROM Cliënt");
             ResultSet rs = prestatement.executeQuery();
-       
             overzichtTabel.setModel(DbUtils.resultSetToTableModel(rs));
+            overzichtTabel.setAutoCreateRowSorter(true);
+            overzichtTabel.setAutoResizeMode(5);
             prestatement.executeUpdate();
 
         } catch (SQLException ex) {
