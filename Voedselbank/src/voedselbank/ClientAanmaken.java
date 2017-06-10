@@ -354,6 +354,7 @@ public class ClientAanmaken extends javax.swing.JFrame {
             prestatement.setString(11, statusVeld.getSelectedItem().toString());
 
             prestatement.executeUpdate();
+            this.dispose();
 
         } catch (SQLException ex) {
             ex.printStackTrace();
