@@ -79,6 +79,11 @@ public class OverzichtScherm extends javax.swing.JFrame {
         clientperhulpverlenerKnop.setText("Cliënten per hulpverlener");
 
         overzichtintakeKnop.setText("Overzicht van intakes");
+        overzichtintakeKnop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                overzichtintakeKnopActionPerformed(evt);
+            }
+        });
 
         mutatieperuitgiftepuntKnop.setText("Mutaties per uitgiftepunt");
         mutatieperuitgiftepuntKnop.addActionListener(new java.awt.event.ActionListener() {
@@ -155,6 +160,21 @@ public class OverzichtScherm extends javax.swing.JFrame {
             ex.printStackTrace();
         }
     }//GEN-LAST:event_clientenoverzichtKnopActionPerformed
+
+    private void overzichtintakeKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_overzichtintakeKnopActionPerformed
+        try {
+            connection = SimpleDataSourceV2.getConnection();
+            PreparedStatement prestatement = connection.prepareStatement("SELECT datum, startdatum_uitgifte, datum_herintake,datum_stopzetting, reden_stopzetting FROM Intake");
+            ResultSet rs = prestatement.executeQuery();
+            overzichtTabel.setModel(DbUtils.resultSetToTableModel(rs));
+            overzichtTabel.setAutoCreateRowSorter(true);
+            overzichtTabel.setAutoResizeMode(5);
+            prestatement.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_overzichtintakeKnopActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bevoorradingslijstKnop;
