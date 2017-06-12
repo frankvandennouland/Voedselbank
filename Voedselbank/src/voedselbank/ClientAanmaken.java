@@ -34,7 +34,7 @@ public class ClientAanmaken extends javax.swing.JFrame {
      */
     private void maakUitgiftepuntLijst() {
 
-        DefaultComboBoxModel<Uitgiftepunt> model = new DefaultComboBoxModel();
+        DefaultComboBoxModel<Uitgiftepunt> model = new DefaultComboBoxModel<>();
 
         try {
             connection = SimpleDataSourceV2.getConnection();

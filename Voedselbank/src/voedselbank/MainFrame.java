@@ -62,6 +62,8 @@ public class MainFrame extends javax.swing.JFrame {
         uitgiftepuntwijzigenKnop = new javax.swing.JButton();
         overzichtenKnop = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -108,6 +110,20 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setText("Hulpverlener toevoegen");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Hulpverlener wijzigen/verwijderen");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -120,7 +136,9 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(uitgiftepunttoevoegenKnop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(uitgiftepuntwijzigenKnop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(overzichtenKnop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(258, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -138,7 +156,11 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(overzichtenKnop)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
-                .addContainerGap(270, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton3)
+                .addContainerGap(194, Short.MAX_VALUE))
         );
 
         setJMenuBar(jMenuBar1);
@@ -211,6 +233,16 @@ public class MainFrame extends javax.swing.JFrame {
             ioe.printStackTrace();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        HulpverlenerToevoegen h = new HulpverlenerToevoegen();
+        h.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        HulpverlenerZoeken z = new HulpverlenerZoeken();
+        z.setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
                                        
     public static void main(String[] args) {
         MainFrame f = new MainFrame();
@@ -222,6 +254,8 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton clienttoevoegenKnop;
     private javax.swing.JButton clientwijzigenKnop;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JOptionPane jOptionPane1;
     private javax.swing.JPanel jPanel1;

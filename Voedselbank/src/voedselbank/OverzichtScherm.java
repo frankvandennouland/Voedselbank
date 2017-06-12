@@ -154,7 +154,6 @@ public class OverzichtScherm extends javax.swing.JFrame {
             overzichtTabel.setModel(DbUtils.resultSetToTableModel(rs));
             overzichtTabel.setAutoCreateRowSorter(true);
             overzichtTabel.setAutoResizeMode(5);
-            prestatement.executeUpdate();
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -169,8 +168,7 @@ public class OverzichtScherm extends javax.swing.JFrame {
             overzichtTabel.setModel(DbUtils.resultSetToTableModel(rs));
             overzichtTabel.setAutoCreateRowSorter(true);
             overzichtTabel.setAutoResizeMode(5);
-            prestatement.executeUpdate();
-
+ 
         } catch (SQLException ex) {
             ex.printStackTrace();
         }

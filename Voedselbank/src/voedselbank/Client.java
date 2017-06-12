@@ -169,7 +169,7 @@ public class Client {
     
     @Override
     public String toString(){
-        return kaartnummer + " - " + naam + " - " + telefoonnummer;
+        return kaartnummer + " - " + naam;
     }
     
 }

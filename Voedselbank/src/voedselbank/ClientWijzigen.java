@@ -56,9 +56,8 @@ public class ClientWijzigen extends javax.swing.JFrame {
         emailVeld.setText(client.getEmail());
         kaartnummerVeld.setText(client.getKaartnummer() + "");
         naampartnerVeld.setText(client.getNaamPartner());
-        aantalpersonenVeld.setSelectedItem(client.getAantalPersonen());
+        aantalpersonenVeld.setSelectedItem(client.getAantalPersonen() + "");
         statusVeld.setSelectedItem(client.getStatus());
-
     }
 
     /**
@@ -66,7 +65,7 @@ public class ClientWijzigen extends javax.swing.JFrame {
      */
     private void maakUitgiftepuntLijst() {
 
-        DefaultComboBoxModel<Uitgiftepunt> model = new DefaultComboBoxModel();
+        DefaultComboBoxModel<Uitgiftepunt> model = new DefaultComboBoxModel<>();
 
         try {
             connection = SimpleDataSourceV2.getConnection();

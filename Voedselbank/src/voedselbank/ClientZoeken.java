@@ -62,6 +62,8 @@ public class ClientZoeken extends javax.swing.JFrame {
             }
         });
 
+        clientenLijst.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        clientenLijst.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane1.setViewportView(clientenLijst);
 
         wijzigKnop.setText("Wijzig");
@@ -120,8 +122,8 @@ public class ClientZoeken extends javax.swing.JFrame {
 
     private void zoekKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zoekKnopActionPerformed
 
-        DefaultListModel<Client> model = new DefaultListModel();
-        
+        DefaultListModel<Client> model = new DefaultListModel<>();
+
         try {
             connection = SimpleDataSourceV2.getConnection();
             PreparedStatement prestatement = connection.prepareStatement("SELECT * FROM Cliënt WHERE kaartnummer = ? or naam like ? or telefoonnummer = ?");
@@ -155,18 +157,20 @@ public class ClientZoeken extends javax.swing.JFrame {
                 model.addElement(client);
 
             }
-            
+
             clientenLijst.setModel(model);
-            
+
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }//GEN-LAST:event_zoekKnopActionPerformed
 
     private void wijzigKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_wijzigKnopActionPerformed
-        ClientWijzigen w = new ClientWijzigen(clientenLijst.getSelectedValue());
-        w.setOpener(this);  
-        w.setVisible(true);
+        if (!clientenLijst.isSelectionEmpty()) {
+            ClientWijzigen w = new ClientWijzigen(clientenLijst.getSelectedValue());
+            w.setOpener(this);
+            w.setVisible(true);
+        }
     }//GEN-LAST:event_wijzigKnopActionPerformed
 
 

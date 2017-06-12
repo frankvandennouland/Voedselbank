@@ -17,10 +17,11 @@ public class Hulpverlener {
     private Date geboortedatum = new Date();
     private String telefoonnummer;
 
-    public Hulpverlener(int hulverlener_ID, String naam, String telefoonnummer) {
+    public Hulpverlener(int hulverlener_ID, String naam, String telefoonnummer, Date geboortedatum) {
         this.hulverlener_ID = hulverlener_ID;
         this.naam = naam;
         this.telefoonnummer = telefoonnummer;
+        this.geboortedatum = geboortedatum;
     }
     
     public int getHulverlener_ID() {
@@ -55,5 +56,8 @@ public class Hulpverlener {
         this.telefoonnummer = telefoonnummer;
     }
 
+    public String toString(){
+        return naam;
+    }
     
 }
