@@ -200,6 +200,8 @@ public class OverzichtScherm extends javax.swing.JFrame {
     }//GEN-LAST:event_overzichtintakeKnopActionPerformed
 
     private void clientperhulpverlenerKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientperhulpverlenerKnopActionPerformed
+        ClientperHulpverlenerFrame ch = new ClientperHulpverlenerFrame();
+        ch.setVisible(true);
         try {
             connection = SimpleDataSourceV2.getConnection();
             PreparedStatement prestatement = connection.prepareStatement("SELECT Cliënt.naam as naam_cliënt, Hulpverlener.naam as naam_hulpverlener,\n" +
