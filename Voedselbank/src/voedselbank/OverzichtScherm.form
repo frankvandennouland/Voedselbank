@@ -114,6 +114,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Cli&#xeb;nten per hulpverlener"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="clientperhulpverlenerKnopActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="overzichtintakeKnop">
       <Properties>

@@ -77,6 +77,11 @@ public class OverzichtScherm extends javax.swing.JFrame {
         mutatieperperiodeKnop.setText("Mutatie per periode");
 
         clientperhulpverlenerKnop.setText("Cliënten per hulpverlener");
+        clientperhulpverlenerKnop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clientperhulpverlenerKnopActionPerformed(evt);
+            }
+        });
 
         overzichtintakeKnop.setText("Overzicht van intakes");
         overzichtintakeKnop.addActionListener(new java.awt.event.ActionListener() {
@@ -161,18 +166,36 @@ public class OverzichtScherm extends javax.swing.JFrame {
     }//GEN-LAST:event_clientenoverzichtKnopActionPerformed
 
     private void overzichtintakeKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_overzichtintakeKnopActionPerformed
-        try {
+ try {
             connection = SimpleDataSourceV2.getConnection();
-            PreparedStatement prestatement = connection.prepareStatement("SELECT datum, startdatum_uitgifte, datum_herintake,datum_stopzetting, reden_stopzetting FROM Intake");
+            PreparedStatement prestatement = connection.prepareStatement("SELECT Cliënt.naam as naam_cliënt, Hulpverlener.naam as naam_hulpverlener, startdatum_uitgifte, \n" +
+"datum_herintake, datum_stopzetting, reden_stopzetting \n" +
+"FROM Intake\n" +
+"JOIN Hulpverlener ON Hulpverlener.ID_hulpverlener = Intake.ID_hulpverlener\n" +
+"JOIN Cliënt ON Cliënt.ID_cliënt = Intake.ID_cliënt");
             ResultSet rs = prestatement.executeQuery();
             overzichtTabel.setModel(DbUtils.resultSetToTableModel(rs));
             overzichtTabel.setAutoCreateRowSorter(true);
             overzichtTabel.setAutoResizeMode(5);
- 
+
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }//GEN-LAST:event_overzichtintakeKnopActionPerformed
+
+    private void clientperhulpverlenerKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientperhulpverlenerKnopActionPerformed
+          try {
+            connection = SimpleDataSourceV2.getConnection();
+            PreparedStatement prestatement = connection.prepareStatement("SELECT Cliënt.naam as naam_cliënt, Hulpverlener.naam as naam_hulpverlener FROM Intake JOIN Hulpverlener ON Hulpverlener.ID_hulpverlener = Intake.ID_hulpverlener JOIN Cliënt ON Cliënt.ID_cliënt = Intake.ID_cliënt");
+            ResultSet rs = prestatement.executeQuery();
+            overzichtTabel.setModel(DbUtils.resultSetToTableModel(rs));
+            overzichtTabel.setAutoCreateRowSorter(true);
+            overzichtTabel.setAutoResizeMode(5);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_clientperhulpverlenerKnopActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bevoorradingslijstKnop;
