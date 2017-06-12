@@ -202,7 +202,12 @@ public class OverzichtScherm extends javax.swing.JFrame {
     private void clientperhulpverlenerKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientperhulpverlenerKnopActionPerformed
         try {
             connection = SimpleDataSourceV2.getConnection();
-            PreparedStatement prestatement = connection.prepareStatement("SELECT Hulpverlener.naam as naam_hulpverlener, Cliënt.naam as naam_cliënt, FROM Intake JOIN Hulpverlener ON Hulpverlener.ID_hulpverlener = Intake.ID_hulpverlener JOIN Cliënt ON Cliënt.ID_cliënt = Intake.ID_cliënt");
+            PreparedStatement prestatement = connection.prepareStatement("SELECT Cliënt.naam as naam_cliënt, Hulpverlener.naam as naam_hulpverlener,\n" +
+"count(case when Intake.ID_cliënt is not null then 1 else NULL end) as aantal_cliënten\n" +
+"FROM Intake \n" +
+"JOIN Hulpverlener ON Hulpverlener.ID_hulpverlener = Intake.ID_hulpverlener \n" +
+"JOIN Cliënt ON Cliënt.ID_cliënt = Intake.ID_cliënt\n" +
+"GROUP BY Hulpverlener.naam");
             ResultSet rs = prestatement.executeQuery();
             overzichtTabel.setModel(DbUtils.resultSetToTableModel(rs));
             overzichtTabel.setAutoCreateRowSorter(true);
