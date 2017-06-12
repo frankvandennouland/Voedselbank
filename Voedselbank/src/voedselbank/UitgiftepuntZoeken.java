@@ -110,7 +110,7 @@ public class UitgiftepuntZoeken extends javax.swing.JFrame {
 
     private void zoekKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zoekKnopActionPerformed
 
-        DefaultListModel<Uitgiftepunt> model = new DefaultListModel();
+        DefaultListModel<Uitgiftepunt> model = new DefaultListModel<>();
 
         try {
             connection = SimpleDataSourceV2.getConnection();

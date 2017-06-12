@@ -64,6 +64,9 @@ public class Voedselpakket {
     public void setSoort(String soort) {
         this.soort = soort;
     }
-      
+    
+    public String toString(){
+        return soort;
+    }
     
 }
