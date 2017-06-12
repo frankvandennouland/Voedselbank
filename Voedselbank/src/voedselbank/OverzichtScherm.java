@@ -150,12 +150,13 @@ public class OverzichtScherm extends javax.swing.JFrame {
     private void bevoorradingslijstKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bevoorradingslijstKnopActionPerformed
         try {
             connection = SimpleDataSourceV2.getConnection();
-            PreparedStatement prestatement = connection.prepareStatement("SELECT Uitgiftepunt.naam as naam_uitgiftepunt, count(case when soort like 'Enkel%' then 1 else NULL end) as aantal_enkelvoudigepakketten,\n" +
-"count(case when soort like 'Dubbel%' then 1 else NULL end) as aantal_dubbelvoudigepakketten,\n" +
-"count(case when soort like 'Drie%' then 1 else NULL end) as aantal_drievoudigepakketten\n" +
-"FROM Voedselpakket\n" +
-"JOIN Uitgiftepunt ON Uitgiftepunt.ID_uitgiftepunt = Voedselpakket.ID_uitgiftepunt\n" +
-"JOIN Cliënt ON Cliënt.ID_Cliënt = Voedselpakket.ID_cliënt\n");
+            PreparedStatement prestatement = connection.prepareStatement("SELECT naam, adres, postcode, plaatsnaam,\n" +
+"count(case when soort like 'Enkel%' then 1 else NULL end) as aantal_enkelvoudigepakketten,\n" +
+"count(case when Voedselpakket.soort like 'Dubbel%' then 1 else NULL end) as aantal_dubbelvoudigepakketten,\n" +
+"count(case when Voedselpakket.soort like 'Drie%' then 1 else NULL end) as aantal_drievoudigepakketten\n" +
+"FROM Uitgiftepunt\n" +
+"JOIN Voedselpakket ON Voedselpakket.ID_uitgiftepunt = Uitgiftepunt.ID_uitgiftepunt\n" +
+"GROUP BY Uitgiftepunt.naam;");
             ResultSet rs = prestatement.executeQuery();
             overzichtTabel.setModel(DbUtils.resultSetToTableModel(rs));
             overzichtTabel.setAutoCreateRowSorter(true);
