@@ -5,19 +5,61 @@
  */
 package voedselbank;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JFrame;
+
 /**
  *
  * @author Niek van der Starre
  */
 public class UitgiftepuntWijzigen extends javax.swing.JFrame {
 
+    private Uitgiftepunt uitgiftepunt;
+    private JFrame opener;
+    private Connection connection;
+
     /**
-     * Creates new form KlantAanpassen
+     * Creates new form ClientWijzigen
      */
     public UitgiftepuntWijzigen() {
         initComponents();
-        setTitle("Uitgiftepunt wijzigen");
+        this.setTitle("Uitgiftepuntgegevens wijzigen/verwijderen");
     }
+
+    public UitgiftepuntWijzigen(Uitgiftepunt uitgiftepunt) {
+        this.uitgiftepunt = uitgiftepunt;
+        initComponents();
+        this.setTitle("Uitgiftepuntgegevens wijzigen/verwijderen");
+        vulVelden();
+        
+    }
+
+    public void setOpener(JFrame jf) {
+        opener = jf;
+        opener.setVisible(false);
+    }
+
+    /**
+     * Vult de velden met informatie van de cliënt.
+     */
+    private void vulVelden() {
+        naamVeld.setText(uitgiftepunt.getNaam());
+        adresVeld.setText(uitgiftepunt.getAdres());
+        postcodeVeld.setText(uitgiftepunt.getPostcode());
+        plaatsnaamVeld.setText(uitgiftepunt.getPlaatsnaam());
+        capaciteitVeld.setText(uitgiftepunt.getCapaciteit());
+       
+
+    }
+
+    /**
+     * Maakt de combobox van uitgiftepunten aan
+     */
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -28,70 +70,71 @@ public class UitgiftepuntWijzigen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        capaciteitVeld = new javax.swing.JTextField();
+        Capaciteit = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        plaatsnaamVeld = new javax.swing.JTextField();
+        postcodeVeld = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        adresVeld = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        naamVeld = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        verwijderKnop = new javax.swing.JButton();
+        wijzigKnop = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setText("Naam*");
+        jLabel11.setText("Velden met * zijn verplicht");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        Capaciteit.setText("Capaciteit");
+
+        jLabel4.setText("Plaatsnaam*");
+
+        plaatsnaamVeld.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                plaatsnaamVeldActionPerformed(evt);
             }
         });
 
-        jLabel2.setText("Adres*");
-
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        postcodeVeld.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                postcodeVeldActionPerformed(evt);
             }
         });
 
         jLabel3.setText("Postcode*");
 
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        adresVeld.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                adresVeldActionPerformed(evt);
             }
         });
 
-        jLabel4.setText("Plaatsnaam*");
+        jLabel2.setText("Adres *");
 
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        naamVeld.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                naamVeldActionPerformed(evt);
             }
         });
 
-        jLabel5.setText("Capaciteit*");
+        jLabel1.setText("Naam*");
 
-        jLabel11.setText("Velden met * zijn verplicht");
-
-        jButton3.setText("Verwijder uitgiftepunt");
-
-        jButton4.setText("Pas uitgiftepunt aan");
-
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+        verwijderKnop.setText("Uitgiftepunt verwijderen");
+        verwijderKnop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                verwijderKnopActionPerformed(evt);
+            }
         });
-        jScrollPane1.setViewportView(jList1);
+
+        wijzigKnop.setText("Gegevens wijzigen");
+        wijzigKnop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                wijzigKnopActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -100,99 +143,123 @@ public class UitgiftepuntWijzigen extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addGap(110, 110, 110)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE))
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
-                            .addComponent(jTextField2)
-                            .addComponent(jLabel4)
-                            .addComponent(jTextField4)
-                            .addComponent(jLabel5)
-                            .addComponent(jTextField5)
-                            .addComponent(jTextField1))
-                        .addGap(74, 74, 74)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel1)
+                        .addComponent(jLabel2)
+                        .addComponent(jLabel3)
+                        .addComponent(postcodeVeld, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
+                        .addComponent(adresVeld)
+                        .addComponent(jLabel4)
+                        .addComponent(plaatsnaamVeld)
+                        .addComponent(Capaciteit)
+                        .addComponent(capaciteitVeld)
+                        .addComponent(naamVeld))
+                    .addComponent(jLabel11))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(verwijderKnop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(wijzigKnop, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
+                .addGap(91, 91, 91))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3)))
+                .addComponent(naamVeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(adresVeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(postcodeVeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(plaatsnaamVeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Capaciteit)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(capaciteitVeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(99, 99, 99)
+                .addComponent(verwijderKnop)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(wijzigKnop)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addComponent(jLabel11)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void plaatsnaamVeldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_plaatsnaamVeldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_plaatsnaamVeldActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void postcodeVeldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_postcodeVeldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_postcodeVeldActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void adresVeldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adresVeldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_adresVeldActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void naamVeldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naamVeldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_naamVeldActionPerformed
+
+    private void wijzigKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_wijzigKnopActionPerformed
+        try {
+            connection = SimpleDataSourceV2.getConnection();
+            PreparedStatement ps = connection.prepareStatement("UPDATE Uitgiftepunt SET naam = ?, adres = ?, postcode = ?, plaatsnaam = ?, capaciteit = ? WHERE ID_uitgiftepunt = ?");
+
+            ps.setString(1, naamVeld.getText());
+            ps.setString(2, adresVeld.getText());
+            ps.setString(3, postcodeVeld.getText());
+            ps.setString(4, plaatsnaamVeld.getText());
+            ps.setString(5, capaciteitVeld.getText());
+            ps.setInt(6, uitgiftepunt.getUitgiftepunt_ID());
+
+            ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+    }//GEN-LAST:event_wijzigKnopActionPerformed
+
+    private void verwijderKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verwijderKnopActionPerformed
+        try {
+            connection = SimpleDataSourceV2.getConnection();
+            PreparedStatement ps = connection.prepareStatement("DELETE FROM Uitgiftepunt WHERE ID_uitgiftepunt = ?");
+
+            ps.setInt(1, uitgiftepunt.getUitgiftepunt_ID());
+
+            ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_verwijderKnopActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JLabel Capaciteit;
+    private javax.swing.JTextField adresVeld;
+    private javax.swing.JTextField capaciteitVeld;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField naamVeld;
+    private javax.swing.JTextField plaatsnaamVeld;
+    private javax.swing.JTextField postcodeVeld;
+    private javax.swing.JButton verwijderKnop;
+    private javax.swing.JButton wijzigKnop;
     // End of variables declaration//GEN-END:variables
 }

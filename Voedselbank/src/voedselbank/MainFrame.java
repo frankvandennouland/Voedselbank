@@ -200,7 +200,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_uitgiftepunttoevoegenKnopActionPerformed
 
     private void uitgiftepuntwijzigenKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uitgiftepuntwijzigenKnopActionPerformed
-        UitgiftepuntWijzigen u = new UitgiftepuntWijzigen();
+        UitgiftepuntZoeken u = new UitgiftepuntZoeken();
         u.setVisible(true);
     }//GEN-LAST:event_uitgiftepuntwijzigenKnopActionPerformed
 

@@ -81,7 +81,7 @@ public class UitgiftepuntAanmaken extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setText("Capaciteit*");
+        jLabel5.setText("Capaciteit");
 
         jLabel11.setText("Velden met * zijn verplicht");
 

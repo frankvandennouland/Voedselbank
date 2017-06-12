@@ -79,7 +79,7 @@ public class ClientWijzigen extends javax.swing.JFrame {
                 String adres = rs.getString("adres");
                 String postcode = rs.getString("postcode");
                 String plaatsnaam = rs.getString("plaatsnaam");
-                int capaciteit = rs.getInt("capaciteit");
+                String capaciteit = rs.getString("capaciteit");
 
                 Uitgiftepunt u = new Uitgiftepunt(uitgiftepunt_ID, naam, adres, postcode, plaatsnaam, capaciteit);
 
