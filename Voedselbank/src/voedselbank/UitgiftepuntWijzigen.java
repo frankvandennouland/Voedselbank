@@ -51,9 +51,7 @@ public class UitgiftepuntWijzigen extends javax.swing.JFrame {
         adresVeld.setText(uitgiftepunt.getAdres());
         postcodeVeld.setText(uitgiftepunt.getPostcode());
         plaatsnaamVeld.setText(uitgiftepunt.getPlaatsnaam());
-        capaciteitVeld.setText(uitgiftepunt.getCapaciteit());
-       
-
+        capaciteitVeld.setText(uitgiftepunt.getCapaciteit() + "");
     }
 
     /**

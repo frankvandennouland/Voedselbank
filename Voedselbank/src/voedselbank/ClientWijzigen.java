@@ -79,7 +79,7 @@ public class ClientWijzigen extends javax.swing.JFrame {
                 String adres = rs.getString("adres");
                 String postcode = rs.getString("postcode");
                 String plaatsnaam = rs.getString("plaatsnaam");
-                String capaciteit = rs.getString("capaciteit");
+                int capaciteit = rs.getInt("capaciteit");
 
                 Uitgiftepunt u = new Uitgiftepunt(uitgiftepunt_ID, naam, adres, postcode, plaatsnaam, capaciteit);
 
@@ -391,6 +391,14 @@ public class ClientWijzigen extends javax.swing.JFrame {
             ps.setInt(12, client.getID());
 
             ps.executeUpdate();
+
+            PreparedStatement psVoedselpakket = connection.prepareStatement("UPDATE Voedselpakket SET ID_uitgiftepunt = ?, soort = ? WHERE ID_cliënt = ?");
+
+            psVoedselpakket.setInt(1, uitgiftepuntVeld.getItemAt(uitgiftepuntVeld.getSelectedIndex()).getUitgiftepunt_ID());
+            psVoedselpakket.setString(2, soortvoedselpakketVeld.getSelectedItem().toString());
+            psVoedselpakket.setInt(3, client.getID());
+
+            psVoedselpakket.executeUpdate();
 
         } catch (SQLException ex) {
             ex.printStackTrace();

@@ -9,7 +9,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.swing.DefaultComboBoxModel;
+import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 /**
@@ -19,6 +22,8 @@ import javax.swing.DefaultComboBoxModel;
 public class ClientAanmaken extends javax.swing.JFrame {
 
     private Connection connection;
+    private Date today = new Date();
+    private DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
 
     /**
      * Creates new form KlantAanpassen
@@ -27,14 +32,13 @@ public class ClientAanmaken extends javax.swing.JFrame {
         initComponents();
         setTitle("Cliënt toevoegen");
         maakUitgiftepuntLijst();
+        maakHulpverlenerLijst();
     }
 
     /**
-     *   Maakt de combobox van uitgiftepunten aan
+     * Maakt de combobox van uitgiftepunten aan
      */
     private void maakUitgiftepuntLijst() {
-
-        DefaultComboBoxModel<Uitgiftepunt> model = new DefaultComboBoxModel<>();
 
         try {
             connection = SimpleDataSourceV2.getConnection();
@@ -48,15 +52,37 @@ public class ClientAanmaken extends javax.swing.JFrame {
                 String adres = rs.getString("adres");
                 String postcode = rs.getString("postcode");
                 String plaatsnaam = rs.getString("plaatsnaam");
-                String capaciteit = rs.getString("capaciteit");
+                int capaciteit = rs.getInt("capaciteit");
                 
                 Uitgiftepunt u = new Uitgiftepunt(uitgiftepunt_ID, naam, adres, postcode, plaatsnaam, capaciteit);
 
-                model.addElement(u);
+                uitgiftepuntVeld.addItem(u);
             }
 
-            uitgiftepuntVeld.setModel(model);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
             
+    private void maakHulpverlenerLijst() {
+        
+        try {
+            connection = SimpleDataSourceV2.getConnection();
+            PreparedStatement prestatement = connection.prepareStatement("SELECT * FROM Hulpverlener");
+
+            ResultSet rs = prestatement.executeQuery();
+
+            while (rs.next()) {
+                int hulpverlener_ID = rs.getInt("ID_hulpverlener");
+                String naam = rs.getString("naam");
+                String telefoonnummer = rs.getString("telefoonnummer");
+                Date geboortedatum = rs.getDate("geboortedatum");
+
+                Hulpverlener h = new Hulpverlener(hulpverlener_ID, naam, telefoonnummer, geboortedatum);
+
+                hulpverlenerLijst.addItem(h);
+            }
+
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -89,8 +115,6 @@ public class ClientAanmaken extends javax.swing.JFrame {
         aantalpersonenVeld = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
         naampartnerVeld = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
-        verwijzerVeld = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         soortvoedselpakketVeld = new javax.swing.JComboBox<>();
@@ -101,6 +125,10 @@ public class ClientAanmaken extends javax.swing.JFrame {
         kaartnummerVeld = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         statusVeld = new javax.swing.JComboBox<>();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        startdatumVeld = new javax.swing.JTextField();
+        hulpverlenerLijst = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -159,10 +187,6 @@ public class ClientAanmaken extends javax.swing.JFrame {
 
         jLabel9.setText("Naam partner");
 
-        jLabel10.setText("Verwijzer");
-
-        verwijzerVeld.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lijst van hulporganisaties" }));
-
         jLabel11.setText("Velden met * zijn verplicht");
 
         jLabel12.setText("Soort voedselpakket");
@@ -183,6 +207,12 @@ public class ClientAanmaken extends javax.swing.JFrame {
         jLabel15.setText("Status");
 
         statusVeld.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Actief", "Afgewezen", "Gestopt", "Pending" }));
+
+        jLabel16.setText("Intake gedaan door");
+
+        jLabel17.setText("Startdatum uitgifte");
+
+        startdatumVeld.setText("YYYY-MM-DD");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -212,20 +242,25 @@ public class ClientAanmaken extends javax.swing.JFrame {
                                     .addComponent(jLabel7)
                                     .addComponent(emailVeld, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
                                     .addComponent(naamVeld))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGap(79, 79, 79)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(aantalpersonenVeld, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel10)
-                                    .addComponent(verwijzerVeld, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel12)
                                     .addComponent(soortvoedselpakketVeld, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel9)
-                                    .addComponent(naampartnerVeld, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel13)
-                                    .addComponent(jLabel15)
+                                    .addComponent(uitgiftepuntVeld, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(statusVeld, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(uitgiftepuntVeld, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addComponent(startdatumVeld)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(aantalpersonenVeld, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel12)
+                                            .addComponent(jLabel9)
+                                            .addComponent(naampartnerVeld, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel13)
+                                            .addComponent(jLabel16)
+                                            .addComponent(jLabel15)
+                                            .addComponent(jLabel17))
+                                        .addGap(0, 25, Short.MAX_VALUE))
+                                    .addComponent(hulpverlenerLijst, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(kaartnummerVeld)
@@ -282,28 +317,32 @@ public class ClientAanmaken extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(postcodeVeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel10)
+                        .addComponent(jLabel15)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(verwijzerVeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(statusVeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
-                    .addComponent(jLabel15))
+                    .addComponent(jLabel17))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(plaatsVeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(statusVeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
-                .addComponent(jLabel7)
+                    .addComponent(startdatumVeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel16))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(emailVeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(emailVeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(hulpverlenerLijst, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(kaartnummerVeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(toevoegKnop))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel11)
                 .addContainerGap())
         );
@@ -336,10 +375,12 @@ public class ClientAanmaken extends javax.swing.JFrame {
     }//GEN-LAST:event_telefoonnummerVeldActionPerformed
 
     private void toevoegKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toevoegKnopActionPerformed
+       
+        int clientID = 0;
         try {
             connection = SimpleDataSourceV2.getConnection();
-            PreparedStatement prestatement = connection.prepareStatement("INSERT INTO Cliënt(naam, telefoonnummer, mobielnummer, adres, postcode, plaats, email, kaartnummer, aantalpersonen, naam_partner, status_cliënt)"
-                    + "VALUES(?,?,?,?,?,?,?,?,?,?,?)");
+            PreparedStatement prestatement = connection.prepareStatement("INSERT INTO Cliënt(naam, telefoonnummer, mobielnummer, adres, postcode, plaats, email, kaartnummer, aantalpersonen, naam_partner, status_cliënt, ID_uitgiftepunt)"
+                    + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
 
             prestatement.setString(1, naamVeld.getText());
             prestatement.setString(2, telefoonnummerVeld.getText());
@@ -352,8 +393,33 @@ public class ClientAanmaken extends javax.swing.JFrame {
             prestatement.setString(9, aantalpersonenVeld.getSelectedItem().toString());
             prestatement.setString(10, naampartnerVeld.getText());
             prestatement.setString(11, statusVeld.getSelectedItem().toString());
-
+            prestatement.setInt(12, uitgiftepuntVeld.getItemAt(uitgiftepuntVeld.getSelectedIndex()).getUitgiftepunt_ID());
+            
             prestatement.executeUpdate();
+            
+            ResultSet rs = prestatement.getGeneratedKeys();
+            
+            while(rs.next()){
+            clientID = ((Number) rs.getObject(1)).intValue();
+            }
+            
+            PreparedStatement psIntake = connection.prepareStatement("INSERT INTO Intake(ID_cliënt, ID_hulpverlener, datum, startdatum_uitgifte)" + "VALUES(?,?,?,?)");
+            
+            psIntake.setInt(1, clientID);
+            psIntake.setInt(2, hulpverlenerLijst.getItemAt(hulpverlenerLijst.getSelectedIndex()).getHulverlener_ID());
+            psIntake.setString(3, dateFormat.format(today));
+            psIntake.setString(4, startdatumVeld.getText());
+            
+            psIntake.executeUpdate();
+            
+            PreparedStatement psVoedselpakket = connection.prepareStatement("INSERT INTO Voedselpakket(ID_cliënt, ID_uitgiftepunt, soort)" + "VALUES(?,?,?)");
+            
+            psVoedselpakket.setInt(1, clientID);
+            psVoedselpakket.setInt(2, uitgiftepuntVeld.getItemAt(uitgiftepuntVeld.getSelectedIndex()).getUitgiftepunt_ID());
+            psVoedselpakket.setString(3, soortvoedselpakketVeld.getSelectedItem().toString());
+            
+            psVoedselpakket.executeUpdate();
+            
             this.dispose();
 
         } catch (SQLException ex) {
@@ -365,13 +431,15 @@ public class ClientAanmaken extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> aantalpersonenVeld;
     private javax.swing.JTextField adresVeld;
     private javax.swing.JTextField emailVeld;
+    private javax.swing.JComboBox<Hulpverlener> hulpverlenerLijst;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -387,10 +455,10 @@ public class ClientAanmaken extends javax.swing.JFrame {
     private javax.swing.JTextField plaatsVeld;
     private javax.swing.JTextField postcodeVeld;
     private javax.swing.JComboBox<String> soortvoedselpakketVeld;
+    private javax.swing.JTextField startdatumVeld;
     private javax.swing.JComboBox<String> statusVeld;
     private javax.swing.JTextField telefoonnummerVeld;
     private javax.swing.JButton toevoegKnop;
     private javax.swing.JComboBox<Uitgiftepunt> uitgiftepuntVeld;
-    private javax.swing.JComboBox<String> verwijzerVeld;
     // End of variables declaration//GEN-END:variables
 }

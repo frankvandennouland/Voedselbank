@@ -15,9 +15,9 @@ public class Uitgiftepunt {
     private String adres;
     private String postcode;
     private String plaatsnaam;
-    private String capaciteit;
+    private int capaciteit;
 
-    public Uitgiftepunt(int uitgiftepunt_ID, String naam, String adres, String postcode, String plaatsnaam, String capaciteit) {
+    public Uitgiftepunt(int uitgiftepunt_ID, String naam, String adres, String postcode, String plaatsnaam, int capaciteit) {
         this.uitgiftepunt_ID = uitgiftepunt_ID;
         this.naam = naam;
         this.adres = adres;
@@ -66,11 +66,11 @@ public class Uitgiftepunt {
         this.plaatsnaam = plaatsnaam;
     }
 
-    public String getCapaciteit() {
+    public int getCapaciteit() {
         return capaciteit;
     }
 
-    public void setCapaciteit(String capaciteit) {
+    public void setCapaciteit(int capaciteit) {
         this.capaciteit = capaciteit;
     }
     

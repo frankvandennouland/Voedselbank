@@ -128,7 +128,7 @@ public class UitgiftepuntZoeken extends javax.swing.JFrame {
                 String adres = rs.getString("adres");
                 String postcode = rs.getString("postcode");
                 String plaatsnaam = rs.getString("plaatsnaam");
-                String capaciteit = rs.getString("capaciteit");
+                int capaciteit = rs.getInt("capaciteit");
 
                 Uitgiftepunt uitgiftepunt = new Uitgiftepunt(ID, naam, adres, postcode, plaatsnaam, capaciteit);
 

@@ -54,8 +54,8 @@
                                   <Component id="jLabel8" max="32767" attributes="0"/>
                                   <Component id="soortvoedselpakketVeld" alignment="0" max="32767" attributes="0"/>
                                   <Component id="uitgiftepuntVeld" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="hulpverlenerLijst" alignment="0" max="32767" attributes="0"/>
                                   <Component id="statusVeld" max="32767" attributes="0"/>
+                                  <Component id="startdatumVeld" alignment="0" max="32767" attributes="0"/>
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="aantalpersonenVeld" min="-2" pref="93" max="-2" attributes="0"/>
@@ -69,7 +69,7 @@
                                       </Group>
                                       <EmptySpace min="0" pref="25" max="32767" attributes="0"/>
                                   </Group>
-                                  <Component id="startdatumVeld" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="hulpverlenerLijst" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -172,7 +172,7 @@
                   <Component id="emailVeld" min="-2" max="-2" attributes="0"/>
                   <Component id="hulpverlenerLijst" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
               <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -366,11 +366,6 @@
         <Property name="text" type="java.lang.String" value="Intake gedaan door"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="hulpverlenerLijst">
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Hulpverlener&gt;"/>
-      </AuxValues>
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabel17">
       <Properties>
         <Property name="text" type="java.lang.String" value="Startdatum uitgifte"/>
@@ -380,6 +375,16 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="YYYY-MM-DD"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="hulpverlenerLijst">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Hulpverlener&gt;"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>
