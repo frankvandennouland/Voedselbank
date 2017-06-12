@@ -148,7 +148,22 @@ public class OverzichtScherm extends javax.swing.JFrame {
     }//GEN-LAST:event_mutatieperuitgiftepuntKnopActionPerformed
 
     private void bevoorradingslijstKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bevoorradingslijstKnopActionPerformed
-        // TODO add your handling code here:
+        try {
+            connection = SimpleDataSourceV2.getConnection();
+            PreparedStatement prestatement = connection.prepareStatement("SELECT Uitgiftepunt.naam as naam_uitgiftepunt, count(case when soort like 'Enkel%' then 1 else NULL end) as aantal_enkelvoudigepakketten,\n" +
+"count(case when soort like 'Dubbel%' then 1 else NULL end) as aantal_dubbelvoudigepakketten,\n" +
+"count(case when soort like 'Drie%' then 1 else NULL end) as aantal_drievoudigepakketten\n" +
+"FROM Voedselpakket\n" +
+"JOIN Uitgiftepunt ON Uitgiftepunt.ID_uitgiftepunt = Voedselpakket.ID_uitgiftepunt\n" +
+"JOIN Cliënt ON Cliënt.ID_Cliënt = Voedselpakket.ID_cliënt\n");
+            ResultSet rs = prestatement.executeQuery();
+            overzichtTabel.setModel(DbUtils.resultSetToTableModel(rs));
+            overzichtTabel.setAutoCreateRowSorter(true);
+            overzichtTabel.setAutoResizeMode(5);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }//GEN-LAST:event_bevoorradingslijstKnopActionPerformed
 
     private void clientenoverzichtKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientenoverzichtKnopActionPerformed
@@ -166,13 +181,13 @@ public class OverzichtScherm extends javax.swing.JFrame {
     }//GEN-LAST:event_clientenoverzichtKnopActionPerformed
 
     private void overzichtintakeKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_overzichtintakeKnopActionPerformed
- try {
+        try {
             connection = SimpleDataSourceV2.getConnection();
-            PreparedStatement prestatement = connection.prepareStatement("SELECT Cliënt.naam as naam_cliënt, Hulpverlener.naam as naam_hulpverlener, datum, startdatum_uitgifte, \n" +
-"datum_herintake, datum_stopzetting, reden_stopzetting \n" +
-"FROM Intake\n" +
-"JOIN Hulpverlener ON Hulpverlener.ID_hulpverlener = Intake.ID_hulpverlener\n" +
-"JOIN Cliënt ON Cliënt.ID_cliënt = Intake.ID_cliënt");
+            PreparedStatement prestatement = connection.prepareStatement("SELECT Cliënt.naam as naam_cliënt, Hulpverlener.naam as naam_hulpverlener, datum, startdatum_uitgifte, \n"
+                    + "datum_herintake, datum_stopzetting, reden_stopzetting \n"
+                    + "FROM Intake\n"
+                    + "JOIN Hulpverlener ON Hulpverlener.ID_hulpverlener = Intake.ID_hulpverlener\n"
+                    + "JOIN Cliënt ON Cliënt.ID_cliënt = Intake.ID_cliënt");
             ResultSet rs = prestatement.executeQuery();
             overzichtTabel.setModel(DbUtils.resultSetToTableModel(rs));
             overzichtTabel.setAutoCreateRowSorter(true);
@@ -184,7 +199,7 @@ public class OverzichtScherm extends javax.swing.JFrame {
     }//GEN-LAST:event_overzichtintakeKnopActionPerformed
 
     private void clientperhulpverlenerKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientperhulpverlenerKnopActionPerformed
-          try {
+        try {
             connection = SimpleDataSourceV2.getConnection();
             PreparedStatement prestatement = connection.prepareStatement("SELECT Cliënt.naam as naam_cliënt, Hulpverlener.naam as naam_hulpverlener FROM Intake JOIN Hulpverlener ON Hulpverlener.ID_hulpverlener = Intake.ID_hulpverlener JOIN Cliënt ON Cliënt.ID_cliënt = Intake.ID_cliënt");
             ResultSet rs = prestatement.executeQuery();
