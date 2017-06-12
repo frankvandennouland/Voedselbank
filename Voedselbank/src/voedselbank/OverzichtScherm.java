@@ -168,7 +168,7 @@ public class OverzichtScherm extends javax.swing.JFrame {
     private void overzichtintakeKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_overzichtintakeKnopActionPerformed
  try {
             connection = SimpleDataSourceV2.getConnection();
-            PreparedStatement prestatement = connection.prepareStatement("SELECT Cliënt.naam as naam_cliënt, Hulpverlener.naam as naam_hulpverlener, startdatum_uitgifte, \n" +
+            PreparedStatement prestatement = connection.prepareStatement("SELECT Cliënt.naam as naam_cliënt, Hulpverlener.naam as naam_hulpverlener, datum, startdatum_uitgifte, \n" +
 "datum_herintake, datum_stopzetting, reden_stopzetting \n" +
 "FROM Intake\n" +
 "JOIN Hulpverlener ON Hulpverlener.ID_hulpverlener = Intake.ID_hulpverlener\n" +
