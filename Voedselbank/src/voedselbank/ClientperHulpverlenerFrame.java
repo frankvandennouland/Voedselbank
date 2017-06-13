@@ -28,6 +28,7 @@ public class ClientperHulpverlenerFrame extends javax.swing.JFrame {
         initComponents();
         comboBoxVullen();
         lijstVullen();
+        tabelVullen();
     }
 
     /**
@@ -66,11 +67,16 @@ public class ClientperHulpverlenerFrame extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        jList1.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jList1ValueChanged(evt);
+            }
+        });
         jScrollPane1.setViewportView(jList1);
 
-        jLabel1.setText("Cliënten");
+        jLabel1.setText("Cliënten:");
 
-        jLabel2.setText("Hulpverlener");
+        jLabel2.setText("Hulpverlener:");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -92,44 +98,47 @@ public class ClientperHulpverlenerFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 598, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 102, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-    
-            lijstVullen();
+        lijstVullen();
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
 
     }//GEN-LAST:event_jComboBox1ItemStateChanged
+
+    private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
+        tabelVullen();
+    }//GEN-LAST:event_jList1ValueChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -159,20 +168,20 @@ private void comboBoxVullen() {
     }
 
     private void lijstVullen() {
-        
+
         try {
             connection = SimpleDataSourceV2.getConnection();
             PreparedStatement prestatement = connection.prepareStatement("SELECT Cliënt.naam FROM Intake "
                     + "JOIN Hulpverlener ON Hulpverlener.ID_hulpverlener = Intake.ID_hulpverlener JOIN Cliënt ON Cliënt.ID_cliënt = Intake.ID_cliënt WHERE Hulpverlener.naam = ?");
-            
+
             prestatement.setString(1, jComboBox1.getItemAt(jComboBox1.getSelectedIndex()));
-            
+
             ResultSet rs = prestatement.executeQuery();
-            
+
             Vector<String> cLijst = new Vector();
-      
+
             while (rs.next()) {
-                cLijst.add(rs.getString("naam"));   
+                cLijst.add(rs.getString("naam"));
             }
             jList1.setListData(cLijst);
 
@@ -180,7 +189,20 @@ private void comboBoxVullen() {
             ex.printStackTrace();
         }
     }
-    private void tabelVullen(){
-        
+
+    private void tabelVullen() {
+        try {
+            connection = SimpleDataSourceV2.getConnection();
+            PreparedStatement prestatement = connection.prepareStatement("SELECT naam, kaartnummer, telefoonnummer, mobielnummer, adres, postcode, email, status_cliënt FROM Cliënt WHERE Cliënt.naam = ?");
+            prestatement.setString(1, jList1.getSelectedValue());
+            ResultSet rs = prestatement.executeQuery();
+
+            jTable1.setModel(DbUtils.resultSetToTableModel(rs));
+            jTable1.setAutoCreateRowSorter(true);
+            jTable1.setAutoResizeMode(5);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 }
