@@ -102,8 +102,8 @@ public class ClientperHulpverlenerFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        
-            //lijstVullen();
+    
+            lijstVullen();
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
@@ -139,20 +139,17 @@ private void comboBoxVullen() {
         
         try {
             connection = SimpleDataSourceV2.getConnection();
-            PreparedStatement prestatement = connection.prepareStatement("SELECT Cliënt.naam \n"
-                    + "FROM Intake \n"
-                    + "JOIN Hulpverlener ON Hulpverlener.ID_hulpverlener = Intake.ID_hulpverlener \n"
-                    + "JOIN Cliënt ON Cliënt.ID_cliënt = Intake.ID_cliënt"
-                    + "WHERE Hulpverlener.naam = ?");
+            PreparedStatement prestatement = connection.prepareStatement("SELECT Cliënt.naam FROM Intake "
+                    + "JOIN Hulpverlener ON Hulpverlener.ID_hulpverlener = Intake.ID_hulpverlener JOIN Cliënt ON Cliënt.ID_cliënt = Intake.ID_cliënt WHERE Hulpverlener.naam = ?");
             
             prestatement.setString(1, jComboBox1.getItemAt(jComboBox1.getSelectedIndex()));
             
             ResultSet rs = prestatement.executeQuery();
             
-            String[] cLijst = new String[jComboBox1.getItemCount()];
+            Vector<String> cLijst = new Vector();
             while (rs.next()) {
                 int i = 0;
-                cLijst[i] = rs.getString("naam");          
+                cLijst.add(rs.getString("naam"));          
             }
             jList1.setListData(cLijst);
 
