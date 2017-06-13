@@ -5,17 +5,29 @@
  */
 package voedselbank;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Vector;
+import net.proteanit.sql.DbUtils;
+
 /**
  *
  * @author Dave
  */
 public class ClientperHulpverlenerFrame extends javax.swing.JFrame {
 
+    private Connection connection;
+    private Hulpverlener hulpverlener;
+
     /**
      * Creates new form ClientperHulpverlenerFrame
      */
     public ClientperHulpverlenerFrame() {
         initComponents();
+        comboBoxVullen();
+        lijstVullen();
     }
 
     /**
@@ -36,6 +48,16 @@ public class ClientperHulpverlenerFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox1ItemStateChanged(evt);
+            }
+        });
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -79,6 +101,15 @@ public class ClientperHulpverlenerFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        
+            //lijstVullen();
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
+
+    }//GEN-LAST:event_jComboBox1ItemStateChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> jComboBox1;
@@ -87,4 +118,42 @@ public class ClientperHulpverlenerFrame extends javax.swing.JFrame {
     private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
+private void comboBoxVullen() {
+        try {
+            connection = SimpleDataSourceV2.getConnection();
+            PreparedStatement prestatement = connection.prepareStatement("SELECT naam FROM Hulpverlener");
+            ResultSet rs = prestatement.executeQuery();
+            jComboBox1.removeAllItems();
+            while (rs.next()) {
+                String naam = rs.getString("naam");
+
+                jComboBox1.addItem(naam);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private void lijstVullen() {
+        
+        try {
+            connection = SimpleDataSourceV2.getConnection();
+            PreparedStatement prestatement = connection.prepareStatement("SELECT Cliënt.naam \n"
+                    + "FROM Intake \n"
+                    + "JOIN Hulpverlener ON Hulpverlener.ID_hulpverlener = Intake.ID_hulpverlener \n"
+                    + "JOIN Cliënt ON Cliënt.ID_cliënt = Intake.ID_cliënt"
+                    + "Where Hulpverlener.naam = ?");
+            prestatement.setString(1, jComboBox1.getItemAt(jComboBox1.getSelectedIndex()));
+            ResultSet rs = prestatement.executeQuery();
+            Vector<String> cLijst = new Vector();
+            while (rs.next()) {
+                cLijst.add(rs.getString("naam"));
+            }
+            jList1.setListData(cLijst);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
 }
