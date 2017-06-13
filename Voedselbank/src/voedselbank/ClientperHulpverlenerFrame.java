@@ -143,12 +143,16 @@ private void comboBoxVullen() {
                     + "FROM Intake \n"
                     + "JOIN Hulpverlener ON Hulpverlener.ID_hulpverlener = Intake.ID_hulpverlener \n"
                     + "JOIN Cliënt ON Cliënt.ID_cliënt = Intake.ID_cliënt"
-                    + "Where Hulpverlener.naam = ?");
+                    + "WHERE Hulpverlener.naam = ?");
+            
             prestatement.setString(1, jComboBox1.getItemAt(jComboBox1.getSelectedIndex()));
+            
             ResultSet rs = prestatement.executeQuery();
-            Vector<String> cLijst = new Vector();
+            
+            String[] cLijst = new String[jComboBox1.getItemCount()];
             while (rs.next()) {
-                cLijst.add(rs.getString("naam"));
+                int i = 0;
+                cLijst[i] = rs.getString("naam");          
             }
             jList1.setListData(cLijst);
 
