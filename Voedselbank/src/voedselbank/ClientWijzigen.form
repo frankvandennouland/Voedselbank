@@ -55,13 +55,13 @@
                   <Component id="jLabel12" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="soortvoedselpakketVeld" alignment="0" max="32767" attributes="0"/>
                   <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="naampartnerVeld" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
                   <Component id="jLabel13" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="uitgiftepuntVeld" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="verwijderKnop" alignment="0" max="32767" attributes="0"/>
                   <Component id="wijzigKnop" pref="175" max="32767" attributes="0"/>
                   <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
                   <Component id="statusVeld" alignment="0" max="32767" attributes="0"/>
+                  <Component id="uitgiftepuntVeld" alignment="0" max="32767" attributes="0"/>
+                  <Component id="naampartnerVeld" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
           </Group>

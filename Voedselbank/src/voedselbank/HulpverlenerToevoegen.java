@@ -8,6 +8,8 @@ package voedselbank;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -16,6 +18,7 @@ import java.sql.SQLException;
 public class HulpverlenerToevoegen extends javax.swing.JFrame {
 
     private Connection connection;
+    private final DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
 
     /**
      * Creates new form HulpverlenerToevoegen
@@ -36,10 +39,10 @@ public class HulpverlenerToevoegen extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         naamVeld = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        geboortedatumVeld = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         telefoonnummerVeld = new javax.swing.JTextField();
         toevoegKnop = new javax.swing.JButton();
+        geboortedatumVeld = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -52,13 +55,6 @@ public class HulpverlenerToevoegen extends javax.swing.JFrame {
         });
 
         jLabel2.setText("Geboortedatum");
-
-        geboortedatumVeld.setText("YYYY-DD-MM");
-        geboortedatumVeld.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                geboortedatumVeldActionPerformed(evt);
-            }
-        });
 
         jLabel3.setText("Telefoonnummer");
 
@@ -79,10 +75,10 @@ public class HulpverlenerToevoegen extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(naamVeld)
                     .addComponent(jLabel2)
-                    .addComponent(geboortedatumVeld)
                     .addComponent(jLabel3)
                     .addComponent(telefoonnummerVeld)
-                    .addComponent(toevoegKnop, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
+                    .addComponent(toevoegKnop, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                    .addComponent(geboortedatumVeld, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(244, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -96,7 +92,7 @@ public class HulpverlenerToevoegen extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(geboortedatumVeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(7, 7, 7)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(telefoonnummerVeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -119,7 +115,7 @@ public class HulpverlenerToevoegen extends javax.swing.JFrame {
                     + "VALUES(?,?,?)");
 
             prestatement.setString(1, naamVeld.getText());
-            prestatement.setString(2, geboortedatumVeld.getText());
+            prestatement.setString(2, dateFormat.format(geboortedatumVeld.getDate()));
             prestatement.setString(3, telefoonnummerVeld.getText());
 
             prestatement.executeUpdate();
@@ -130,47 +126,8 @@ public class HulpverlenerToevoegen extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_toevoegKnopActionPerformed
 
-    private void geboortedatumVeldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_geboortedatumVeldActionPerformed
-
-    }//GEN-LAST:event_geboortedatumVeldActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(HulpverlenerToevoegen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(HulpverlenerToevoegen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(HulpverlenerToevoegen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(HulpverlenerToevoegen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new HulpverlenerToevoegen().setVisible(true);
-            }
-        });
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField geboortedatumVeld;
+    private com.toedter.calendar.JDateChooser geboortedatumVeld;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

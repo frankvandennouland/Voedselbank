@@ -118,8 +118,6 @@ public class ClientWijzigen extends javax.swing.JFrame {
         naamVeld = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         verwijderKnop = new javax.swing.JButton();
-        verwijzerVeld = new javax.swing.JComboBox<>();
-        jLabel10 = new javax.swing.JLabel();
         soortvoedselpakketVeld = new javax.swing.JComboBox<>();
         uitgiftepuntVeld = new javax.swing.JComboBox<>();
         jLabel12 = new javax.swing.JLabel();
@@ -189,10 +187,6 @@ public class ClientWijzigen extends javax.swing.JFrame {
             }
         });
 
-        verwijzerVeld.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lijst van hulporganisaties" }));
-
-        jLabel10.setText("Verwijzer");
-
         soortvoedselpakketVeld.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Enkelvoudig", "Dubbel", "Drievoudig" }));
 
         jLabel12.setText("Soort voedselpakket");
@@ -253,18 +247,16 @@ public class ClientWijzigen extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(aantalpersonenVeld, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10)
-                    .addComponent(verwijzerVeld, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel12)
                     .addComponent(soortvoedselpakketVeld, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel9)
-                    .addComponent(naampartnerVeld, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13)
-                    .addComponent(uitgiftepuntVeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(verwijderKnop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(wijzigKnop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(wijzigKnop, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
                     .addComponent(jLabel15)
-                    .addComponent(statusVeld, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(statusVeld, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(uitgiftepuntVeld, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(naampartnerVeld))
                 .addGap(91, 91, 91))
         );
         layout.setVerticalGroup(
@@ -315,15 +307,13 @@ public class ClientWijzigen extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(postcodeVeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel10)
+                        .addComponent(jLabel15)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(verwijzerVeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel15))
+                        .addComponent(statusVeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(12, 12, 12)
+                .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(plaatsVeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(14, 14, 14)
@@ -335,8 +325,6 @@ public class ClientWijzigen extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(kaartnummerVeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(statusVeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(verwijderKnop)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(wijzigKnop)))
@@ -426,7 +414,6 @@ public class ClientWijzigen extends javax.swing.JFrame {
     private javax.swing.JTextField adresVeld;
     private javax.swing.JTextField emailVeld;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -451,7 +438,6 @@ public class ClientWijzigen extends javax.swing.JFrame {
     private javax.swing.JTextField telefoonnummerVeld;
     private javax.swing.JComboBox<Uitgiftepunt> uitgiftepuntVeld;
     private javax.swing.JButton verwijderKnop;
-    private javax.swing.JComboBox<String> verwijzerVeld;
     private javax.swing.JButton wijzigKnop;
     // End of variables declaration//GEN-END:variables
 }

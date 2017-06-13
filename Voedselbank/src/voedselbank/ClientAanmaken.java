@@ -22,8 +22,8 @@ import java.util.Date;
 public class ClientAanmaken extends javax.swing.JFrame {
 
     private Connection connection;
-    private Date today = new Date();
-    private DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
+    private final Date today = new Date();
+    private final DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
 
     /**
      * Creates new form KlantAanpassen
@@ -33,6 +33,7 @@ public class ClientAanmaken extends javax.swing.JFrame {
         setTitle("Cliënt toevoegen");
         maakUitgiftepuntLijst();
         maakHulpverlenerLijst();
+        
     }
 
     /**
@@ -97,6 +98,7 @@ public class ClientAanmaken extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jLabel1 = new javax.swing.JLabel();
         naamVeld = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -127,8 +129,8 @@ public class ClientAanmaken extends javax.swing.JFrame {
         statusVeld = new javax.swing.JComboBox<>();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        startdatumVeld = new javax.swing.JTextField();
         hulpverlenerLijst = new javax.swing.JComboBox<>();
+        startdatumVeld = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -212,8 +214,6 @@ public class ClientAanmaken extends javax.swing.JFrame {
 
         jLabel17.setText("Startdatum uitgifte");
 
-        startdatumVeld.setText("YYYY-MM-DD");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -248,7 +248,7 @@ public class ClientAanmaken extends javax.swing.JFrame {
                                     .addComponent(soortvoedselpakketVeld, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(uitgiftepuntVeld, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(statusVeld, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(startdatumVeld)
+                                    .addComponent(hulpverlenerLijst, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(aantalpersonenVeld, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -260,7 +260,7 @@ public class ClientAanmaken extends javax.swing.JFrame {
                                             .addComponent(jLabel15)
                                             .addComponent(jLabel17))
                                         .addGap(0, 25, Short.MAX_VALUE))
-                                    .addComponent(hulpverlenerLijst, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addComponent(startdatumVeld, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(kaartnummerVeld)
@@ -328,7 +328,7 @@ public class ClientAanmaken extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(plaatsVeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(startdatumVeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(14, 14, 14)
+                .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
                     .addComponent(jLabel16))
@@ -408,7 +408,7 @@ public class ClientAanmaken extends javax.swing.JFrame {
             psIntake.setInt(1, clientID);
             psIntake.setInt(2, hulpverlenerLijst.getItemAt(hulpverlenerLijst.getSelectedIndex()).getHulverlener_ID());
             psIntake.setString(3, dateFormat.format(today));
-            psIntake.setString(4, startdatumVeld.getText());
+            psIntake.setString(4, dateFormat.format(startdatumVeld.getDate()));
             
             psIntake.executeUpdate();
             
@@ -432,6 +432,7 @@ public class ClientAanmaken extends javax.swing.JFrame {
     private javax.swing.JTextField adresVeld;
     private javax.swing.JTextField emailVeld;
     private javax.swing.JComboBox<Hulpverlener> hulpverlenerLijst;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -455,7 +456,7 @@ public class ClientAanmaken extends javax.swing.JFrame {
     private javax.swing.JTextField plaatsVeld;
     private javax.swing.JTextField postcodeVeld;
     private javax.swing.JComboBox<String> soortvoedselpakketVeld;
-    private javax.swing.JTextField startdatumVeld;
+    private com.toedter.calendar.JDateChooser startdatumVeld;
     private javax.swing.JComboBox<String> statusVeld;
     private javax.swing.JTextField telefoonnummerVeld;
     private javax.swing.JButton toevoegKnop;

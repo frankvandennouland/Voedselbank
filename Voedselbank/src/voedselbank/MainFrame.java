@@ -209,27 +209,26 @@ public class MainFrame extends javax.swing.JFrame {
         fc.showOpenDialog(this);
 
         DataFormatter formatter = new DataFormatter();
-        
-        
+
         File file = fc.getSelectedFile();
 
         try {
-	FileInputStream fileInputStream = new FileInputStream(file);
-	HSSFWorkbook workbook = new HSSFWorkbook(fileInputStream);
-	HSSFSheet worksheet = workbook.getSheet("Intakestatus");
-	HSSFRow row6 = worksheet.getRow(5);
-	HSSFCell cellA6 = row6.getCell((short) 0);
-	String a6Val = formatter.formatCellValue(worksheet.getRow(5).getCell(0));
-	HSSFCell cellB6 = row6.getCell((short) 1);
-	String b6Val = formatter.formatCellValue(worksheet.getRow(5).getCell(1));
-	HSSFCell cellC6 = row6.getCell((short) 2);
-	String c6Val = formatter.formatCellValue(worksheet.getRow(5).getCell(2));
-                
-        System.out.println("A1: " + a6Val);
-	System.out.println("B1: " + b6Val);
-	System.out.println("C1: " + c6Val);
+            FileInputStream fileInputStream = new FileInputStream(file);
+            HSSFWorkbook workbook = new HSSFWorkbook(fileInputStream);
+            HSSFSheet worksheet = workbook.getSheet("Intakestatus");
+            HSSFRow row6 = worksheet.getRow(5);
+            HSSFCell cellA6 = row6.getCell((short) 0);
+            String a6Val = formatter.formatCellValue(worksheet.getRow(5).getCell(0));
+            HSSFCell cellB6 = row6.getCell((short) 1);
+            String b6Val = formatter.formatCellValue(worksheet.getRow(5).getCell(1));
+            HSSFCell cellC6 = row6.getCell((short) 2);
+            String c6Val = formatter.formatCellValue(worksheet.getRow(5).getCell(2));
 
-        } catch(Exception ioe) {
+            System.out.println("A1: " + a6Val);
+            System.out.println("B1: " + b6Val);
+            System.out.println("C1: " + c6Val);
+
+        } catch (Exception ioe) {
             ioe.printStackTrace();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -243,7 +242,7 @@ public class MainFrame extends javax.swing.JFrame {
         HulpverlenerZoeken z = new HulpverlenerZoeken();
         z.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
-                                       
+
     public static void main(String[] args) {
         MainFrame f = new MainFrame();
         f.setVisible(true);

@@ -29,10 +29,10 @@
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <Component id="naamVeld" max="32767" attributes="0"/>
                   <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="geboortedatumVeld" alignment="0" max="32767" attributes="0"/>
                   <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="telefoonnummerVeld" alignment="0" max="32767" attributes="0"/>
                   <Component id="toevoegKnop" pref="150" max="32767" attributes="0"/>
+                  <Component id="geboortedatumVeld" max="32767" attributes="0"/>
               </Group>
               <EmptySpace pref="244" max="32767" attributes="0"/>
           </Group>
@@ -49,7 +49,7 @@
               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="geboortedatumVeld" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="telefoonnummerVeld" min="-2" max="-2" attributes="0"/>
@@ -76,14 +76,6 @@
         <Property name="text" type="java.lang.String" value="Geboortedatum"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="geboortedatumVeld">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="YYYY-DD-MM"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="geboortedatumVeldActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
         <Property name="text" type="java.lang.String" value="Telefoonnummer"/>
@@ -98,6 +90,8 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="toevoegKnopActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="com.toedter.calendar.JDateChooser" name="geboortedatumVeld">
     </Component>
   </SubComponents>
 </Form>
