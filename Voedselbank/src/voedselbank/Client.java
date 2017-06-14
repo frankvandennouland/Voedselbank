@@ -5,12 +5,17 @@
  */
 package voedselbank;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /**
  *
  * @author frank
  */
 public class Client {
-    private int ID;
+      private int ID;
     private int kaartnummer;
     private String naam;
     private String telefoonnummer;
@@ -25,10 +30,8 @@ public class Client {
     private int uitgiftepunt_ID;
     private int verwijzer_ID;
     private int verwijzing_ID;
+    private Connection connection;
 
-    public Client() {
-    }
-     
     public Client(int ID, int kaartnummer, String naam, String telefoonnummer, String adres, String postcode, String plaats, String email, String mobielnummer, int aantalPersonen, String Status, String naamPartner, int uitgiftepunt_ID, int verwijzer_ID, int verwijzing_ID) {
         this.ID = ID;
         this.kaartnummer = kaartnummer;
@@ -45,6 +48,19 @@ public class Client {
         this.uitgiftepunt_ID = uitgiftepunt_ID;
         this.verwijzer_ID = verwijzer_ID;
         this.verwijzing_ID = verwijzing_ID;
+    }
+    
+    public Client(int kaartnummer, String naam, String telefoonnummer, String adres, String postcode, String plaats, String email, int aantalPersonen, String Status, String naamPartner) {
+        this.kaartnummer = kaartnummer;
+        this.naam = naam;
+        this.telefoonnummer = telefoonnummer;
+        this.adres = adres;
+        this.postcode = postcode;
+        this.plaats = plaats;
+        this.email = email;
+        this.aantalPersonen = aantalPersonen;
+        this.Status = Status;
+        this.naamPartner = naamPartner;
     }
     
     public int getID() {
@@ -165,6 +181,77 @@ public class Client {
 
     public void setVerwijzing_ID(int verwijzing_ID) {
         this.verwijzing_ID = verwijzing_ID;
+    }
+    
+       public void checkBestaat(Client client) {
+           
+        try {
+            connection = SimpleDataSourceV2.getConnection();
+            PreparedStatement prestatement = connection.prepareStatement("SELECT * FROM Cliënt where kaartnummer = " + client.kaartnummer + " limit 1");
+
+            ResultSet rs = prestatement.executeQuery();
+
+            while (rs.next()) {
+                boolean hetzelfde = false;
+     
+                int ID = rs.getInt("ID_cliënt");
+                int kaartnummer = rs.getInt("kaartnummer");
+                String naam = rs.getString("naam");
+                String telefoonnummer = rs.getString("telefoonnummer");
+                String adres = rs.getString("adres");
+                String postcode = rs.getString("postcode");
+                String plaats = rs.getString("plaats");
+                String email = rs.getString("email");
+                String mobielnummer = rs.getString("mobielnummer");
+                int aantalPersonen = rs.getInt("aantalPersonen");
+                String Status = rs.getString("status_cliënt");
+                String naamPartner = rs.getString("naam_partner");
+                int uitgiftepunt_ID = rs.getInt("ID_uitgiftepunt");
+                int verwijzer_ID = rs.getInt("ID_verwijzer");
+                int verwijzing_ID = rs.getInt("ID_verwijzing");
+
+                Client dbClient = new Client(ID, kaartnummer, naam, telefoonnummer, adres, postcode, plaats, email, mobielnummer, aantalPersonen,
+                        Status, naamPartner, uitgiftepunt_ID, verwijzer_ID, verwijzing_ID);
+                
+                System.out.println(client.equals(dbClient));
+                
+                if(client.equals(dbClient)) {
+                    hetzelfde = true;
+                }
+                
+//                if(hetzelfde == false) {
+//                    prestatement = connection.prepareStatement("Update Cliënt set where kaartnummer = " + client.kaartnummer);
+//                    
+//                    rs = prestatement.executeQuery();
+//                }
+                }
+            
+            if (!rs.isBeforeFirst() ) {
+                prestatement = connection.prepareStatement("INSERT INTO Cliënt(kaartnummer, naam, telefoonnummer, mobielnummer, adres, postcode, plaats, email, aantalpersonen, naam_partner, status_cliënt)"
+                    + "VALUES(?,?,?,?,?,?,?,?,?,?,?)");
+
+            prestatement.setInt(1, client.kaartnummer);
+            prestatement.setString(2, client.naam);
+            prestatement.setString(3, client.telefoonnummer);
+            prestatement.setString(4, client.mobielnummer);
+            prestatement.setString(5, client.adres);
+            prestatement.setString(6, client.postcode);
+            prestatement.setString(7, client.plaats);
+            prestatement.setString(8, client.email);
+            prestatement.setInt(9, client.aantalPersonen);
+            prestatement.setString(10, client.naamPartner);
+            prestatement.setString(11, client.Status);
+
+            prestatement.executeUpdate();
+            }
+            
+            } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    public void insertClient (Client client) {
+        
     }
     
     @Override

@@ -205,31 +205,77 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_uitgiftepuntwijzigenKnopActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        JFileChooser fc = new JFileChooser();
+       JFileChooser fc = new JFileChooser();
         fc.showOpenDialog(this);
 
         DataFormatter formatter = new DataFormatter();
-
+        
+        
         File file = fc.getSelectedFile();
 
         try {
-            FileInputStream fileInputStream = new FileInputStream(file);
-            HSSFWorkbook workbook = new HSSFWorkbook(fileInputStream);
-            HSSFSheet worksheet = workbook.getSheet("Intakestatus");
-            HSSFRow row6 = worksheet.getRow(5);
-            HSSFCell cellA6 = row6.getCell((short) 0);
-            String a6Val = formatter.formatCellValue(worksheet.getRow(5).getCell(0));
-            HSSFCell cellB6 = row6.getCell((short) 1);
-            String b6Val = formatter.formatCellValue(worksheet.getRow(5).getCell(1));
-            HSSFCell cellC6 = row6.getCell((short) 2);
-            String c6Val = formatter.formatCellValue(worksheet.getRow(5).getCell(2));
-
-            System.out.println("A1: " + a6Val);
-            System.out.println("B1: " + b6Val);
-            System.out.println("C1: " + c6Val);
-
-        } catch (Exception ioe) {
-            ioe.printStackTrace();
+	FileInputStream fileInputStream = new FileInputStream(file);
+	HSSFWorkbook workbook = new HSSFWorkbook(fileInputStream);
+	HSSFSheet worksheet = workbook.getSheet("Intakestatus");
+        
+        boolean begin = false;
+        boolean einde = false;
+        
+        for(int i = 0; begin == false; i++) {
+            String content = formatter.formatCellValue(worksheet.getRow(i).getCell(0));
+            
+            if (content.equals("Kaartnummer")) {
+                begin = true;
+                i = i+1;
+                while(einde == false) {
+                    if (!formatter.formatCellValue(worksheet.getRow(i).getCell(0)).equals("")) {
+                        String kaartnummer = formatter.formatCellValue(worksheet.getRow(i).getCell(0));
+                        String naam = formatter.formatCellValue(worksheet.getRow(i).getCell(1));
+                        String naamPartner = formatter.formatCellValue(worksheet.getRow(i).getCell(2));
+                        String telefoonnummer = formatter.formatCellValue(worksheet.getRow(i).getCell(3));
+                        String email = formatter.formatCellValue(worksheet.getRow(i).getCell(4));
+                        String mobiel = formatter.formatCellValue(worksheet.getRow(i).getCell(5));
+                        String aantalPersonen = formatter.formatCellValue(worksheet.getRow(i).getCell(6));
+                        String aantalPersonenNorm = formatter.formatCellValue(worksheet.getRow(i).getCell(7));
+                        String gebruikInMaanden = formatter.formatCellValue(worksheet.getRow(i).getCell(8));
+                        String identiteitsbewijs_soort = formatter.formatCellValue(worksheet.getRow(i).getCell(9));
+                        String datum_uitgifte_identiteitsbewijs = formatter.formatCellValue(worksheet.getRow(i).getCell(10));
+                        String identiteitsnummer = formatter.formatCellValue(worksheet.getRow(i).getCell(11));
+                        String plaats_uitgifte_identiteitsbewijs = formatter.formatCellValue(worksheet.getRow(i).getCell(12));
+                        String adres = formatter.formatCellValue(worksheet.getRow(i).getCell(13));
+                        String postcode = formatter.formatCellValue(worksheet.getRow(i).getCell(14));
+                        String plaats = formatter.formatCellValue(worksheet.getRow(i).getCell(15));
+                        String status = formatter.formatCellValue(worksheet.getRow(i).getCell(16));
+                        String intaker = formatter.formatCellValue(worksheet.getRow(i).getCell(17));
+                        String intakedatum = formatter.formatCellValue(worksheet.getRow(i).getCell(18));
+                        String startdatum_uitgifte = formatter.formatCellValue(worksheet.getRow(i).getCell(19));
+                        String datum_herintake = formatter.formatCellValue(worksheet.getRow(i).getCell(20));
+                        String datum_stopzetting = formatter.formatCellValue(worksheet.getRow(i).getCell(21));
+                        String reden_stopzetting = formatter.formatCellValue(worksheet.getRow(i).getCell(22));
+                        String verwijzer_door = formatter.formatCellValue(worksheet.getRow(i).getCell(23));
+                        String verwijzer_door_contact = formatter.formatCellValue(worksheet.getRow(i).getCell(24));
+                        String verwijzer_door_tel = formatter.formatCellValue(worksheet.getRow(i).getCell(25));
+                        String verwijzer_door_email = formatter.formatCellValue(worksheet.getRow(i).getCell(26));
+                        String verwijzer_naar = formatter.formatCellValue(worksheet.getRow(i).getCell(27));
+                        String verwijzer_naar_contact = formatter.formatCellValue(worksheet.getRow(i).getCell(28));
+                        String verwijzer_naar_tel = formatter.formatCellValue(worksheet.getRow(i).getCell(29));
+                        String verwijzer_naar_email = formatter.formatCellValue(worksheet.getRow(i).getCell(30));
+                        String uitgifte_punt = formatter.formatCellValue(worksheet.getRow(i).getCell(31));
+                        String pakket = formatter.formatCellValue(worksheet.getRow(i).getCell(32));
+                        
+                        Client client = new Client(Integer.parseInt(kaartnummer), naam, telefoonnummer, adres, postcode, plaats, email, Integer.parseInt(aantalPersonen), status, naamPartner); //mobiel nummer?
+                
+                        client.checkBestaat(client);
+                        
+                        i++;
+                    } else {
+                        einde = true;
+                    }
+                }
+            }
+        }
+        } catch(Exception e) {
+            System.out.println(e);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
