@@ -51,13 +51,23 @@ public class UitgiftepuntAanmaken extends javax.swing.JFrame {
 
         jLabel1.setText("Naam*");
 
+        naamVeld.setDocument(new TextfieldLimit(75));
+
         jLabel2.setText("Adres*");
+
+        adresVeld.setDocument(new TextfieldLimit(100));
 
         jLabel3.setText("Postcode*");
 
+        postcodeVeld.setDocument(new voedselbank.TextfieldLimit(6));
+
         jLabel4.setText("Plaatsnaam*");
 
+        plaatsnaamVeld.setDocument(new TextfieldLimit(75));
+
         jLabel5.setText("Capaciteit");
+
+        capaciteitVeld.setDocument(new TextfieldLimit(11));
 
         jLabel11.setText("Velden met * zijn verplicht");
 

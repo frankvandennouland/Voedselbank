@@ -84,6 +84,11 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="naamVeld">
+      <Properties>
+        <Property name="document" type="javax.swing.text.Document" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new TextfieldLimit(75)" type="code"/>
+        </Property>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
@@ -91,6 +96,11 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="adresVeld">
+      <Properties>
+        <Property name="document" type="javax.swing.text.Document" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new TextfieldLimit(100)" type="code"/>
+        </Property>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
@@ -98,6 +108,11 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="postcodeVeld">
+      <Properties>
+        <Property name="document" type="javax.swing.text.Document" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new voedselbank.TextfieldLimit(6)" type="code"/>
+        </Property>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
@@ -105,6 +120,11 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="plaatsnaamVeld">
+      <Properties>
+        <Property name="document" type="javax.swing.text.Document" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new TextfieldLimit(75)" type="code"/>
+        </Property>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
@@ -112,6 +132,11 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="capaciteitVeld">
+      <Properties>
+        <Property name="document" type="javax.swing.text.Document" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new TextfieldLimit(11)" type="code"/>
+        </Property>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel11">
       <Properties>

@@ -136,7 +136,13 @@ public class ClientWijzigen extends javax.swing.JFrame {
 
         jLabel11.setText("Velden met * zijn verplicht");
 
+        emailVeld.setDocument(new TextfieldLimit(100));
+
         jLabel7.setText("E-mailadres*");
+
+        plaatsVeld.setDocument(new TextfieldLimit(75));
+
+        postcodeVeld.setDocument(new voedselbank.TextfieldLimit(6));
 
         jLabel6.setText("Plaats*");
 
@@ -144,9 +150,17 @@ public class ClientWijzigen extends javax.swing.JFrame {
 
         jLabel4.setText("Adres*");
 
+        adresVeld.setDocument(new TextfieldLimit(75));
+
+        mobielnummerVeld.setDocument(new TextfieldLimit(15));
+
         jLabel3.setText("Mobielnummer");
 
+        telefoonnummerVeld.setDocument(new TextfieldLimit(15));
+
         jLabel2.setText("Telefoonnummer*");
+
+        naamVeld.setDocument(new TextfieldLimit(75));
 
         jLabel1.setText("Naam*");
 
@@ -167,6 +181,8 @@ public class ClientWijzigen extends javax.swing.JFrame {
 
         jLabel8.setText("Aantal personen");
 
+        naampartnerVeld.setDocument(new TextfieldLimit(50));
+
         jLabel9.setText("Naam partner");
 
         wijzigKnop.setText("Gegevens wijzigen");
@@ -177,6 +193,8 @@ public class ClientWijzigen extends javax.swing.JFrame {
         });
 
         jLabel14.setText("Kaartnummer");
+
+        kaartnummerVeld.setDocument(new TextfieldLimit(11));
 
         jLabel15.setText("Status");
 

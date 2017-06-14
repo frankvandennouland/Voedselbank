@@ -167,6 +167,11 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="emailVeld">
+      <Properties>
+        <Property name="document" type="javax.swing.text.Document" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new TextfieldLimit(100)" type="code"/>
+        </Property>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel7">
       <Properties>
@@ -174,8 +179,18 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="plaatsVeld">
+      <Properties>
+        <Property name="document" type="javax.swing.text.Document" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new TextfieldLimit(75)" type="code"/>
+        </Property>
+      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="postcodeVeld">
+      <Properties>
+        <Property name="document" type="javax.swing.text.Document" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new voedselbank.TextfieldLimit(6)" type="code"/>
+        </Property>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
       <Properties>
@@ -193,8 +208,18 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="adresVeld">
+      <Properties>
+        <Property name="document" type="javax.swing.text.Document" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new TextfieldLimit(75)" type="code"/>
+        </Property>
+      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="mobielnummerVeld">
+      <Properties>
+        <Property name="document" type="javax.swing.text.Document" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new TextfieldLimit(15)" type="code"/>
+        </Property>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
@@ -202,6 +227,11 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="telefoonnummerVeld">
+      <Properties>
+        <Property name="document" type="javax.swing.text.Document" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new TextfieldLimit(15)" type="code"/>
+        </Property>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
@@ -209,6 +239,11 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="naamVeld">
+      <Properties>
+        <Property name="document" type="javax.swing.text.Document" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new TextfieldLimit(75)" type="code"/>
+        </Property>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
@@ -284,6 +319,11 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="naampartnerVeld">
+      <Properties>
+        <Property name="document" type="javax.swing.text.Document" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new TextfieldLimit(50)" type="code"/>
+        </Property>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel9">
       <Properties>
@@ -304,6 +344,11 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="kaartnummerVeld">
+      <Properties>
+        <Property name="document" type="javax.swing.text.Document" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new TextfieldLimit(11)" type="code"/>
+        </Property>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel15">
       <Properties>

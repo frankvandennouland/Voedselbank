@@ -49,9 +49,13 @@ public class HulpverlenerToevoegen extends javax.swing.JFrame {
 
         jLabel1.setText("Naam");
 
+        naamVeld.setDocument(new TextfieldLimit(75));
+
         jLabel2.setText("Geboortedatum");
 
         jLabel3.setText("Telefoonnummer");
+
+        telefoonnummerVeld.setDocument(new TextfieldLimit(15));
 
         toevoegKnop.setText("Toevoegen");
         toevoegKnop.addActionListener(new java.awt.event.ActionListener() {

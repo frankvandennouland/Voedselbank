@@ -114,10 +114,10 @@ public class UitgiftepuntZoeken extends javax.swing.JFrame {
 
         try {
             connection = SimpleDataSourceV2.getConnection();
-            PreparedStatement prestatement = connection.prepareStatement("SELECT * FROM Uitgiftepunt WHERE naam like ? or adres like ?");
+            PreparedStatement prestatement = connection.prepareStatement("SELECT * FROM Uitgiftepunt WHERE naam like ? and adres like ?");
 
-            prestatement.setString(1, naamVeld.getText());
-            prestatement.setString(2, adresVeld.getText());
+            prestatement.setString(1, '%' + naamVeld.getText() + '%');
+            prestatement.setString(2, '%' + adresVeld.getText() + '%');
 
             ResultSet rs = prestatement.executeQuery();
 
@@ -144,10 +144,11 @@ public class UitgiftepuntZoeken extends javax.swing.JFrame {
     }//GEN-LAST:event_zoekKnopActionPerformed
 
     private void wijzigKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_wijzigKnopActionPerformed
-
+        if (!uitgiftepuntenLijst.isSelectionEmpty()) {
         UitgiftepuntWijzigen w = new UitgiftepuntWijzigen(uitgiftepuntenLijst.getSelectedValue());
         w.setOpener(this);
         w.setVisible(true);
+        }
     }//GEN-LAST:event_wijzigKnopActionPerformed
 
 

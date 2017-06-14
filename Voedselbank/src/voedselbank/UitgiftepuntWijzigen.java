@@ -7,9 +7,7 @@ package voedselbank;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
 
 /**
@@ -86,13 +84,23 @@ public class UitgiftepuntWijzigen extends javax.swing.JFrame {
 
         jLabel11.setText("Velden met * zijn verplicht");
 
+        capaciteitVeld.setDocument(new TextfieldLimit(11));
+
         Capaciteit.setText("Capaciteit");
 
         jLabel4.setText("Plaatsnaam*");
 
+        plaatsnaamVeld.setDocument(new TextfieldLimit(75));
+
+        postcodeVeld.setDocument(new voedselbank.TextfieldLimit(6));
+
         jLabel3.setText("Postcode*");
 
+        adresVeld.setDocument(new TextfieldLimit(100));
+
         jLabel2.setText("Adres *");
+
+        naamVeld.setDocument(new TextfieldLimit(75));
 
         jLabel1.setText("Naam*");
 

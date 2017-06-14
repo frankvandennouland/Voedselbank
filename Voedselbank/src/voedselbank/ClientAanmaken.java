@@ -135,23 +135,39 @@ public class ClientAanmaken extends javax.swing.JFrame {
 
         jLabel1.setText("Naam*");
 
+        naamVeld.setDocument(new TextfieldLimit(75));
+
         jLabel2.setText("Telefoonnummer*");
+
+        telefoonnummerVeld.setDocument(new TextfieldLimit(15));
 
         jLabel3.setText("Mobielnummer");
 
+        mobielnummerVeld.setDocument(new TextfieldLimit(15));
+
         jLabel4.setText("Adres*");
+
+        adresVeld.setDocument(new TextfieldLimit(75));
 
         jLabel5.setText("Postcode*");
 
+        postcodeVeld.setDocument(new voedselbank.TextfieldLimit(6));
+
         jLabel6.setText("Plaats*");
 
+        plaatsVeld.setDocument(new TextfieldLimit(75));
+
         jLabel7.setText("E-mailadres*");
+
+        emailVeld.setDocument(new TextfieldLimit(100));
 
         jLabel8.setText("Aantal personen");
 
         aantalpersonenVeld.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
 
         jLabel9.setText("Naam partner");
+
+        naampartnerVeld.setDocument(new TextfieldLimit(50));
 
         jLabel11.setText("Velden met * zijn verplicht");
 
@@ -169,6 +185,8 @@ public class ClientAanmaken extends javax.swing.JFrame {
         });
 
         jLabel14.setText("Kaartnummer");
+
+        kaartnummerVeld.setDocument(new TextfieldLimit(11));
 
         jLabel15.setText("Status");
 

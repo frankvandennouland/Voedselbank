@@ -72,7 +72,11 @@ public class HulpverlenerWijzigen extends javax.swing.JFrame {
 
         jLabel1.setText("Naam");
 
+        naamVeld.setDocument(new TextfieldLimit(75));
+
         jLabel2.setText("Geboortedatum");
+
+        telefoonnummerVeld.setDocument(new TextfieldLimit(15));
 
         jLabel3.setText("Telefoonnummer");
 

@@ -105,7 +105,7 @@ public class HulpverlenerZoeken extends javax.swing.JFrame {
             connection = SimpleDataSourceV2.getConnection();
             PreparedStatement prestatement = connection.prepareStatement("SELECT * FROM Hulpverlener WHERE naam like ?");
 
-            prestatement.setString(1, naamVeld.getText());
+            prestatement.setString(1,'%' + naamVeld.getText() + '%');
             
             ResultSet rs = prestatement.executeQuery();
 

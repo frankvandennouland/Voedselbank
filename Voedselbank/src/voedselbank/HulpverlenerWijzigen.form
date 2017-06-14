@@ -70,6 +70,11 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="naamVeld">
+      <Properties>
+        <Property name="document" type="javax.swing.text.Document" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new TextfieldLimit(75)" type="code"/>
+        </Property>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
@@ -77,6 +82,11 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="telefoonnummerVeld">
+      <Properties>
+        <Property name="document" type="javax.swing.text.Document" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new TextfieldLimit(15)" type="code"/>
+        </Property>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
