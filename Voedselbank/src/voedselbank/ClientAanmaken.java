@@ -33,7 +33,6 @@ public class ClientAanmaken extends javax.swing.JFrame {
         setTitle("Cliënt toevoegen");
         maakUitgiftepuntLijst();
         maakHulpverlenerLijst();
-        
     }
 
     /**
@@ -136,56 +135,21 @@ public class ClientAanmaken extends javax.swing.JFrame {
 
         jLabel1.setText("Naam*");
 
-        naamVeld.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                naamVeldActionPerformed(evt);
-            }
-        });
-
         jLabel2.setText("Telefoonnummer*");
-
-        telefoonnummerVeld.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                telefoonnummerVeldActionPerformed(evt);
-            }
-        });
 
         jLabel3.setText("Mobielnummer");
 
-        mobielnummerVeld.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mobielnummerVeldActionPerformed(evt);
-            }
-        });
-
         jLabel4.setText("Adres*");
-
-        adresVeld.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                adresVeldActionPerformed(evt);
-            }
-        });
 
         jLabel5.setText("Postcode*");
 
         jLabel6.setText("Plaats*");
-
-        plaatsVeld.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                plaatsVeldActionPerformed(evt);
-            }
-        });
 
         jLabel7.setText("E-mailadres*");
 
         jLabel8.setText("Aantal personen");
 
         aantalpersonenVeld.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
-        aantalpersonenVeld.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                aantalpersonenVeldActionPerformed(evt);
-            }
-        });
 
         jLabel9.setText("Naam partner");
 
@@ -213,6 +177,8 @@ public class ClientAanmaken extends javax.swing.JFrame {
         jLabel16.setText("Intake gedaan door");
 
         jLabel17.setText("Startdatum uitgifte");
+
+        startdatumVeld.setDate(new Date());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -349,30 +315,6 @@ public class ClientAanmaken extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void naamVeldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naamVeldActionPerformed
-
-    }//GEN-LAST:event_naamVeldActionPerformed
-
-    private void mobielnummerVeldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mobielnummerVeldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mobielnummerVeldActionPerformed
-
-    private void adresVeldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adresVeldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_adresVeldActionPerformed
-
-    private void plaatsVeldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_plaatsVeldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_plaatsVeldActionPerformed
-
-    private void aantalpersonenVeldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aantalpersonenVeldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_aantalpersonenVeldActionPerformed
-
-    private void telefoonnummerVeldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telefoonnummerVeldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_telefoonnummerVeldActionPerformed
 
     private void toevoegKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toevoegKnopActionPerformed
        

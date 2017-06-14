@@ -90,33 +90,9 @@ public class UitgiftepuntWijzigen extends javax.swing.JFrame {
 
         jLabel4.setText("Plaatsnaam*");
 
-        plaatsnaamVeld.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                plaatsnaamVeldActionPerformed(evt);
-            }
-        });
-
-        postcodeVeld.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                postcodeVeldActionPerformed(evt);
-            }
-        });
-
         jLabel3.setText("Postcode*");
 
-        adresVeld.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                adresVeldActionPerformed(evt);
-            }
-        });
-
         jLabel2.setText("Adres *");
-
-        naamVeld.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                naamVeldActionPerformed(evt);
-            }
-        });
 
         jLabel1.setText("Naam*");
 
@@ -140,24 +116,21 @@ public class UitgiftepuntWijzigen extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel1)
-                        .addComponent(jLabel2)
-                        .addComponent(jLabel3)
-                        .addComponent(postcodeVeld, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
-                        .addComponent(adresVeld)
-                        .addComponent(jLabel4)
-                        .addComponent(plaatsnaamVeld)
-                        .addComponent(Capaciteit)
-                        .addComponent(capaciteitVeld)
-                        .addComponent(naamVeld))
-                    .addComponent(jLabel11))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel11)
+                    .addComponent(wijzigKnop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(Capaciteit)
                     .addComponent(verwijderKnop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(wijzigKnop, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
-                .addGap(91, 91, 91))
+                    .addComponent(capaciteitVeld)
+                    .addComponent(plaatsnaamVeld)
+                    .addComponent(postcodeVeld)
+                    .addComponent(adresVeld)
+                    .addComponent(naamVeld))
+                .addContainerGap(178, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,33 +155,17 @@ public class UitgiftepuntWijzigen extends javax.swing.JFrame {
                 .addComponent(Capaciteit)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(capaciteitVeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(99, 99, 99)
+                .addGap(18, 18, 18)
                 .addComponent(verwijderKnop)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(wijzigKnop)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel11)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void plaatsnaamVeldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_plaatsnaamVeldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_plaatsnaamVeldActionPerformed
-
-    private void postcodeVeldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_postcodeVeldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_postcodeVeldActionPerformed
-
-    private void adresVeldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adresVeldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_adresVeldActionPerformed
-
-    private void naamVeldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naamVeldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_naamVeldActionPerformed
 
     private void wijzigKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_wijzigKnopActionPerformed
         try {

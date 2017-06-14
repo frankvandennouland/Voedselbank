@@ -174,9 +174,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="plaatsVeld">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="plaatsVeldActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="postcodeVeld">
     </Component>
@@ -196,14 +193,8 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="adresVeld">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="adresVeldActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="mobielnummerVeld">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mobielnummerVeldActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
@@ -211,9 +202,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="telefoonnummerVeld">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="telefoonnummerVeldActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
@@ -221,9 +209,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="naamVeld">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="naamVeldActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
@@ -289,9 +274,6 @@
           </StringArray>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="aantalpersonenVeldActionPerformed"/>
-      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>

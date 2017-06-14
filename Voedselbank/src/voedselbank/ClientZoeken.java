@@ -38,10 +38,6 @@ public class ClientZoeken extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         kaartnummerVeld = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        naamVeld = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        telefoonnummerVeld = new javax.swing.JTextField();
         zoekKnop = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         clientenLijst = new javax.swing.JList<>();
@@ -50,10 +46,6 @@ public class ClientZoeken extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Kaartnummer");
-
-        jLabel2.setText("Naam");
-
-        jLabel3.setText("Telefoonnummer");
 
         zoekKnop.setText("Zoeken");
         zoekKnop.addActionListener(new java.awt.event.ActionListener() {
@@ -83,10 +75,6 @@ public class ClientZoeken extends javax.swing.JFrame {
                     .addComponent(wijzigKnop, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(kaartnummerVeld, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(naamVeld, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(telefoonnummerVeld, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(zoekKnop, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
@@ -102,15 +90,7 @@ public class ClientZoeken extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(kaartnummerVeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(naamVeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(telefoonnummerVeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(122, 122, 122)
                         .addComponent(zoekKnop)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(wijzigKnop)))
@@ -126,11 +106,9 @@ public class ClientZoeken extends javax.swing.JFrame {
 
         try {
             connection = SimpleDataSourceV2.getConnection();
-            PreparedStatement prestatement = connection.prepareStatement("SELECT * FROM Cliënt WHERE kaartnummer = ? or naam like ? or telefoonnummer = ?");
+            PreparedStatement prestatement = connection.prepareStatement("SELECT * FROM Cliënt WHERE kaartnummer = ?");
 
             prestatement.setString(1, kaartnummerVeld.getText());
-            prestatement.setString(2, naamVeld.getText());
-            prestatement.setString(3, telefoonnummerVeld.getText());
 
             ResultSet rs = prestatement.executeQuery();
 
@@ -177,12 +155,8 @@ public class ClientZoeken extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList<Client> clientenLijst;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField kaartnummerVeld;
-    private javax.swing.JTextField naamVeld;
-    private javax.swing.JTextField telefoonnummerVeld;
     private javax.swing.JButton wijzigKnop;
     private javax.swing.JButton zoekKnop;
     // End of variables declaration//GEN-END:variables

@@ -147,13 +147,15 @@ public class OverzichtScherm extends javax.swing.JFrame {
     private void bevoorradingslijstKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bevoorradingslijstKnopActionPerformed
         try {
             connection = SimpleDataSourceV2.getConnection();
-            PreparedStatement prestatement = connection.prepareStatement("SELECT naam, adres, postcode, plaatsnaam,\n" +
-"count(case when soort like 'Enkel%' then 1 else NULL end) as aantal_enkelvoudigepakketten,\n" +
-"count(case when Voedselpakket.soort like 'Dubbel%' then 1 else NULL end) as aantal_dubbelvoudigepakketten,\n" +
-"count(case when Voedselpakket.soort like 'Drie%' then 1 else NULL end) as aantal_drievoudigepakketten\n" +
-"FROM Uitgiftepunt\n" +
-"JOIN Voedselpakket ON Voedselpakket.ID_uitgiftepunt = Uitgiftepunt.ID_uitgiftepunt\n" +
-"GROUP BY Uitgiftepunt.naam;");
+            PreparedStatement prestatement = connection.prepareStatement("SELECT u.naam, u.adres, u.postcode, u.plaatsnaam as 'plaats',\n"
+                    + "count(case when v.soort like 'Enkel%' then 1 else NULL end) as 'enkelvoudig pakket',\n"
+                    + "count(case when v.soort like 'Dubbel%' then 1 else NULL end) as 'dubbel pakket',\n"
+                    + "count(case when v.soort like 'Drie%' then 1 else NULL end) as 'drievoudig pakket'\n"
+                    + "FROM Uitgiftepunt u\n"
+                    + "JOIN Voedselpakket v ON v.ID_uitgiftepunt = u.ID_uitgiftepunt\n"
+                    + "JOIN Cliënt c on v.ID_cliënt = c.ID_cliënt\n"
+                    + "WHERE c.status_cliënt = 'Actief'\n"
+                    + "GROUP BY u.naam;");
             ResultSet rs = prestatement.executeQuery();
             overzichtTabel.setModel(DbUtils.resultSetToTableModel(rs));
             overzichtTabel.setAutoCreateRowSorter(true);
@@ -201,12 +203,12 @@ public class OverzichtScherm extends javax.swing.JFrame {
         ch.setVisible(true);
         try {
             connection = SimpleDataSourceV2.getConnection();
-            PreparedStatement prestatement = connection.prepareStatement("SELECT Cliënt.naam as naam_cliënt, Hulpverlener.naam as naam_hulpverlener,\n" +
-"count(case when Intake.ID_cliënt is not null then 1 else NULL end) as aantal_cliënten\n" +
-"FROM Intake \n" +
-"JOIN Hulpverlener ON Hulpverlener.ID_hulpverlener = Intake.ID_hulpverlener \n" +
-"JOIN Cliënt ON Cliënt.ID_cliënt = Intake.ID_cliënt\n" +
-"GROUP BY Hulpverlener.naam");
+            PreparedStatement prestatement = connection.prepareStatement("SELECT Hulpverlener.naam as naam_hulpverlener,\n"
+                    + "count(case when Intake.ID_cliënt is not null then 1 else NULL end) as aantal_cliënten\n"
+                    + "FROM Intake \n"
+                    + "JOIN Hulpverlener ON Hulpverlener.ID_hulpverlener = Intake.ID_hulpverlener \n"
+                    + "JOIN Cliënt ON Cliënt.ID_cliënt = Intake.ID_cliënt\n"
+                    + "GROUP BY Hulpverlener.naam");
             ResultSet rs = prestatement.executeQuery();
             overzichtTabel.setModel(DbUtils.resultSetToTableModel(rs));
             overzichtTabel.setAutoCreateRowSorter(true);

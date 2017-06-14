@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
@@ -48,12 +49,6 @@ public class HulpverlenerToevoegen extends javax.swing.JFrame {
 
         jLabel1.setText("Naam");
 
-        naamVeld.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                naamVeldActionPerformed(evt);
-            }
-        });
-
         jLabel2.setText("Geboortedatum");
 
         jLabel3.setText("Telefoonnummer");
@@ -64,6 +59,8 @@ public class HulpverlenerToevoegen extends javax.swing.JFrame {
                 toevoegKnopActionPerformed(evt);
             }
         });
+
+        geboortedatumVeld.setDate(new Date());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -103,10 +100,6 @@ public class HulpverlenerToevoegen extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void naamVeldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naamVeldActionPerformed
-
-    }//GEN-LAST:event_naamVeldActionPerformed
 
     private void toevoegKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toevoegKnopActionPerformed
         try {

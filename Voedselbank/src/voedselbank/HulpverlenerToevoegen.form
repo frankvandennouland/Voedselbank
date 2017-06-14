@@ -67,9 +67,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="naamVeld">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="naamVeldActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
@@ -92,6 +89,11 @@
       </Events>
     </Component>
     <Component class="com.toedter.calendar.JDateChooser" name="geboortedatumVeld">
+      <Properties>
+        <Property name="date" type="java.util.Date" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new Date()" type="code"/>
+        </Property>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

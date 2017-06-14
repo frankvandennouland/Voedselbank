@@ -138,45 +138,15 @@ public class ClientWijzigen extends javax.swing.JFrame {
 
         jLabel7.setText("E-mailadres*");
 
-        plaatsVeld.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                plaatsVeldActionPerformed(evt);
-            }
-        });
-
         jLabel6.setText("Plaats*");
 
         jLabel5.setText("Postcode*");
 
         jLabel4.setText("Adres*");
 
-        adresVeld.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                adresVeldActionPerformed(evt);
-            }
-        });
-
-        mobielnummerVeld.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mobielnummerVeldActionPerformed(evt);
-            }
-        });
-
         jLabel3.setText("Mobielnummer");
 
-        telefoonnummerVeld.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                telefoonnummerVeldActionPerformed(evt);
-            }
-        });
-
         jLabel2.setText("Telefoonnummer*");
-
-        naamVeld.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                naamVeldActionPerformed(evt);
-            }
-        });
 
         jLabel1.setText("Naam*");
 
@@ -194,11 +164,6 @@ public class ClientWijzigen extends javax.swing.JFrame {
         jLabel13.setText("Uitgiftepunt");
 
         aantalpersonenVeld.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
-        aantalpersonenVeld.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                aantalpersonenVeldActionPerformed(evt);
-            }
-        });
 
         jLabel8.setText("Aantal personen");
 
@@ -335,30 +300,6 @@ public class ClientWijzigen extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void plaatsVeldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_plaatsVeldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_plaatsVeldActionPerformed
-
-    private void adresVeldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adresVeldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_adresVeldActionPerformed
-
-    private void mobielnummerVeldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mobielnummerVeldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mobielnummerVeldActionPerformed
-
-    private void telefoonnummerVeldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telefoonnummerVeldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_telefoonnummerVeldActionPerformed
-
-    private void naamVeldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naamVeldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_naamVeldActionPerformed
-
-    private void aantalpersonenVeldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aantalpersonenVeldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_aantalpersonenVeldActionPerformed
 
     private void wijzigKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_wijzigKnopActionPerformed
         try {

@@ -29,10 +29,6 @@
                   <Component id="wijzigKnop" pref="150" max="32767" attributes="0"/>
                   <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="kaartnummerVeld" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="naamVeld" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="telefoonnummerVeld" alignment="0" max="32767" attributes="0"/>
                   <Component id="zoekKnop" alignment="0" pref="150" max="32767" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -51,15 +47,7 @@
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="kaartnummerVeld" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="naamVeld" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="telefoonnummerVeld" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="122" max="-2" attributes="0"/>
                       <Component id="zoekKnop" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="wijzigKnop" min="-2" max="-2" attributes="0"/>
@@ -77,20 +65,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="kaartnummerVeld">
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel2">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Naam"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="naamVeld">
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel3">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Telefoonnummer"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="telefoonnummerVeld">
     </Component>
     <Component class="javax.swing.JButton" name="zoekKnop">
       <Properties>
