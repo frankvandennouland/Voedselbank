@@ -138,7 +138,11 @@
     <Component class="javax.swing.JButton" name="exporteerKnop">
       <Properties>
         <Property name="text" type="java.lang.String" value="Exporteer naar pdf"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="exporteerKnopActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

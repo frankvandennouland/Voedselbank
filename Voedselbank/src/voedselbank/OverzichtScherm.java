@@ -5,6 +5,15 @@
  */
 package voedselbank;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Rectangle;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -95,6 +104,12 @@ public class OverzichtScherm extends javax.swing.JFrame {
         });
 
         exporteerKnop.setText("Exporteer naar pdf");
+        exporteerKnop.setEnabled(false);
+        exporteerKnop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exporteerKnopActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -147,10 +162,10 @@ public class OverzichtScherm extends javax.swing.JFrame {
     private void bevoorradingslijstKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bevoorradingslijstKnopActionPerformed
         try {
             connection = SimpleDataSourceV2.getConnection();
-            PreparedStatement prestatement = connection.prepareStatement("SELECT u.naam, u.adres, u.postcode, u.plaatsnaam as 'plaats',\n"
-                    + "count(case when v.soort like 'Enkel%' then 1 else NULL end) as 'enkelvoudig pakket',\n"
-                    + "count(case when v.soort like 'Dubbel%' then 1 else NULL end) as 'dubbel pakket',\n"
-                    + "count(case when v.soort like 'Drie%' then 1 else NULL end) as 'drievoudig pakket'\n"
+            PreparedStatement prestatement = connection.prepareStatement("SELECT u.naam as 'Naam', u.adres as 'Adres', u.postcode as 'Postcode', u.plaatsnaam as 'Plaats',\n"
+                    + "count(case when v.soort like 'Enkel%' then 1 else NULL end) as 'Enkelvoudig pakket',\n"
+                    + "count(case when v.soort like 'Dubbel%' then 1 else NULL end) as 'Dubbel pakket',\n"
+                    + "count(case when v.soort like 'Drie%' then 1 else NULL end) as 'Drievoudig pakket'\n"
                     + "FROM Uitgiftepunt u\n"
                     + "JOIN Voedselpakket v ON v.ID_uitgiftepunt = u.ID_uitgiftepunt\n"
                     + "JOIN Cliënt c on v.ID_cliënt = c.ID_cliënt\n"
@@ -161,6 +176,7 @@ public class OverzichtScherm extends javax.swing.JFrame {
             overzichtTabel.setAutoCreateRowSorter(true);
             overzichtTabel.setAutoResizeMode(5);
 
+            exporteerKnop.setEnabled(true);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -174,6 +190,8 @@ public class OverzichtScherm extends javax.swing.JFrame {
             overzichtTabel.setModel(DbUtils.resultSetToTableModel(rs));
             overzichtTabel.setAutoCreateRowSorter(true);
             overzichtTabel.setAutoResizeMode(5);
+
+            exporteerKnop.setEnabled(false);
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -193,6 +211,8 @@ public class OverzichtScherm extends javax.swing.JFrame {
             overzichtTabel.setAutoCreateRowSorter(true);
             overzichtTabel.setAutoResizeMode(5);
 
+            exporteerKnop.setEnabled(false);
+
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -203,8 +223,8 @@ public class OverzichtScherm extends javax.swing.JFrame {
         ch.setVisible(true);
         try {
             connection = SimpleDataSourceV2.getConnection();
-            PreparedStatement prestatement = connection.prepareStatement("SELECT Hulpverlener.naam as naam_hulpverlener,\n"
-                    + "count(case when Intake.ID_cliënt is not null then 1 else NULL end) as aantal_cliënten\n"
+            PreparedStatement prestatement = connection.prepareStatement("SELECT Hulpverlener.naam as 'Hulpverlener',\n"
+                    + "count(case when Intake.ID_cliënt is not null then 1 else NULL end) as 'Aantal cliënten'\n"
                     + "FROM Intake \n"
                     + "JOIN Hulpverlener ON Hulpverlener.ID_hulpverlener = Intake.ID_hulpverlener \n"
                     + "JOIN Cliënt ON Cliënt.ID_cliënt = Intake.ID_cliënt\n"
@@ -214,10 +234,46 @@ public class OverzichtScherm extends javax.swing.JFrame {
             overzichtTabel.setAutoCreateRowSorter(true);
             overzichtTabel.setAutoResizeMode(5);
 
+            exporteerKnop.setEnabled(true);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }//GEN-LAST:event_clientperhulpverlenerKnopActionPerformed
+
+    private void exporteerKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exporteerKnopActionPerformed
+
+        try {
+            Document doc = new Document();
+            Rectangle rect = new Rectangle(PageSize.A4.rotate());
+            PdfWriter.getInstance(doc, new FileOutputStream("overzicht.pdf"));
+
+            doc.setPageSize(rect);
+            doc.open();
+
+            PdfPTable pdfTable = new PdfPTable(overzichtTabel.getColumnCount());
+            pdfTable.setWidthPercentage(100);
+            pdfTable.setHorizontalAlignment(Element.ALIGN_CENTER);
+
+            //adding table headers
+            for (int i = 0; i < overzichtTabel.getColumnCount(); i++) {
+                pdfTable.addCell(overzichtTabel.getColumnName(i));
+            }
+
+            //extracting data from the JTable and inserting it to PdfPTable
+            for (int rows = 0; rows < overzichtTabel.getRowCount() - 1; rows++) {
+                for (int cols = 0; cols < overzichtTabel.getColumnCount(); cols++) {
+                    pdfTable.addCell(overzichtTabel.getModel().getValueAt(rows, cols).toString());
+                }
+            }
+
+            doc.add(pdfTable);
+            doc.close();
+            System.out.println("done");
+        } catch (FileNotFoundException | DocumentException e) {
+            e.printStackTrace();
+
+        }
+    }//GEN-LAST:event_exporteerKnopActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bevoorradingslijstKnop;
