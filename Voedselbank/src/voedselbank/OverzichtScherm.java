@@ -182,13 +182,15 @@ public class OverzichtScherm extends javax.swing.JFrame {
             overzichtTabel.setModel(DbUtils.resultSetToTableModel(rs));
             overzichtTabel.setAutoCreateRowSorter(true);
             overzichtTabel.setAutoResizeMode(5);
-            while(rs.next()){
-            if (rs.getInt("Totaal") > 225) {
-                JOptionPane waarschuwing = new JOptionPane();
-                waarschuwing.setName( rs.getString("Naam") + " Capaciteit bijna Vol");
-            }
+
+            while (rs.next()) {
+                if (rs.getInt("Totaal") > 225) {
+                    JOptionPane waarschuwing = new JOptionPane();
+                    waarschuwing.setName(rs.getString("Naam") + " Capaciteit bijna Vol");
+                }
             }
             exporteerKnop.setEnabled(true);
+
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -263,7 +265,7 @@ public class OverzichtScherm extends javax.swing.JFrame {
 
             if (chooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
                 Document doc = new Document();
-         
+
                 Rectangle rect = new Rectangle(PageSize.A4.rotate());
                 PdfWriter.getInstance(doc, new FileOutputStream(chooser.getSelectedFile() + "/overzicht.pdf"));
 
@@ -278,7 +280,7 @@ public class OverzichtScherm extends javax.swing.JFrame {
                 for (int i = 0; i < overzichtTabel.getColumnCount(); i++) {
                     PdfPCell head = new PdfPCell(new Paragraph(overzichtTabel.getColumnName(i)));
                     head.setHorizontalAlignment(Element.ALIGN_CENTER);
-                    head.setBackgroundColor(new BaseColor(236,116,4));
+                    head.setBackgroundColor(new BaseColor(236, 116, 4));
                     pdfTable.addCell(head);
                 }
 
