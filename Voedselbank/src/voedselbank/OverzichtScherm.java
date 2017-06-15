@@ -23,6 +23,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
 
 /**
@@ -38,10 +39,8 @@ public class OverzichtScherm extends javax.swing.JFrame {
      */
     public OverzichtScherm() {
         initComponents();
-        overzichtTabel.setFocusable(false);
-        overzichtTabel.setRowSelectionAllowed(false);
-        overzichtTabel.setCellSelectionEnabled(false);
-        
+        omhoogKnop.setVisible(false);
+        omlaagKnop.setVisible(false);
     }
 
     /**
@@ -62,6 +61,8 @@ public class OverzichtScherm extends javax.swing.JFrame {
         overzichtintakeKnop = new javax.swing.JButton();
         mutatieperuitgiftepuntKnop = new javax.swing.JButton();
         exporteerKnop = new javax.swing.JButton();
+        omhoogKnop = new javax.swing.JButton();
+        omlaagKnop = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -90,6 +91,11 @@ public class OverzichtScherm extends javax.swing.JFrame {
         });
 
         mutatieperperiodeKnop.setText("Mutatie per periode");
+        mutatieperperiodeKnop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mutatieperperiodeKnopActionPerformed(evt);
+            }
+        });
 
         clientperhulpverlenerKnop.setText("Cliënten per hulpverlener");
         clientperhulpverlenerKnop.addActionListener(new java.awt.event.ActionListener() {
@@ -120,6 +126,20 @@ public class OverzichtScherm extends javax.swing.JFrame {
             }
         });
 
+        omhoogKnop.setText("Verplaats omhoog");
+        omhoogKnop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                omhoogKnopActionPerformed(evt);
+            }
+        });
+
+        omlaagKnop.setText("Verplaats omlaag");
+        omlaagKnop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                omlaagKnopActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -133,7 +153,9 @@ public class OverzichtScherm extends javax.swing.JFrame {
                     .addComponent(clientperhulpverlenerKnop, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                     .addComponent(overzichtintakeKnop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(mutatieperuitgiftepuntKnop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(exporteerKnop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(exporteerKnop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(omhoogKnop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(omlaagKnop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1269, Short.MAX_VALUE)
                 .addContainerGap())
@@ -155,6 +177,10 @@ public class OverzichtScherm extends javax.swing.JFrame {
                         .addComponent(overzichtintakeKnop)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(mutatieperuitgiftepuntKnop)
+                        .addGap(70, 70, 70)
+                        .addComponent(omhoogKnop)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(omlaagKnop)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(exporteerKnop))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE))
@@ -163,6 +189,17 @@ public class OverzichtScherm extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void moveSelectedRows(int by) {
+        DefaultTableModel model = (DefaultTableModel) overzichtTabel.getModel();
+        int[] selectedRows = overzichtTabel.getSelectedRows();
+        int targetIndex = selectedRows[0] + by;
+
+        if (targetIndex >= 0 && targetIndex < overzichtTabel.getRowCount()) {
+            model.moveRow(selectedRows[0], selectedRows[selectedRows.length - 1], targetIndex);
+            overzichtTabel.setRowSelectionInterval(selectedRows[0] + by, selectedRows[selectedRows.length - 1] + by);
+        }
+    }
 
     private void mutatieperuitgiftepuntKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mutatieperuitgiftepuntKnopActionPerformed
         // TODO add your handling code here:
@@ -188,12 +225,15 @@ public class OverzichtScherm extends javax.swing.JFrame {
             overzichtTabel.setAutoResizeMode(5);
 
             while (rs.next()) {
-                if (rs.getInt("totaal") > 1) {
+                if (rs.getInt("Totaal") > 225) {
                     JOptionPane waarschuwing = new JOptionPane();
-                    waarschuwing.setName(rs.getString("naam") + " Capaciteit bijna Vol");
+                    waarschuwing.setName(rs.getString("Naam") + " Capaciteit bijna Vol");
                 }
             }
             exporteerKnop.setEnabled(true);
+
+            omhoogKnop.setVisible(true);
+            omlaagKnop.setVisible(true);
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -210,7 +250,8 @@ public class OverzichtScherm extends javax.swing.JFrame {
             overzichtTabel.setAutoResizeMode(5);
 
             exporteerKnop.setEnabled(false);
-
+            omhoogKnop.setVisible(false);
+            omlaagKnop.setVisible(false);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -228,9 +269,10 @@ public class OverzichtScherm extends javax.swing.JFrame {
             overzichtTabel.setModel(DbUtils.resultSetToTableModel(rs));
             overzichtTabel.setAutoCreateRowSorter(true);
             overzichtTabel.setAutoResizeMode(5);
-           
-            exporteerKnop.setEnabled(false);
 
+            exporteerKnop.setEnabled(false);
+            omhoogKnop.setVisible(false);
+            omlaagKnop.setVisible(false);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -253,6 +295,8 @@ public class OverzichtScherm extends javax.swing.JFrame {
             overzichtTabel.setAutoResizeMode(5);
 
             exporteerKnop.setEnabled(true);
+            omhoogKnop.setVisible(false);
+            omlaagKnop.setVisible(false);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -277,7 +321,7 @@ public class OverzichtScherm extends javax.swing.JFrame {
                 doc.open();
 
                 PdfPTable pdfTable = new PdfPTable(overzichtTabel.getColumnCount());
-                pdfTable.setWidthPercentage(100);
+                pdfTable.setWidthPercentage(108);
                 pdfTable.setHorizontalAlignment(Element.ALIGN_CENTER);
 
                 //adding table headers
@@ -289,7 +333,7 @@ public class OverzichtScherm extends javax.swing.JFrame {
                 }
 
                 //extracting data from the JTable and inserting it to PdfPTable
-                for (int rows = 0; rows < overzichtTabel.getRowCount() - 1; rows++) {
+                for (int rows = 0; rows < overzichtTabel.getRowCount(); rows++) {
                     for (int cols = 0; cols < overzichtTabel.getColumnCount(); cols++) {
                         pdfTable.addCell(overzichtTabel.getModel().getValueAt(rows, cols).toString());
                     }
@@ -297,7 +341,7 @@ public class OverzichtScherm extends javax.swing.JFrame {
 
                 doc.add(pdfTable);
                 doc.close();
-                System.out.println("done");
+                System.out.println("Done");
             } else {
                 System.out.println("U heeft niks geselecteerd.");
             }
@@ -305,6 +349,23 @@ public class OverzichtScherm extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }//GEN-LAST:event_exporteerKnopActionPerformed
+
+    private void omhoogKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_omhoogKnopActionPerformed
+        if (!overzichtTabel.getSelectionModel().isSelectionEmpty()) {
+            moveSelectedRows(-1);
+        }
+    }//GEN-LAST:event_omhoogKnopActionPerformed
+
+    private void omlaagKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_omlaagKnopActionPerformed
+        if (!overzichtTabel.getSelectionModel().isSelectionEmpty()) {
+            moveSelectedRows(1);
+        }
+    }//GEN-LAST:event_omlaagKnopActionPerformed
+
+    private void mutatieperperiodeKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mutatieperperiodeKnopActionPerformed
+        omhoogKnop.setVisible(false);
+        omlaagKnop.setVisible(false);
+    }//GEN-LAST:event_mutatieperperiodeKnopActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bevoorradingslijstKnop;
@@ -314,6 +375,8 @@ public class OverzichtScherm extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton mutatieperperiodeKnop;
     private javax.swing.JButton mutatieperuitgiftepuntKnop;
+    private javax.swing.JButton omhoogKnop;
+    private javax.swing.JButton omlaagKnop;
     private javax.swing.JTable overzichtTabel;
     private javax.swing.JButton overzichtintakeKnop;
     // End of variables declaration//GEN-END:variables
