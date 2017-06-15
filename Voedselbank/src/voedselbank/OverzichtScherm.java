@@ -38,6 +38,10 @@ public class OverzichtScherm extends javax.swing.JFrame {
      */
     public OverzichtScherm() {
         initComponents();
+        overzichtTabel.setFocusable(false);
+        overzichtTabel.setRowSelectionAllowed(false);
+        overzichtTabel.setCellSelectionEnabled(false);
+        
     }
 
     /**
@@ -184,9 +188,9 @@ public class OverzichtScherm extends javax.swing.JFrame {
             overzichtTabel.setAutoResizeMode(5);
 
             while (rs.next()) {
-                if (rs.getInt("Totaal") > 225) {
+                if (rs.getInt("totaal") > 1) {
                     JOptionPane waarschuwing = new JOptionPane();
-                    waarschuwing.setName(rs.getString("Naam") + " Capaciteit bijna Vol");
+                    waarschuwing.setName(rs.getString("naam") + " Capaciteit bijna Vol");
                 }
             }
             exporteerKnop.setEnabled(true);
@@ -224,7 +228,7 @@ public class OverzichtScherm extends javax.swing.JFrame {
             overzichtTabel.setModel(DbUtils.resultSetToTableModel(rs));
             overzichtTabel.setAutoCreateRowSorter(true);
             overzichtTabel.setAutoResizeMode(5);
-
+           
             exporteerKnop.setEnabled(false);
 
         } catch (SQLException ex) {
