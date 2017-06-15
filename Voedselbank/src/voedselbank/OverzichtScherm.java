@@ -12,12 +12,14 @@ import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JFileChooser;
 import net.proteanit.sql.DbUtils;
 
 /**
@@ -243,32 +245,43 @@ public class OverzichtScherm extends javax.swing.JFrame {
     private void exporteerKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exporteerKnopActionPerformed
 
         try {
-            Document doc = new Document();
-            Rectangle rect = new Rectangle(PageSize.A4.rotate());
-            PdfWriter.getInstance(doc, new FileOutputStream("overzicht.pdf"));
+            JFileChooser chooser = new JFileChooser();
+            chooser.setCurrentDirectory(new java.io.File("."));
+            chooser.setDialogTitle("Kies een locatie");
+            chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            chooser.setAcceptAllFileFilterUsed(false);
 
-            doc.setPageSize(rect);
-            doc.open();
+            if (chooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+                Document doc = new Document();
+         
+                Rectangle rect = new Rectangle(PageSize.A4.rotate());
+                PdfWriter.getInstance(doc, new FileOutputStream(chooser.getSelectedFile() + "/overzicht.pdf"));
 
-            PdfPTable pdfTable = new PdfPTable(overzichtTabel.getColumnCount());
-            pdfTable.setWidthPercentage(100);
-            pdfTable.setHorizontalAlignment(Element.ALIGN_CENTER);
+                doc.setPageSize(rect);
+                doc.open();
 
-            //adding table headers
-            for (int i = 0; i < overzichtTabel.getColumnCount(); i++) {
-                pdfTable.addCell(overzichtTabel.getColumnName(i));
-            }
+                PdfPTable pdfTable = new PdfPTable(overzichtTabel.getColumnCount());
+                pdfTable.setWidthPercentage(100);
+                pdfTable.setHorizontalAlignment(Element.ALIGN_CENTER);
 
-            //extracting data from the JTable and inserting it to PdfPTable
-            for (int rows = 0; rows < overzichtTabel.getRowCount() - 1; rows++) {
-                for (int cols = 0; cols < overzichtTabel.getColumnCount(); cols++) {
-                    pdfTable.addCell(overzichtTabel.getModel().getValueAt(rows, cols).toString());
+                //adding table headers
+                for (int i = 0; i < overzichtTabel.getColumnCount(); i++) {
+                    pdfTable.addCell(overzichtTabel.getColumnName(i));
                 }
-            }
 
-            doc.add(pdfTable);
-            doc.close();
-            System.out.println("done");
+                //extracting data from the JTable and inserting it to PdfPTable
+                for (int rows = 0; rows < overzichtTabel.getRowCount() - 1; rows++) {
+                    for (int cols = 0; cols < overzichtTabel.getColumnCount(); cols++) {
+                        pdfTable.addCell(overzichtTabel.getModel().getValueAt(rows, cols).toString());
+                    }
+                }
+
+                doc.add(pdfTable);
+                doc.close();
+                System.out.println("done");
+            } else {
+                System.out.println("U heeft niks geselecteerd.");
+            }
         } catch (FileNotFoundException | DocumentException e) {
             e.printStackTrace();
 
