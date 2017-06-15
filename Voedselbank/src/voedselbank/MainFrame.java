@@ -7,6 +7,7 @@ package voedselbank;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.Date;
 import javax.swing.JFileChooser;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -261,9 +262,17 @@ public class MainFrame extends javax.swing.JFrame {
                         String uitgifte_punt = formatter.formatCellValue(worksheet.getRow(i).getCell(31));
                         String pakket = formatter.formatCellValue(worksheet.getRow(i).getCell(32));
                         
-                        Client client = new Client(Integer.parseInt(kaartnummer), naam, telefoonnummer, adres, postcode, plaats, email, Integer.parseInt(aantalPersonen), status, naamPartner); //mobiel nummer?
-                
+                        Client client = new Client(Integer.parseInt(kaartnummer), naam, telefoonnummer, adres, postcode, plaats, email, mobiel, Integer.parseInt(aantalPersonen), status, naamPartner);                        
                         client.checkBestaat(client);
+                        
+                        //uitgifte punt checken
+                        
+                        //verwijzer is een verwijzer een intaker of ???
+//                        Hulpverlener hulpverlener = new Hulpverlener(int hulverlener_ID, String naam, String telefoonnummer, Date geboortedatum);
+                        
+                        
+                       
+                        
                         
                         i++;
                     } else {

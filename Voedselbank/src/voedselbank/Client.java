@@ -50,7 +50,7 @@ public class Client {
         this.verwijzing_ID = verwijzing_ID;
     }
     
-    public Client(int kaartnummer, String naam, String telefoonnummer, String adres, String postcode, String plaats, String email, int aantalPersonen, String Status, String naamPartner) {
+    public Client(int kaartnummer, String naam, String telefoonnummer, String adres, String postcode, String plaats, String email, String mobielnummer, int aantalPersonen, String Status, String naamPartner) {
         this.kaartnummer = kaartnummer;
         this.naam = naam;
         this.telefoonnummer = telefoonnummer;
@@ -58,6 +58,7 @@ public class Client {
         this.postcode = postcode;
         this.plaats = plaats;
         this.email = email;
+        this.mobielnummer = mobielnummer;
         this.aantalPersonen = aantalPersonen;
         this.Status = Status;
         this.naamPartner = naamPartner;
@@ -213,39 +214,58 @@ public class Client {
                 Client dbClient = new Client(ID, kaartnummer, naam, telefoonnummer, adres, postcode, plaats, email, mobielnummer, aantalPersonen,
                         Status, naamPartner, uitgiftepunt_ID, verwijzer_ID, verwijzing_ID);
                 
-                System.out.println(client.equals(dbClient));
-                
-                if(client.equals(dbClient)) {
+                if(client.naam.equals(dbClient.naam) && 
+                   client.telefoonnummer.equals(dbClient.telefoonnummer) &&
+                   client.adres.equals(dbClient.adres) &&
+                   client.postcode.equals(dbClient.postcode) &&
+                   client.plaats.equals(dbClient.plaats) &&
+                   client.email.equals(dbClient.email) &&
+                   client.mobielnummer.equals(dbClient.mobielnummer) &&
+                   client.aantalPersonen == dbClient.aantalPersonen &&
+                   client.Status.equals(dbClient.Status) &&
+                   client.naamPartner.equals(dbClient.naamPartner)) {
                     hetzelfde = true;
                 }
                 
-//                if(hetzelfde == false) {
-//                    prestatement = connection.prepareStatement("Update Cliënt set where kaartnummer = " + client.kaartnummer);
-//                    
-//                    rs = prestatement.executeQuery();
-//                }
+                if(hetzelfde == false) {
+                    prestatement = connection.prepareStatement("Update Cliënt set naam = ?, telefoonnummer = ?, mobielnummer = ?, adres = ?, postcode = ?, plaats = ?, email = ?, aantalpersonen = ?, status_cliënt = ?, naam_partner = ? where kaartnummer = " + client.kaartnummer + " AND ID_cliënt = " + dbClient.ID);
+                    
+                    prestatement.setString(1, client.naam);
+                    prestatement.setString(2, client.telefoonnummer);
+                    prestatement.setString(3, client.mobielnummer);
+                    prestatement.setString(4, client.adres);
+                    prestatement.setString(5, client.postcode);
+                    prestatement.setString(6, client.plaats);
+                    prestatement.setString(7, client.email);
+                    prestatement.setInt(8, client.aantalPersonen);
+                    prestatement.setString(9, client.Status);
+                    prestatement.setString(10, client.naamPartner);
+                    
+                    
+                    prestatement.executeUpdate();
                 }
+            }
             
-            if (!rs.isBeforeFirst() ) {
+            if (!rs.isBeforeFirst()) {
                 prestatement = connection.prepareStatement("INSERT INTO Cliënt(kaartnummer, naam, telefoonnummer, mobielnummer, adres, postcode, plaats, email, aantalpersonen, naam_partner, status_cliënt)"
                     + "VALUES(?,?,?,?,?,?,?,?,?,?,?)");
 
-            prestatement.setInt(1, client.kaartnummer);
-            prestatement.setString(2, client.naam);
-            prestatement.setString(3, client.telefoonnummer);
-            prestatement.setString(4, client.mobielnummer);
-            prestatement.setString(5, client.adres);
-            prestatement.setString(6, client.postcode);
-            prestatement.setString(7, client.plaats);
-            prestatement.setString(8, client.email);
-            prestatement.setInt(9, client.aantalPersonen);
-            prestatement.setString(10, client.naamPartner);
-            prestatement.setString(11, client.Status);
+                prestatement.setInt(1, client.kaartnummer);
+                prestatement.setString(2, client.naam);
+                prestatement.setString(3, client.telefoonnummer);
+                prestatement.setString(4, client.mobielnummer);
+                prestatement.setString(5, client.adres);
+                prestatement.setString(6, client.postcode);
+                prestatement.setString(7, client.plaats); 
+                prestatement.setString(8, client.email);
+                prestatement.setInt(9, client.aantalPersonen);
+                prestatement.setString(10, client.naamPartner);
+                prestatement.setString(11, client.Status);
 
-            prestatement.executeUpdate();
+                prestatement.executeUpdate();
             }
             
-            } catch (SQLException ex) {
+        } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }

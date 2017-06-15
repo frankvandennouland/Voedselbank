@@ -23,7 +23,7 @@ public class Hulporganisatie {
         this.telefoonnummer = telefoonnummer;
         this.email = email;
     }
-    
+     
     public int getHulpoganisatie_ID() {
         return hulpoganisatie_ID;
     }
@@ -64,5 +64,7 @@ public class Hulporganisatie {
         this.email = email;
     }
 
-    
+    public void checkBestaat(Uitgiftepunt uitgiftepunt) {
+  
+    }
 }

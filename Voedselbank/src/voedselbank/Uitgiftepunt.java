@@ -25,7 +25,7 @@ public class Uitgiftepunt {
         this.plaatsnaam = plaatsnaam;
         this.capaciteit = capaciteit;
     }
-
+    
     public int getUitgiftepunt_ID() {
         return uitgiftepunt_ID;
     }
@@ -73,7 +73,7 @@ public class Uitgiftepunt {
     public void setCapaciteit(int capaciteit) {
         this.capaciteit = capaciteit;
     }
-    
+      
     @Override
     public String toString(){
         return naam;
