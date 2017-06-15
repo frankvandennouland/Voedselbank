@@ -12,8 +12,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
-
 
 /**
  *
@@ -22,13 +22,14 @@ import java.util.Date;
 public class ClientAanmaken extends javax.swing.JFrame {
 
     private Connection connection;
-    private final Date today = new Date();
+    private final LocalDate today;
     private final DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
 
     /**
      * Creates new form KlantAanpassen
      */
     public ClientAanmaken() {
+        this.today = LocalDate.now();
         initComponents();
         setTitle("Cliënt toevoegen");
         maakUitgiftepuntLijst();
@@ -363,20 +364,22 @@ public class ClientAanmaken extends javax.swing.JFrame {
             clientID = ((Number) rs.getObject(1)).intValue();
             }
             
-            PreparedStatement psIntake = connection.prepareStatement("INSERT INTO Intake(ID_cliënt, ID_hulpverlener, datum, startdatum_uitgifte)" + "VALUES(?,?,?,?)");
+            PreparedStatement psIntake = connection.prepareStatement("INSERT INTO Intake(ID_cliënt, ID_hulpverlener, datum, startdatum_uitgifte, datum_herintake)" + "VALUES(?,?,?,?,?)");
             
             psIntake.setInt(1, clientID);
             psIntake.setInt(2, hulpverlenerLijst.getItemAt(hulpverlenerLijst.getSelectedIndex()).getHulverlener_ID());
-            psIntake.setString(3, dateFormat.format(today));
+            psIntake.setString(3, today.toString());
             psIntake.setString(4, dateFormat.format(startdatumVeld.getDate()));
-            
+            psIntake.setString(5, today.plusMonths(3).toString());
+                        
             psIntake.executeUpdate();
             
-            PreparedStatement psVoedselpakket = connection.prepareStatement("INSERT INTO Voedselpakket(ID_cliënt, ID_uitgiftepunt, soort)" + "VALUES(?,?,?)");
+            PreparedStatement psVoedselpakket = connection.prepareStatement("INSERT INTO Voedselpakket(ID_cliënt, ID_uitgiftepunt, soort, datum)" + "VALUES(?,?,?,?)");
             
             psVoedselpakket.setInt(1, clientID);
             psVoedselpakket.setInt(2, uitgiftepuntVeld.getItemAt(uitgiftepuntVeld.getSelectedIndex()).getUitgiftepunt_ID());
             psVoedselpakket.setString(3, soortvoedselpakketVeld.getSelectedItem().toString());
+            psVoedselpakket.setString(4, dateFormat.format(startdatumVeld.getDate()));
             
             psVoedselpakket.executeUpdate();
             

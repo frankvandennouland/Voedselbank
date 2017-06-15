@@ -47,6 +47,8 @@ public class ClientZoeken extends javax.swing.JFrame {
 
         jLabel1.setText("Kaartnummer");
 
+        kaartnummerVeld.setDocument(new TextfieldLimit(11));
+
         zoekKnop.setText("Zoeken");
         zoekKnop.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -26,6 +26,7 @@ public class HulpverlenerToevoegen extends javax.swing.JFrame {
      */
     public HulpverlenerToevoegen() {
         initComponents();
+        setTitle("Hulpverlener toevoegen");
     }
 
     /**

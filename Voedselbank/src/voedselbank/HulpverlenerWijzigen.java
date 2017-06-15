@@ -28,6 +28,7 @@ public class HulpverlenerWijzigen extends javax.swing.JFrame {
      */
     public HulpverlenerWijzigen() {
         initComponents();
+        setTitle("Hulpverlener wijzigen");
     }
 
     public HulpverlenerWijzigen(Hulpverlener hulpverlener) {

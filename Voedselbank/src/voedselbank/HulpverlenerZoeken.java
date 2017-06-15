@@ -24,6 +24,7 @@ public class HulpverlenerZoeken extends javax.swing.JFrame {
      */
     public HulpverlenerZoeken() {
         initComponents();
+        setTitle("Hulpverlener zoeker");
     }
 
     /**

@@ -5,14 +5,16 @@
  */
 package voedselbank;
 
+import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Rectangle;
+import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.sql.Connection;
@@ -167,7 +169,9 @@ public class OverzichtScherm extends javax.swing.JFrame {
             PreparedStatement prestatement = connection.prepareStatement("SELECT u.naam as 'Naam', u.adres as 'Adres', u.postcode as 'Postcode', u.plaatsnaam as 'Plaats',\n"
                     + "count(case when v.soort like 'Enkel%' then 1 else NULL end) as 'Enkelvoudig pakket',\n"
                     + "count(case when v.soort like 'Dubbel%' then 1 else NULL end) as 'Dubbel pakket',\n"
-                    + "count(case when v.soort like 'Drie%' then 1 else NULL end) as 'Drievoudig pakket'\n"
+                    + "count(case when v.soort like 'Drie%' then 1 else NULL end) as 'Drievoudig pakket',\n"
+                    + "count('Enkelvoudig pakket' + 'Dubbel pakket' + 'Drievoudig pakket') as 'Totaal',\n"
+                    + "u.capaciteit as 'Capaciteit'\n"
                     + "FROM Uitgiftepunt u\n"
                     + "JOIN Voedselpakket v ON v.ID_uitgiftepunt = u.ID_uitgiftepunt\n"
                     + "JOIN Cliënt c on v.ID_cliënt = c.ID_cliënt\n"
@@ -266,7 +270,10 @@ public class OverzichtScherm extends javax.swing.JFrame {
 
                 //adding table headers
                 for (int i = 0; i < overzichtTabel.getColumnCount(); i++) {
-                    pdfTable.addCell(overzichtTabel.getColumnName(i));
+                    PdfPCell head = new PdfPCell(new Paragraph(overzichtTabel.getColumnName(i)));
+                    head.setHorizontalAlignment(Element.ALIGN_CENTER);
+                    head.setBackgroundColor(new BaseColor(236,116,4));
+                    pdfTable.addCell(head);
                 }
 
                 //extracting data from the JTable and inserting it to PdfPTable
@@ -284,7 +291,6 @@ public class OverzichtScherm extends javax.swing.JFrame {
             }
         } catch (FileNotFoundException | DocumentException e) {
             e.printStackTrace();
-
         }
     }//GEN-LAST:event_exporteerKnopActionPerformed
 
