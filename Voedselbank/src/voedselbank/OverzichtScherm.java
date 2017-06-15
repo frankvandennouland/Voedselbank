@@ -22,6 +22,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
 
 /**
@@ -181,7 +182,12 @@ public class OverzichtScherm extends javax.swing.JFrame {
             overzichtTabel.setModel(DbUtils.resultSetToTableModel(rs));
             overzichtTabel.setAutoCreateRowSorter(true);
             overzichtTabel.setAutoResizeMode(5);
-
+            while(rs.next()){
+            if (rs.getInt("Totaal") > 225) {
+                JOptionPane waarschuwing = new JOptionPane();
+                waarschuwing.setName( rs.getString("Naam") + " Capaciteit bijna Vol");
+            }
+            }
             exporteerKnop.setEnabled(true);
         } catch (SQLException ex) {
             ex.printStackTrace();
