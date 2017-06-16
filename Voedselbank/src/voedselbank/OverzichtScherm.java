@@ -41,6 +41,7 @@ public class OverzichtScherm extends javax.swing.JFrame {
         initComponents();
         omhoogKnop.setVisible(false);
         omlaagKnop.setVisible(false);
+        informatieKnop.setVisible(false);
     }
 
     /**
@@ -61,6 +62,7 @@ public class OverzichtScherm extends javax.swing.JFrame {
         exporteerKnop = new javax.swing.JButton();
         omhoogKnop = new javax.swing.JButton();
         omlaagKnop = new javax.swing.JButton();
+        informatieKnop = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -124,6 +126,13 @@ public class OverzichtScherm extends javax.swing.JFrame {
             }
         });
 
+        informatieKnop.setText("Meer informatie");
+        informatieKnop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                informatieKnopActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -137,7 +146,8 @@ public class OverzichtScherm extends javax.swing.JFrame {
                     .addComponent(overzichtintakeKnop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(exporteerKnop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(omhoogKnop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(omlaagKnop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(omlaagKnop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(informatieKnop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1269, Short.MAX_VALUE)
                 .addContainerGap())
@@ -155,7 +165,9 @@ public class OverzichtScherm extends javax.swing.JFrame {
                         .addComponent(clientperhulpverlenerKnop)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(overzichtintakeKnop)
-                        .addGap(74, 74, 74)
+                        .addGap(36, 36, 36)
+                        .addComponent(informatieKnop)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(omhoogKnop)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(omlaagKnop)
@@ -208,6 +220,7 @@ public class OverzichtScherm extends javax.swing.JFrame {
 
             omhoogKnop.setVisible(true);
             omlaagKnop.setVisible(true);
+            informatieKnop.setVisible(false);
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -226,6 +239,7 @@ public class OverzichtScherm extends javax.swing.JFrame {
             exporteerKnop.setEnabled(false);
             omhoogKnop.setVisible(false);
             omlaagKnop.setVisible(false);
+            informatieKnop.setVisible(false);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -247,14 +261,13 @@ public class OverzichtScherm extends javax.swing.JFrame {
             exporteerKnop.setEnabled(false);
             omhoogKnop.setVisible(false);
             omlaagKnop.setVisible(false);
+            informatieKnop.setVisible(false);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }//GEN-LAST:event_overzichtintakeKnopActionPerformed
 
     private void clientperhulpverlenerKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientperhulpverlenerKnopActionPerformed
-        ClientperHulpverlenerFrame ch = new ClientperHulpverlenerFrame();
-        ch.setVisible(true);
         try {
             connection = SimpleDataSourceV2.getConnection();
             PreparedStatement prestatement = connection.prepareStatement("SELECT Hulpverlener.naam as 'Hulpverlener',\n"
@@ -271,6 +284,7 @@ public class OverzichtScherm extends javax.swing.JFrame {
             exporteerKnop.setEnabled(true);
             omhoogKnop.setVisible(false);
             omlaagKnop.setVisible(false);
+            informatieKnop.setVisible(true);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -336,11 +350,17 @@ public class OverzichtScherm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_omlaagKnopActionPerformed
 
+    private void informatieKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_informatieKnopActionPerformed
+        ClientperHulpverlenerFrame ch = new ClientperHulpverlenerFrame();
+        ch.setVisible(true);
+    }//GEN-LAST:event_informatieKnopActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bevoorradingslijstKnop;
     private javax.swing.JButton clientenoverzichtKnop;
     private javax.swing.JButton clientperhulpverlenerKnop;
     private javax.swing.JButton exporteerKnop;
+    private javax.swing.JButton informatieKnop;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton omhoogKnop;
     private javax.swing.JButton omlaagKnop;
