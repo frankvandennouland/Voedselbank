@@ -9,13 +9,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  *
  * @author frank
  */
 public class Client {
-      private int ID;
+    private int ID;
     private int kaartnummer;
     private String naam;
     private String telefoonnummer;
@@ -184,9 +185,9 @@ public class Client {
         this.verwijzing_ID = verwijzing_ID;
     }
     
-       public void checkBestaat(Client client) {
-           
+       public void checkBestaat(Client client, String uitgiftepunt, Voedselpakket voedselpakket) {
         try {
+            int dbkaartnummer = 0;
             connection = SimpleDataSourceV2.getConnection();
             PreparedStatement prestatement = connection.prepareStatement("SELECT * FROM Cliënt where kaartnummer = " + client.kaartnummer + " limit 1");
 
@@ -194,9 +195,8 @@ public class Client {
 
             while (rs.next()) {
                 boolean hetzelfde = false;
-     
-                int ID = rs.getInt("ID_cliënt");
-                int kaartnummer = rs.getInt("kaartnummer");
+                this.ID = rs.getInt("ID_cliënt");
+                dbkaartnummer = rs.getInt("kaartnummer");
                 String naam = rs.getString("naam");
                 String telefoonnummer = rs.getString("telefoonnummer");
                 String adres = rs.getString("adres");
@@ -211,7 +211,7 @@ public class Client {
                 int verwijzer_ID = rs.getInt("ID_verwijzer");
                 int verwijzing_ID = rs.getInt("ID_verwijzing");
 
-                Client dbClient = new Client(ID, kaartnummer, naam, telefoonnummer, adres, postcode, plaats, email, mobielnummer, aantalPersonen,
+                Client dbClient = new Client(this.ID, dbkaartnummer, naam, telefoonnummer, adres, postcode, plaats, email, mobielnummer, aantalPersonen,
                         Status, naamPartner, uitgiftepunt_ID, verwijzer_ID, verwijzing_ID);
                 
                 if(client.naam.equals(dbClient.naam) && 
@@ -246,10 +246,10 @@ public class Client {
                 }
             }
             
-            if (!rs.isBeforeFirst()) {
+            if (dbkaartnummer == 0) {
                 prestatement = connection.prepareStatement("INSERT INTO Cliënt(kaartnummer, naam, telefoonnummer, mobielnummer, adres, postcode, plaats, email, aantalpersonen, naam_partner, status_cliënt)"
-                    + "VALUES(?,?,?,?,?,?,?,?,?,?,?)");
-
+                    + "VALUES(?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+               
                 prestatement.setInt(1, client.kaartnummer);
                 prestatement.setString(2, client.naam);
                 prestatement.setString(3, client.telefoonnummer);
@@ -263,17 +263,20 @@ public class Client {
                 prestatement.setString(11, client.Status);
 
                 prestatement.executeUpdate();
+                
+                ResultSet rsInsert = prestatement.getGeneratedKeys();
+                
+                while(rsInsert.next()) {
+                   this.ID = ((Number) rsInsert.getObject(1)).intValue();
+                }
             }
             
+            SimpleDataSourceV2.Connect_Uitgiftepunt(uitgiftepunt, client, voedselpakket);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }
-    
-    public void insertClient (Client client) {
-        
-    }
-    
+ 
     @Override
     public String toString(){
         return kaartnummer + " - " + naam;

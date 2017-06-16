@@ -7,8 +7,13 @@ package voedselbank;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JFileChooser;
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFCreationHelper;
+import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.DataFormatter;
@@ -207,8 +212,8 @@ public class MainFrame extends javax.swing.JFrame {
        JFileChooser fc = new JFileChooser();
         fc.showOpenDialog(this);
 
-        DataFormatter formatter = new DataFormatter();
-        
+        DataFormatter formatter = new DataFormatter();                    
+        DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");        
         
         File file = fc.getSelectedFile();
 
@@ -228,6 +233,10 @@ public class MainFrame extends javax.swing.JFrame {
                 i = i+1;
                 while(einde == false) {
                     if (!formatter.formatCellValue(worksheet.getRow(i).getCell(0)).equals("")) {
+                        Date startdatum_uitgifte = new Date(0);
+                        System.out.println(dateFormat.format(startdatum_uitgifte));
+                        
+                        
                         String kaartnummer = formatter.formatCellValue(worksheet.getRow(i).getCell(0));
                         String naam = formatter.formatCellValue(worksheet.getRow(i).getCell(1));
                         String naamPartner = formatter.formatCellValue(worksheet.getRow(i).getCell(2));
@@ -247,33 +256,25 @@ public class MainFrame extends javax.swing.JFrame {
                         String status = formatter.formatCellValue(worksheet.getRow(i).getCell(16));
                         String intaker = formatter.formatCellValue(worksheet.getRow(i).getCell(17));
                         String intakedatum = formatter.formatCellValue(worksheet.getRow(i).getCell(18));
-                        String startdatum_uitgifte = formatter.formatCellValue(worksheet.getRow(i).getCell(19));
+                        if (worksheet.getRow(i).getCell(19).getDateCellValue() != null) {
+                            startdatum_uitgifte = worksheet.getRow(i).getCell(19).getDateCellValue();
+                        }
                         String datum_herintake = formatter.formatCellValue(worksheet.getRow(i).getCell(20));
                         String datum_stopzetting = formatter.formatCellValue(worksheet.getRow(i).getCell(21));
                         String reden_stopzetting = formatter.formatCellValue(worksheet.getRow(i).getCell(22));
-                        String verwijzer_door = formatter.formatCellValue(worksheet.getRow(i).getCell(23));
-                        String verwijzer_door_contact = formatter.formatCellValue(worksheet.getRow(i).getCell(24));
-                        String verwijzer_door_tel = formatter.formatCellValue(worksheet.getRow(i).getCell(25));
-                        String verwijzer_door_email = formatter.formatCellValue(worksheet.getRow(i).getCell(26));
-                        String verwijzer_naar = formatter.formatCellValue(worksheet.getRow(i).getCell(27));
-                        String verwijzer_naar_contact = formatter.formatCellValue(worksheet.getRow(i).getCell(28));
-                        String verwijzer_naar_tel = formatter.formatCellValue(worksheet.getRow(i).getCell(29));
-                        String verwijzer_naar_email = formatter.formatCellValue(worksheet.getRow(i).getCell(30));
                         String uitgifte_punt = formatter.formatCellValue(worksheet.getRow(i).getCell(31));
                         String pakket = formatter.formatCellValue(worksheet.getRow(i).getCell(32));
+
+                        System.out.println(dateFormat.format(startdatum_uitgifte));
+
                         
                         Client client = new Client(Integer.parseInt(kaartnummer), naam, telefoonnummer, adres, postcode, plaats, email, mobiel, Integer.parseInt(aantalPersonen), status, naamPartner);                        
-                        client.checkBestaat(client);
+                        Voedselpakket voedselpakket = new Voedselpakket(startdatum_uitgifte, pakket);
+                        client.checkBestaat(client, uitgifte_punt, voedselpakket);
                         
                         //uitgifte punt checken
                         
-                        //verwijzer is een verwijzer een intaker of ???
 //                        Hulpverlener hulpverlener = new Hulpverlener(int hulverlener_ID, String naam, String telefoonnummer, Date geboortedatum);
-                        
-                        
-                       
-                        
-                        
                         i++;
                     } else {
                         einde = true;

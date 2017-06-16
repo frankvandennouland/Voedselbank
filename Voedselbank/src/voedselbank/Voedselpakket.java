@@ -12,25 +12,21 @@ import java.util.Date;
  * @author frank
  */
 public class Voedselpakket {
-    private int voedselpakket_ID;
     private int client_ID;
     private int uitgiftepunt_ID;
-    private Date datum = new Date();
+    private Date datum;
     private String soort;
 
-    public Voedselpakket(int voedselpakket_ID, int client_ID, int uitgiftepunt_ID, String soort) {
-        this.voedselpakket_ID = voedselpakket_ID;
+    public Voedselpakket(int client_ID, int uitgiftepunt_ID, Date datum, String soort) {
         this.client_ID = client_ID;
         this.uitgiftepunt_ID = uitgiftepunt_ID;
+        this.datum = datum;
         this.soort = soort;
     }
-
-    public int getVoedselpakket_ID() {
-        return voedselpakket_ID;
-    }
-
-    public void setVoedselpakket_ID(int voedselpakket_ID) {
-        this.voedselpakket_ID = voedselpakket_ID;
+    
+    public Voedselpakket(Date datum, String soort) {
+        this.datum = datum;
+        this.soort = soort;
     }
 
     public int getClient_ID() {

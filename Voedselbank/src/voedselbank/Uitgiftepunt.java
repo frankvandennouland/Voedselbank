@@ -73,7 +73,7 @@ public class Uitgiftepunt {
     public void setCapaciteit(int capaciteit) {
         this.capaciteit = capaciteit;
     }
-      
+         
     @Override
     public String toString(){
         return naam;
