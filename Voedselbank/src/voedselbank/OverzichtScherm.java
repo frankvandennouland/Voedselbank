@@ -21,6 +21,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -209,12 +210,22 @@ public class OverzichtScherm extends javax.swing.JFrame {
             overzichtTabel.setModel(DbUtils.resultSetToTableModel(rs));
             overzichtTabel.setAutoCreateRowSorter(true);
             overzichtTabel.setAutoResizeMode(5);
-
+            rs.first();
+            ArrayList<String> waarschuwingsLijst = new ArrayList();
             while (rs.next()) {
-                if (rs.getInt("Totaal") > 225) {
-                    JOptionPane waarschuwing = new JOptionPane();
-                    waarschuwing.setName(rs.getString("Naam") + " Capaciteit bijna Vol");
+                if (rs.getInt("Totaal") > 0) {
+                    waarschuwingsLijst.add(rs.getString("Naam"));
                 }
+            }
+            if (!waarschuwingsLijst.isEmpty()) {
+                StringBuilder sb = new StringBuilder();
+                for (String s : waarschuwingsLijst) {
+                    sb.append(s);
+                    sb.append("\t");
+                    sb.append("\n");
+                    
+                }
+                JOptionPane.showMessageDialog(this, " Capaciteit bijna Vol bij:\n " + sb.toString(), "Waarschuwing", JOptionPane.WARNING_MESSAGE);
             }
             exporteerKnop.setEnabled(true);
 
