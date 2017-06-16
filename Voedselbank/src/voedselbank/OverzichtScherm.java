@@ -213,7 +213,7 @@ public class OverzichtScherm extends javax.swing.JFrame {
             rs.first();
             ArrayList<String> waarschuwingsLijst = new ArrayList();
             while (rs.next()) {
-                if (rs.getInt("Totaal") > 0) {
+                if (rs.getInt("Totaal") > 2) {
                     waarschuwingsLijst.add(rs.getString("Naam"));
                 }
             }
@@ -225,7 +225,7 @@ public class OverzichtScherm extends javax.swing.JFrame {
                     sb.append("\n");
                     
                 }
-                JOptionPane.showMessageDialog(this, " Capaciteit bijna Vol bij:\n " + sb.toString(), "Waarschuwing", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, " Capaciteit bijna Vol bij:\n" + sb.toString(), "Waarschuwing", JOptionPane.WARNING_MESSAGE);
             }
             exporteerKnop.setEnabled(true);
 
