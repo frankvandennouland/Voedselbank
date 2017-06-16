@@ -174,7 +174,7 @@ public class ClientAanmaken extends javax.swing.JFrame {
 
         jLabel12.setText("Soort voedselpakket");
 
-        soortvoedselpakketVeld.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Enkelvoudig", "Dubbel", "Drievoudig" }));
+        soortvoedselpakketVeld.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Enkelvoudig", "Dubbel", "3-voudig" }));
 
         jLabel13.setText("Uitgiftepunt");
 

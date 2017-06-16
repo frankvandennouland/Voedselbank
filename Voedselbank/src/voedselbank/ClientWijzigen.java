@@ -172,7 +172,7 @@ public class ClientWijzigen extends javax.swing.JFrame {
             }
         });
 
-        soortvoedselpakketVeld.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Enkelvoudig", "Dubbel", "Drievoudig" }));
+        soortvoedselpakketVeld.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Enkelvoudig", "Dubbel", "3-voudig" }));
 
         jLabel12.setText("Soort voedselpakket");
 
