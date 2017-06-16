@@ -213,7 +213,7 @@ public class OverzichtScherm extends javax.swing.JFrame {
             rs.first();
             ArrayList<String> waarschuwingsLijst = new ArrayList();
             while (rs.next()) {
-                if (rs.getInt("Totaal") > 2) {
+                if (rs.getInt("Totaal") > (rs.getInt("Capaciteit") / 100) * 90) {
                     waarschuwingsLijst.add(rs.getString("Naam"));
                 }
             }
