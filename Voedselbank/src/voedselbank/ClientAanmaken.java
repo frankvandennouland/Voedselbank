@@ -185,7 +185,7 @@ public class ClientAanmaken extends javax.swing.JFrame {
             }
         });
 
-        jLabel14.setText("Kaartnummer");
+        jLabel14.setText("Kaartnummer*");
 
         kaartnummerVeld.setDocument(new TextfieldLimit(11));
 

@@ -28,10 +28,8 @@
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="bevoorradingslijstKnop" max="32767" attributes="0"/>
                   <Component id="clientenoverzichtKnop" max="32767" attributes="0"/>
-                  <Component id="mutatieperperiodeKnop" max="32767" attributes="0"/>
                   <Component id="clientperhulpverlenerKnop" pref="200" max="32767" attributes="0"/>
                   <Component id="overzichtintakeKnop" max="32767" attributes="0"/>
-                  <Component id="mutatieperuitgiftepuntKnop" max="32767" attributes="0"/>
                   <Component id="exporteerKnop" max="32767" attributes="0"/>
                   <Component id="omhoogKnop" max="32767" attributes="0"/>
                   <Component id="omlaagKnop" max="32767" attributes="0"/>
@@ -52,14 +50,10 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="clientenoverzichtKnop" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="mutatieperperiodeKnop" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="clientperhulpverlenerKnop" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="overzichtintakeKnop" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="mutatieperuitgiftepuntKnop" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
                       <Component id="omhoogKnop" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="omlaagKnop" min="-2" max="-2" attributes="0"/>
@@ -112,14 +106,6 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="clientenoverzichtKnopActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="mutatieperperiodeKnop">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Mutatie per periode"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mutatieperperiodeKnopActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JButton" name="clientperhulpverlenerKnop">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cli&#xeb;nten per hulpverlener"/>
@@ -134,14 +120,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="overzichtintakeKnopActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="mutatieperuitgiftepuntKnop">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Mutaties per uitgiftepunt"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mutatieperuitgiftepuntKnopActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="exporteerKnop">

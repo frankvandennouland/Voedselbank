@@ -56,10 +56,8 @@ public class OverzichtScherm extends javax.swing.JFrame {
         overzichtTabel = new javax.swing.JTable();
         bevoorradingslijstKnop = new javax.swing.JButton();
         clientenoverzichtKnop = new javax.swing.JButton();
-        mutatieperperiodeKnop = new javax.swing.JButton();
         clientperhulpverlenerKnop = new javax.swing.JButton();
         overzichtintakeKnop = new javax.swing.JButton();
-        mutatieperuitgiftepuntKnop = new javax.swing.JButton();
         exporteerKnop = new javax.swing.JButton();
         omhoogKnop = new javax.swing.JButton();
         omlaagKnop = new javax.swing.JButton();
@@ -90,13 +88,6 @@ public class OverzichtScherm extends javax.swing.JFrame {
             }
         });
 
-        mutatieperperiodeKnop.setText("Mutatie per periode");
-        mutatieperperiodeKnop.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mutatieperperiodeKnopActionPerformed(evt);
-            }
-        });
-
         clientperhulpverlenerKnop.setText("Cliënten per hulpverlener");
         clientperhulpverlenerKnop.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,13 +99,6 @@ public class OverzichtScherm extends javax.swing.JFrame {
         overzichtintakeKnop.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 overzichtintakeKnopActionPerformed(evt);
-            }
-        });
-
-        mutatieperuitgiftepuntKnop.setText("Mutaties per uitgiftepunt");
-        mutatieperuitgiftepuntKnop.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mutatieperuitgiftepuntKnopActionPerformed(evt);
             }
         });
 
@@ -149,10 +133,8 @@ public class OverzichtScherm extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(bevoorradingslijstKnop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(clientenoverzichtKnop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(mutatieperperiodeKnop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(clientperhulpverlenerKnop, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                     .addComponent(overzichtintakeKnop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(mutatieperuitgiftepuntKnop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(exporteerKnop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(omhoogKnop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(omlaagKnop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -170,14 +152,10 @@ public class OverzichtScherm extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(clientenoverzichtKnop)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(mutatieperperiodeKnop)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(clientperhulpverlenerKnop)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(overzichtintakeKnop)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(mutatieperuitgiftepuntKnop)
-                        .addGap(70, 70, 70)
+                        .addGap(74, 74, 74)
                         .addComponent(omhoogKnop)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(omlaagKnop)
@@ -200,10 +178,6 @@ public class OverzichtScherm extends javax.swing.JFrame {
             overzichtTabel.setRowSelectionInterval(selectedRows[0] + by, selectedRows[selectedRows.length - 1] + by);
         }
     }
-
-    private void mutatieperuitgiftepuntKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mutatieperuitgiftepuntKnopActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mutatieperuitgiftepuntKnopActionPerformed
 
     private void bevoorradingslijstKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bevoorradingslijstKnopActionPerformed
         try {
@@ -362,19 +336,12 @@ public class OverzichtScherm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_omlaagKnopActionPerformed
 
-    private void mutatieperperiodeKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mutatieperperiodeKnopActionPerformed
-        omhoogKnop.setVisible(false);
-        omlaagKnop.setVisible(false);
-    }//GEN-LAST:event_mutatieperperiodeKnopActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bevoorradingslijstKnop;
     private javax.swing.JButton clientenoverzichtKnop;
     private javax.swing.JButton clientperhulpverlenerKnop;
     private javax.swing.JButton exporteerKnop;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton mutatieperperiodeKnop;
-    private javax.swing.JButton mutatieperuitgiftepuntKnop;
     private javax.swing.JButton omhoogKnop;
     private javax.swing.JButton omlaagKnop;
     private javax.swing.JTable overzichtTabel;

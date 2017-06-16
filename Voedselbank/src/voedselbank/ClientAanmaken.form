@@ -362,7 +362,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel14">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Kaartnummer"/>
+        <Property name="text" type="java.lang.String" value="Kaartnummer*"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="kaartnummerVeld">

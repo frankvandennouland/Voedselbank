@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -138,33 +139,43 @@ public class HulpverlenerWijzigen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void wijzigKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_wijzigKnopActionPerformed
-        try {
-            connection = SimpleDataSourceV2.getConnection();
-            PreparedStatement ps = connection.prepareStatement("UPDATE Hulpverlener SET naam = ?, geboortedatum = ?, telefoonnummer = ? WHERE ID_hulpverlener = ?");
+        int wijzig = JOptionPane.showConfirmDialog(null, "Weet u zeker dat u de gegevens wilt wijzigen?", "Wijzigen", JOptionPane.YES_NO_OPTION);
 
-            ps.setString(1, naamVeld.getText());
-            ps.setString(2, dateFormat.format(geboortedatumVeld.getDate()));
-            ps.setString(3, telefoonnummerVeld.getText());
-            ps.setInt(4, hulpverlener.getHulverlener_ID());
+        if (wijzig == JOptionPane.YES_OPTION) {
 
-            ps.executeUpdate();
+            try {
+                connection = SimpleDataSourceV2.getConnection();
+                PreparedStatement ps = connection.prepareStatement("UPDATE Hulpverlener SET naam = ?, geboortedatum = ?, telefoonnummer = ? WHERE ID_hulpverlener = ?");
 
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+                ps.setString(1, naamVeld.getText());
+                ps.setString(2, dateFormat.format(geboortedatumVeld.getDate()));
+                ps.setString(3, telefoonnummerVeld.getText());
+                ps.setInt(4, hulpverlener.getHulverlener_ID());
+
+                ps.executeUpdate();
+
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
         }
     }//GEN-LAST:event_wijzigKnopActionPerformed
 
     private void verwijderKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verwijderKnopActionPerformed
-        try {
-            connection = SimpleDataSourceV2.getConnection();
-            PreparedStatement ps = connection.prepareStatement("DELETE FROM Hulpverlener WHERE ID_hulpverlener = ?");
+        int verwijder = JOptionPane.showConfirmDialog(null, "Weet u zeker dat u alle gegevens wilt verwijderen?", "Verwijderen", JOptionPane.YES_NO_OPTION);
 
-            ps.setInt(1, hulpverlener.getHulverlener_ID());
+        if (verwijder == JOptionPane.YES_OPTION) {
 
-            ps.executeUpdate();
+            try {
+                connection = SimpleDataSourceV2.getConnection();
+                PreparedStatement ps = connection.prepareStatement("DELETE FROM Hulpverlener WHERE ID_hulpverlener = ?");
 
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+                ps.setInt(1, hulpverlener.getHulverlener_ID());
+
+                ps.executeUpdate();
+
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
         }
     }//GEN-LAST:event_verwijderKnopActionPerformed
 

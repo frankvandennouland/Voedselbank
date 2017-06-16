@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -320,50 +321,60 @@ public class ClientWijzigen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void wijzigKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_wijzigKnopActionPerformed
-        try {
-            connection = SimpleDataSourceV2.getConnection();
-            PreparedStatement ps = connection.prepareStatement("UPDATE Cliënt SET naam = ?, telefoonnummer = ?, mobielnummer = ?, adres = ?, postcode = ?, plaats = ?, email = ?, kaartnummer = ?, aantalpersonen = ?, naam_partner = ?, status_cliënt = ? WHERE ID_cliënt = ?");
 
-            ps.setString(1, naamVeld.getText());
-            ps.setString(2, telefoonnummerVeld.getText());
-            ps.setString(3, mobielnummerVeld.getText());
-            ps.setString(4, adresVeld.getText());
-            ps.setString(5, postcodeVeld.getText());
-            ps.setString(6, plaatsVeld.getText());
-            ps.setString(7, emailVeld.getText());
-            ps.setString(8, kaartnummerVeld.getText());
-            ps.setString(9, aantalpersonenVeld.getSelectedItem().toString());
-            ps.setString(10, naampartnerVeld.getText());
-            ps.setString(11, statusVeld.getSelectedItem().toString());
-            ps.setInt(12, client.getID());
+        int wijzig = JOptionPane.showConfirmDialog(null, "Weet u zeker dat u de cliëntgegevens wilt wijzigen?", "Wijzigen", JOptionPane.YES_NO_OPTION);
 
-            ps.executeUpdate();
+        if (wijzig == JOptionPane.YES_OPTION) {
 
-            PreparedStatement psVoedselpakket = connection.prepareStatement("UPDATE Voedselpakket SET ID_uitgiftepunt = ?, soort = ? WHERE ID_cliënt = ?");
+            try {
+                connection = SimpleDataSourceV2.getConnection();
+                PreparedStatement ps = connection.prepareStatement("UPDATE Cliënt SET naam = ?, telefoonnummer = ?, mobielnummer = ?, adres = ?, postcode = ?, plaats = ?, email = ?, kaartnummer = ?, aantalpersonen = ?, naam_partner = ?, status_cliënt = ? WHERE ID_cliënt = ?");
 
-            psVoedselpakket.setInt(1, uitgiftepuntVeld.getItemAt(uitgiftepuntVeld.getSelectedIndex()).getUitgiftepunt_ID());
-            psVoedselpakket.setString(2, soortvoedselpakketVeld.getSelectedItem().toString());
-            psVoedselpakket.setInt(3, client.getID());
+                ps.setString(1, naamVeld.getText());
+                ps.setString(2, telefoonnummerVeld.getText());
+                ps.setString(3, mobielnummerVeld.getText());
+                ps.setString(4, adresVeld.getText());
+                ps.setString(5, postcodeVeld.getText());
+                ps.setString(6, plaatsVeld.getText());
+                ps.setString(7, emailVeld.getText());
+                ps.setString(8, kaartnummerVeld.getText());
+                ps.setString(9, aantalpersonenVeld.getSelectedItem().toString());
+                ps.setString(10, naampartnerVeld.getText());
+                ps.setString(11, statusVeld.getSelectedItem().toString());
+                ps.setInt(12, client.getID());
 
-            psVoedselpakket.executeUpdate();
+                ps.executeUpdate();
 
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+                PreparedStatement psVoedselpakket = connection.prepareStatement("UPDATE Voedselpakket SET ID_uitgiftepunt = ?, soort = ? WHERE ID_cliënt = ?");
+
+                psVoedselpakket.setInt(1, uitgiftepuntVeld.getItemAt(uitgiftepuntVeld.getSelectedIndex()).getUitgiftepunt_ID());
+                psVoedselpakket.setString(2, soortvoedselpakketVeld.getSelectedItem().toString());
+                psVoedselpakket.setInt(3, client.getID());
+
+                psVoedselpakket.executeUpdate();
+
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
         }
-
     }//GEN-LAST:event_wijzigKnopActionPerformed
 
     private void verwijderKnopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verwijderKnopActionPerformed
-        try {
-            connection = SimpleDataSourceV2.getConnection();
-            PreparedStatement ps = connection.prepareStatement("DELETE FROM Cliënt WHERE ID_cliënt = ?");
 
-            ps.setInt(1, client.getID());
+        int verwijder = JOptionPane.showConfirmDialog(null, "Weet u zeker dat u alle cliëntgegevens wilt verwijderen?", "Verwijderen", JOptionPane.YES_NO_OPTION);
 
-            ps.executeUpdate();
+        if (verwijder == JOptionPane.YES_OPTION) {
+            try {
+                connection = SimpleDataSourceV2.getConnection();
+                PreparedStatement ps = connection.prepareStatement("DELETE FROM Cliënt WHERE ID_cliënt = ?");
 
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+                ps.setInt(1, client.getID());
+
+                ps.executeUpdate();
+
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
         }
     }//GEN-LAST:event_verwijderKnopActionPerformed
 
