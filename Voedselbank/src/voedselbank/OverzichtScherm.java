@@ -25,6 +25,8 @@ import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import net.proteanit.sql.DbUtils;
 
 /**
@@ -198,7 +200,7 @@ public class OverzichtScherm extends javax.swing.JFrame {
             PreparedStatement prestatement = connection.prepareStatement("SELECT u.naam as 'Naam', u.adres as 'Adres', u.postcode as 'Postcode', u.plaatsnaam as 'Plaats',\n"
                     + "count(case when v.soort like 'Enkel%' then 1 else NULL end) as 'Enkelvoudig pakket',\n"
                     + "count(case when v.soort like 'Dubbel%' then 1 else NULL end) as 'Dubbel pakket',\n"
-                    + "count(case when v.soort like 'Drie%' then 1 else NULL end) as 'Drievoudig pakket',\n"
+                    + "count(case when v.soort like 'Drie%' or '%3%' then 1 else NULL end) as 'Drievoudig pakket',\n"
                     + "count('Enkelvoudig pakket' + 'Dubbel pakket' + 'Drievoudig pakket') as 'Totaal',\n"
                     + "u.capaciteit as 'Capaciteit'\n"
                     + "FROM Uitgiftepunt u\n"
@@ -210,8 +212,9 @@ public class OverzichtScherm extends javax.swing.JFrame {
             overzichtTabel.setModel(DbUtils.resultSetToTableModel(rs));
             overzichtTabel.setAutoCreateRowSorter(true);
             overzichtTabel.setAutoResizeMode(5);
+            
             rs.first();
-            ArrayList<String> waarschuwingsLijst = new ArrayList();
+            ArrayList<String> waarschuwingsLijst = new ArrayList<>();
             while (rs.next()) {
                 if (rs.getInt("Totaal") > (rs.getInt("Capaciteit") / 100) * 90) {
                     waarschuwingsLijst.add(rs.getString("Naam"));
