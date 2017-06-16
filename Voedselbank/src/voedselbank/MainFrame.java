@@ -11,6 +11,9 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JFileChooser;
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFCreationHelper;
+import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.DataFormatter;
@@ -206,77 +209,79 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_uitgiftepuntwijzigenKnopActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        JFileChooser fc = new JFileChooser();
+       JFileChooser fc = new JFileChooser();
         fc.showOpenDialog(this);
 
-        DataFormatter formatter = new DataFormatter();
-        DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
-
+        DataFormatter formatter = new DataFormatter();                    
+        DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");        
+        
         File file = fc.getSelectedFile();
 
         try {
-            FileInputStream fileInputStream = new FileInputStream(file);
-            HSSFWorkbook workbook = new HSSFWorkbook(fileInputStream);
-            HSSFSheet worksheet = workbook.getSheet("Intakestatus");
+	FileInputStream fileInputStream = new FileInputStream(file);
+	HSSFWorkbook workbook = new HSSFWorkbook(fileInputStream);
+	HSSFSheet worksheet = workbook.getSheet("Intakestatus");
+        
+        boolean begin = false;
+        boolean einde = false;
+        
+        for(int i = 0; begin == false; i++) {
+            String content = formatter.formatCellValue(worksheet.getRow(i).getCell(0));
+            
+            if (content.equals("Kaartnummer")) {
+                begin = true;
+                i = i+1;
+                while(einde == false) {
+                    if (!formatter.formatCellValue(worksheet.getRow(i).getCell(0)).equals("")) {
+                        Date startdatum_uitgifte = new Date(0);
+                        Date intakedatum = new Date(0);
+                        Date datum_herintake = new Date(0);
+                        Date datum_stopzetting = new Date(0);
 
-            boolean begin = false;
-            boolean einde = false;
-
-            for (int i = 0; begin == false; i++) {
-                String content = formatter.formatCellValue(worksheet.getRow(i).getCell(0));
-
-                if (content.equals("Kaartnummer")) {
-                    begin = true;
-                    i = i + 1;
-                    while (einde == false) {
-                        if (!formatter.formatCellValue(worksheet.getRow(i).getCell(0)).equals("")) {
-                            Date startdatum_uitgifte = new Date(0);
-                            System.out.println(dateFormat.format(startdatum_uitgifte));
-
-                            String kaartnummer = formatter.formatCellValue(worksheet.getRow(i).getCell(0));
-                            String naam = formatter.formatCellValue(worksheet.getRow(i).getCell(1));
-                            String naamPartner = formatter.formatCellValue(worksheet.getRow(i).getCell(2));
-                            String telefoonnummer = formatter.formatCellValue(worksheet.getRow(i).getCell(3));
-                            String email = formatter.formatCellValue(worksheet.getRow(i).getCell(4));
-                            String mobiel = formatter.formatCellValue(worksheet.getRow(i).getCell(5));
-                            String aantalPersonen = formatter.formatCellValue(worksheet.getRow(i).getCell(6));
-                            String aantalPersonenNorm = formatter.formatCellValue(worksheet.getRow(i).getCell(7));
-                            String gebruikInMaanden = formatter.formatCellValue(worksheet.getRow(i).getCell(8));
-                            String identiteitsbewijs_soort = formatter.formatCellValue(worksheet.getRow(i).getCell(9));
-                            String datum_uitgifte_identiteitsbewijs = formatter.formatCellValue(worksheet.getRow(i).getCell(10));
-                            String identiteitsnummer = formatter.formatCellValue(worksheet.getRow(i).getCell(11));
-                            String plaats_uitgifte_identiteitsbewijs = formatter.formatCellValue(worksheet.getRow(i).getCell(12));
-                            String adres = formatter.formatCellValue(worksheet.getRow(i).getCell(13));
-                            String postcode = formatter.formatCellValue(worksheet.getRow(i).getCell(14));
-                            String plaats = formatter.formatCellValue(worksheet.getRow(i).getCell(15));
-                            String status = formatter.formatCellValue(worksheet.getRow(i).getCell(16));
-                            String intaker = formatter.formatCellValue(worksheet.getRow(i).getCell(17));
-                            String intakedatum = formatter.formatCellValue(worksheet.getRow(i).getCell(18));
-                            if (worksheet.getRow(i).getCell(19).getDateCellValue() != null) {
-                                startdatum_uitgifte = worksheet.getRow(i).getCell(19).getDateCellValue();
-                            }
-                            String datum_herintake = formatter.formatCellValue(worksheet.getRow(i).getCell(20));
-                            String datum_stopzetting = formatter.formatCellValue(worksheet.getRow(i).getCell(21));
-                            String reden_stopzetting = formatter.formatCellValue(worksheet.getRow(i).getCell(22));
-                            String uitgifte_punt = formatter.formatCellValue(worksheet.getRow(i).getCell(31));
-                            String pakket = formatter.formatCellValue(worksheet.getRow(i).getCell(32));
-
-                            System.out.println(dateFormat.format(startdatum_uitgifte));
-
-                            Client client = new Client(Integer.parseInt(kaartnummer), naam, telefoonnummer, adres, postcode, plaats, email, mobiel, Integer.parseInt(aantalPersonen), status, naamPartner);
-                            Voedselpakket voedselpakket = new Voedselpakket(startdatum_uitgifte, pakket);
-                            client.checkBestaat(client, uitgifte_punt, voedselpakket);
-
-                            //uitgifte punt checken
-//                        Hulpverlener hulpverlener = new Hulpverlener(int hulverlener_ID, String naam, String telefoonnummer, Date geboortedatum);
-                            i++;
-                        } else {
-                            einde = true;
+                        String kaartnummer = formatter.formatCellValue(worksheet.getRow(i).getCell(0));
+                        String naam = formatter.formatCellValue(worksheet.getRow(i).getCell(1));
+                        String naamPartner = formatter.formatCellValue(worksheet.getRow(i).getCell(2));
+                        String telefoonnummer = formatter.formatCellValue(worksheet.getRow(i).getCell(3));
+                        String email = formatter.formatCellValue(worksheet.getRow(i).getCell(4));
+                        String mobiel = formatter.formatCellValue(worksheet.getRow(i).getCell(5));
+                        String aantalPersonen = formatter.formatCellValue(worksheet.getRow(i).getCell(6));
+                        String adres = formatter.formatCellValue(worksheet.getRow(i).getCell(13));
+                        String postcode = formatter.formatCellValue(worksheet.getRow(i).getCell(14));
+                        String plaats = formatter.formatCellValue(worksheet.getRow(i).getCell(15));
+                        String status = formatter.formatCellValue(worksheet.getRow(i).getCell(16));
+                        String intaker = formatter.formatCellValue(worksheet.getRow(i).getCell(17));
+                       
+                        
+                        if (worksheet.getRow(i).getCell(19).getDateCellValue() != null) {
+                            startdatum_uitgifte = worksheet.getRow(i).getCell(19).getDateCellValue();
                         }
+                        if (worksheet.getRow(i).getCell(18).getDateCellValue() != null) {
+                            intakedatum = worksheet.getRow(i).getCell(18).getDateCellValue();
+                        }
+                        if (worksheet.getRow(i).getCell(20).getDateCellValue() != null) {
+                            datum_herintake = worksheet.getRow(i).getCell(20).getDateCellValue();
+                        }
+                        if (worksheet.getRow(i).getCell(21).getDateCellValue() != null) {
+                            datum_stopzetting = worksheet.getRow(i).getCell(21).getDateCellValue();
+                        }
+                                
+                        String reden_stopzetting = formatter.formatCellValue(worksheet.getRow(i).getCell(22));
+                        String uitgifte_punt = formatter.formatCellValue(worksheet.getRow(i).getCell(31));
+                        String pakket = formatter.formatCellValue(worksheet.getRow(i).getCell(32));
+
+                        Client client = new Client(Integer.parseInt(kaartnummer), naam, telefoonnummer, adres, postcode, plaats, email, mobiel, Integer.parseInt(aantalPersonen), status, naamPartner);                        
+                        Voedselpakket voedselpakket = new Voedselpakket(startdatum_uitgifte, pakket);
+                        Intake intake = new Intake(0, 0, intaker, intakedatum, startdatum_uitgifte, datum_herintake, datum_stopzetting, reden_stopzetting);
+                        client.checkBestaat(client, uitgifte_punt, voedselpakket, intake);
+                     
+                        i++;
+                    } else {
+                        einde = true;
                     }
                 }
             }
-        } catch (Exception e) {
+        }
+        } catch(Exception e) {
             System.out.println(e);
         }
     }//GEN-LAST:event_jButton1ActionPerformed

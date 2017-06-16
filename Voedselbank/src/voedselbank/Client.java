@@ -185,7 +185,7 @@ public class Client {
         this.verwijzing_ID = verwijzing_ID;
     }
     
-       public void checkBestaat(Client client, String uitgiftepunt, Voedselpakket voedselpakket) {
+       public void checkBestaat(Client client, String uitgiftepunt, Voedselpakket voedselpakket, Intake intake) {
         try {
             int dbkaartnummer = 0;
             connection = SimpleDataSourceV2.getConnection();
@@ -272,6 +272,7 @@ public class Client {
             }
             
             SimpleDataSourceV2.Connect_Uitgiftepunt(uitgiftepunt, client, voedselpakket);
+            SimpleDataSourceV2.Connect_Hulpverlener(client, intake);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }

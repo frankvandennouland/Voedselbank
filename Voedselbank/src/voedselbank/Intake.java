@@ -14,17 +14,34 @@ import java.util.Date;
 public class Intake {
     private int client_ID;
     private int hulpverlerner_ID;
+    private String hulpverlener = "";
     private Date datum = new Date();
     private Date datumUitgifte = new Date();
     private Date datumHerintake = new Date();
     private Date datumStopzetting = new Date();
     private String RedenStopzetting;
 
-    public Intake(int client_ID, int hulpverlerner_ID, String RedenStopzetting) {
+    public Intake(int client_ID, int hulpverlerner_ID, Date datum, Date datumUitgifte, Date datumHerintake, Date datumStopzetting, String RedenStopzetting) {
         this.client_ID = client_ID;
         this.hulpverlerner_ID = hulpverlerner_ID;
+        this.datum = datum;
+        this.datumUitgifte = datumUitgifte;
+        this.datumHerintake = datumHerintake;
+        this.datumStopzetting = datumStopzetting;
         this.RedenStopzetting = RedenStopzetting;
     }
+    
+    public Intake(int client_ID, int hulpverlerner_ID, String hulpverlener, Date datum, Date datumUitgifte, Date datumHerintake, Date datumStopzetting, String RedenStopzetting) {
+        this.client_ID = client_ID;
+        this.hulpverlerner_ID = hulpverlerner_ID;
+        this.hulpverlener = hulpverlener;
+        this.datum = datum;
+        this.datumUitgifte = datumUitgifte;
+        this.datumHerintake = datumHerintake;
+        this.datumStopzetting = datumStopzetting;
+        this.RedenStopzetting = RedenStopzetting;
+    }
+   
     
     public int getClient_ID() {
         return client_ID;
@@ -82,4 +99,7 @@ public class Intake {
         this.RedenStopzetting = RedenStopzetting;
     }
 
+    public String getHulpverlener(){
+        return this.hulpverlener;
+    }
 }
